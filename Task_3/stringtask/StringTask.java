@@ -1,9 +1,9 @@
-package taskmodified;
+package com.string.task;
 
 import java.util.Scanner;
-import stringexception.NullStringException;
+import com.string.exception.NullStringException;
 
-public class StringTaskModified{
+public class StringTask{
 	
 	public void taskStringException(String str) throws NullStringException{
 		if(str==null){

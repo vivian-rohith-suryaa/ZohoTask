@@ -1,10 +1,10 @@
-package runnermodified;
+package com.string.runner;
 
-import stringexception.NullStringException;
-import taskmodified.StringTaskModified;
+import com.string.exception.NullStringException;
+import com.string.task.StringTask;
 import java.util.Scanner;
 
-public class StringRunnerModified{
+public class StringRunner{
 	
 	public static String str;
 	public static int len;
@@ -15,7 +15,7 @@ public class StringRunnerModified{
 	
 	public static void main(String[] args){
 		
-		StringTaskModified strObj = new StringTaskModified();
+		StringTask strObj = new StringTask();
 		
 		System.out.print("Enter the sequence number for the exercise (1-20): ");
 		
