@@ -26,8 +26,8 @@ public class StringRunner{
 			switch(sequenceNumber){
 				case 1:
 					try{
-						str = strObj.readString(args);
-						len = strObj.stringLength(str);
+						str = strObj.toReadString(args);
+						len = strObj.toFindStringLength(str);
 						if (len == 0){
 							System.out.println("OOPS, run the program again and give it a command line string!!!");
 						}
@@ -47,7 +47,7 @@ public class StringRunner{
 						System.out.print("Enter a String: ");
 						Scanner scan = new Scanner(System.in);
 						userStr = scan.nextLine();
-						char[] charArr = strObj.charArrayConvert(userStr);
+						char[] charArr = strObj.convertToCharArray(userStr);
 						for(char c : charArr){
 							System.out.print(c+" ");
 						}
@@ -67,7 +67,7 @@ public class StringRunner{
 						System.out.print("Enter a position(Number): ");
 						Scanner scanPosition = new Scanner(System.in);
 						userPos = scanPosition.nextInt();
-						char printChar = strObj.charPosition(userStr,userPos);
+						char printChar = strObj.positionOfChar(userStr,userPos);
 						System.out.println(printChar);
 					}
 					
@@ -86,7 +86,7 @@ public class StringRunner{
 						System.out.print("Enter a char: ");
 						Scanner scanChar = new Scanner(System.in);
 						userChar = scanChar.next().charAt(0);
-						System.out.println("The number of occurrences of character "+userChar+" are: "+strObj.numberOfOccurrences(userStr,userChar));
+						System.out.println("The number of occurrences of character "+userChar+" are: "+strObj.numberOfOccurrence(userStr,userChar));
 					}
 					
 					catch(NullStringException strEx){
@@ -103,7 +103,7 @@ public class StringRunner{
 						System.out.print("Enter a char: ");
 						Scanner scanChar = new Scanner(System.in);
 						userChar = scanChar.next().charAt(0);
-						System.out.println("The greatest occurrences of character "+userChar+" is: "+strObj.greatestPosition(userStr,userChar));
+						System.out.println("The greatest occurrences of character "+userChar+" is: "+strObj.toFindGreatestPositionOfChar(userStr,userChar));
 					}
 					
 					catch(NullStringException strEx){
@@ -120,7 +120,7 @@ public class StringRunner{
 						System.out.print("Enter a position(Number):");
 						Scanner scanPosition = new Scanner(System.in);
 						userPos = scanPosition.nextInt();
-						System.out.println("The characters of the given String is: "+strObj.lastChar(userStr,userPos));
+						System.out.println("The characters of the given String is: "+strObj.toFindLastChar(userStr,userPos));
 					}
 					
 						
@@ -138,7 +138,7 @@ public class StringRunner{
 						System.out.print("Enter a position(Number): ");
 						Scanner scanPosition = new Scanner(System.in);
 						userPos = scanPosition.nextInt();
-						System.out.println("The characters of the given String is: "+strObj.firstChar(userStr,userPos));
+						System.out.println("The characters of the given String is: "+strObj.toFindFirstChar(userStr,userPos));
 					}
 					
 						
@@ -156,7 +156,7 @@ public class StringRunner{
 						System.out.print("Enter a String to be added: ");
 						Scanner scanAdd = new Scanner(System.in);
 						String userStrAdd = scanAdd.nextLine();
-						System.out.println("The resulted string is:"+strObj.atBegining(userStr, userStrAdd));
+						System.out.println("The resulted string is:"+strObj.toReplaceBeginningChar(userStr, userStrAdd));
 					}
 					catch(NullStringException strEx){
 						System.out.println(strEx.getMessage());
@@ -172,7 +172,7 @@ public class StringRunner{
 						System.out.print("Enter a String to be checked: ");
 						Scanner scanCheck = new Scanner(System.in);
 						String userStrCheck = scanCheck.nextLine();
-						System.out.println("Whether the given String '"+userStrCheck+"' starts with "+userStrCheck+" ? "+strObj.startCheck(userStr, userStrCheck));
+						System.out.println("Whether the given String '"+userStrCheck+"' starts with "+userStrCheck+" ? "+strObj.toCheckStartingChar(userStr, userStrCheck));
 					}
 					catch(NullStringException strEx){
 						System.out.println(strEx.getMessage());
@@ -188,7 +188,7 @@ public class StringRunner{
 						System.out.print("Enter a String to be checked: ");
 						Scanner scanCheck = new Scanner(System.in);
 						String userStrCheck = scanCheck.nextLine();
-						System.out.println("Whether the given String '"+userStrCheck+"' ends with "+userStrCheck+" ? "+strObj.endCheck(userStr, userStrCheck));
+						System.out.println("Whether the given String '"+userStrCheck+"' ends with "+userStrCheck+" ? "+strObj.toCheckEndingChar(userStr, userStrCheck));
 					}
 					catch(NullStringException strEx){
 						System.out.println(strEx.getMessage());
@@ -201,7 +201,7 @@ public class StringRunner{
 						System.out.print("Enter a String: ");
 						Scanner scan = new Scanner(System.in);
 						userStr = scan.nextLine();
-						System.out.println("The given string converted to upper case is: "+strObj.convertLowerToUpper(userStr));
+						System.out.println("The given string converted to upper case is: "+strObj.toConvertFromLowerCaseToUpperCase(userStr));
 						}
 					catch(NullStringException strEx){
 						System.out.println(strEx.getMessage());
@@ -214,7 +214,7 @@ public class StringRunner{
 						System.out.print("Enter a String: ");
 						Scanner scan = new Scanner(System.in);
 						userStr = scan.nextLine();
-						System.out.println("The given string converted to lower case is: "+strObj.convertUpperToLower(userStr));
+						System.out.println("The given string converted to lower case is: "+strObj.toConvertFromUpperCaseToLowerCase(userStr));
 						}
 					catch(NullStringException strEx){
 						System.out.println(strEx.getMessage());
@@ -227,7 +227,7 @@ public class StringRunner{
 						System.out.print("Enter a String: ");
 						Scanner scan = new Scanner(System.in);
 						userStr = scan.nextLine();
-						System.out.println("The reversed input String is: "+strObj.reverseString(userStr));
+						System.out.println("The reversed input String is: "+strObj.toReverseString(userStr));
 					}
 					catch(NullStringException strEx){
 						System.out.println(strEx.getMessage());
@@ -241,7 +241,7 @@ public class StringRunner{
 						System.out.print("Enter a String: ");
 						Scanner scan = new Scanner(System.in);
 						userStr = scan.nextLine();
-						System.out.println("The input String is: "+strObj.multipleLine(userStr));
+						System.out.println("The input String is: "+strObj.toReadMultipleStrings(userStr));
 					}
 					catch(NullStringException strEx){
 						System.out.println(strEx.getMessage());
@@ -254,7 +254,7 @@ public class StringRunner{
 						System.out.print("Enter a String: ");
 						Scanner scan = new Scanner(System.in);
 						userStr = scan.nextLine();
-						System.out.println("The concatenated String is: "+strObj.multiLineConcat(userStr));
+						System.out.println("The concatenated String is: "+strObj.toConcatenateMultipleLines(userStr));
 					}
 					catch(NullStringException strEx){
 						System.out.println(strEx.getMessage());
@@ -267,7 +267,7 @@ public class StringRunner{
 						System.out.print("Enter multiple Strings: ");
 						Scanner scan = new Scanner(System.in);
 						userStr = scan.nextLine();
-						String[] loopArr = strObj.stringArrayConvert(userStr);
+						String[] loopArr = strObj.convertToStringArray(userStr);
 						System.out.print("{");
 						for (int i = 0; i<loopArr.length;i++){
 							System.out.print("\""+loopArr[i]+"\"");
@@ -289,7 +289,7 @@ public class StringRunner{
 						System.out.print("Enter multiple Strings: ");
 						Scanner scan = new Scanner(System.in);
 						userStr = scan.nextLine();
-						String[] loopArr = strObj.stringArrayConvert(userStr);
+						String[] loopArr = strObj.convertToStringArray(userStr);
 						for (int i=0; i<loopArr.length;i++){
 							System.out.print(loopArr[i]);
 							if(i<loopArr.length - 1){
@@ -313,7 +313,7 @@ public class StringRunner{
 						System.out.print("Enter a String: ");
 						Scanner scanTwo = new Scanner(System.in);
 						String strTwo = scanTwo.nextLine();
-						System.out.println("Whether the two strings are equal(Case sensitive)? "+strObj.compareTwoString(strOne,strTwo));
+						System.out.println("Whether the two strings are equal(Case sensitive)? "+strObj.toCompareTwoStrings(strOne,strTwo));
 					}
 					catch(NullStringException strEx){
 						System.out.println(strEx.getMessage());
@@ -329,7 +329,7 @@ public class StringRunner{
 						System.out.print("Enter a String: ");
 						Scanner scanTwo = new Scanner(System.in);
 						String strTwo = scanTwo.nextLine();
-						System.out.println("Whether the two strings are equal(Case insensitive)? "+strObj.compareTwoStringInsensitive(strOne,strTwo));
+						System.out.println("Whether the two strings are equal(Case insensitive)? "+strObj.toCompareTwoInsensitiveStrings(strOne,strTwo));
 					}
 					catch(NullStringException strEx){
 						System.out.println(strEx.getMessage());
@@ -342,7 +342,7 @@ public class StringRunner{
 						System.out.print("Enter a String: ");
 						Scanner scan = new Scanner(System.in);
 						userStr = scan.nextLine();
-						System.out.println("The Trimmed version of Original String is "+strObj.trimSpace(userStr));
+						System.out.println("The Trimmed version of Original String is "+strObj.toTrimSpaceInString(userStr));
 					}
 					
 					catch(NullStringException strEx){
