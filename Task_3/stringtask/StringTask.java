@@ -70,7 +70,7 @@ public class StringTask{
 	
 	//Example6
 
-	public String toFindLastChar(String str,int position)throws NullStringException{
+	public String getLastCharacters(String str,int position)throws NullStringException{
 		taskStringException(str);
 		int len = str.length();
 		 
@@ -80,7 +80,7 @@ public class StringTask{
 	
 	//Example7
 
-	public String toFindFirstChar(String str,int position)throws NullStringException{
+	public String getFirstCharacters(String str,int position)throws NullStringException{
 		taskStringException(str);
 		String firstStr = str.substring(0,position);
 		return firstStr;
