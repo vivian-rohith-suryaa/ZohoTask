@@ -87,21 +87,37 @@ public class StringTask{
 	
 	//Example6
 
+<<<<<<< HEAD
 	public String getLastChar(String str,int position)throws StringException{
 		int len = getLength(str);
 		validateEmptyString(str);
 		validateIndexInBounds(str,position);
 		return str.substring(len-position,len);
+=======
+	public String getLastCharacters(String str,int position)throws NullStringException{
+		taskStringException(str);
+		int len = str.length();
+		 
+		String lastStr = str.substring(len-position,len);
+		return lastStr;
+>>>>>>> 8c00e28964bffebb9a513e04db59760963376221
 	}
 	
 	//Example7
 
+<<<<<<< HEAD
 	public String getFirstChar(String str,int position)throws StringException{
 		validateNullString(str);
 		validateEmptyString(str);
 		validateIndexInBounds(str,position);
 		return str.substring(0,position);
 
+=======
+	public String getFirstCharacters(String str,int position)throws NullStringException{
+		taskStringException(str);
+		String firstStr = str.substring(0,position);
+		return firstStr;
+>>>>>>> 8c00e28964bffebb9a513e04db59760963376221
 	}
 	
 	//Example8
