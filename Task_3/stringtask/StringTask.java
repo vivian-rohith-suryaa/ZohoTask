@@ -139,7 +139,7 @@ public class StringTask {
     }
 
     // Example14
-    public String getStrings(String str) throws StringException {
+    public String getString(String str) throws StringException {
         validateNullString(str);
         return str;
     }
