@@ -196,14 +196,20 @@ public class StringTask {
     }
 
     public int getIntInput() {
-        return scan.nextInt();
+		int input = scan.nextInt();
+		scan.nextLine();
+        return input;
     }
 
     public char getCharInput() {
-        return scan.next().charAt(0);
+        char character = scan.next().charAt(0);
+		scan.nextLine();
+		return character;
     }
 
     public boolean getBoolInput() {
-        return scan.nextBoolean();
+        boolean bool = scan.nextBoolean();
+		scan.nextLine();
+		return bool;
     }
 }
