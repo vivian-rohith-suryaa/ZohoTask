@@ -12,7 +12,8 @@ public class StringTask {
     }
 
     public void validateEmptyString(String str) throws StringException {
-        if (str != null && str.isEmpty()) {
+	validateNullString(str);
+        if (str.isEmpty()) {
             throw new StringException("Invalid String: Empty value is given.");
         }
     }
@@ -24,7 +25,7 @@ public class StringTask {
     }
 
     // Example1
-    public String getInputArgument(String[] args) {
+    public String getCommandLineArgument(String[] args) {
         if (args != null && args.length > 0) {
             return args[0];
         }
@@ -68,14 +69,13 @@ public class StringTask {
     }
 
     // Example5
-    public int getLastCharIndex(String str, char checkChar) throws StringException {
-        validateNullString(str);
-        validateEmptyString(str);
+    public int findGreatestPosition(String str, char checkChar) throws StringException {
+	validateEmptyString(str);
         return str.lastIndexOf(checkChar);
     }
 
     // Example6
-    public String getLastChar(String str, int position) throws StringException {
+    public String getLastNChars(String str, int position) throws StringException {
         int len = getLength(str);
         validateEmptyString(str);
         validateIndexInBounds(str, position);
@@ -83,8 +83,7 @@ public class StringTask {
     }
 
     // Example7
-    public String getFirstChar(String str, int position) throws StringException {
-        validateNullString(str);
+    public String getFirstNChars(String str, int position) throws StringException {
         validateEmptyString(str);
         validateIndexInBounds(str, position);
         return str.substring(0, position);
@@ -98,37 +97,33 @@ public class StringTask {
     }
 
     // Example9
-    public boolean checkPrefixChar(String str, String checkStr) throws StringException {
-        validateNullString(str);
-        validateNullString(checkStr);
+    public boolean checkBeginning(String str, String checkStr) throws StringException {
         validateEmptyString(str);
         validateEmptyString(checkStr);
         return str.startsWith(checkStr);
     }
 
     // Example10
-    public boolean checkSuffixChar(String str, String checkStr) throws StringException {
-        validateNullString(str);
-        validateNullString(checkStr);
+    public boolean checkEnding(String str, String checkStr) throws StringException {
         validateEmptyString(str);
         validateEmptyString(checkStr);
         return str.endsWith(checkStr);
     }
 
     // Example11
-    public String convertLowerCaseToUpperCase(String str) throws StringException {
+    public String convertToUpperCase(String str) throws StringException {
         validateNullString(str);
         return str.toUpperCase();
     }
 
     // Example12
-    public String convertUpperCaseToLowerCase(String str) throws StringException {
+    public String convertToLowerCase(String str) throws StringException {
         validateNullString(str);
         return str.toLowerCase();
     }
 
     // Example13
-    public String getReverseString(String str) throws StringException {
+    public String reverseString(String str) throws StringException {
         int len = getLength(str);
         char[] charRev = convertToCharArray(str);
         int leftPoint = 0;
@@ -144,13 +139,13 @@ public class StringTask {
     }
 
     // Example14
-    public String getMultipleString(String str) throws StringException {
+    public String getStrings(String str) throws StringException {
         validateNullString(str);
         return str;
     }
 
     // Example15
-    public String joinMultipleLines(String str) throws StringException {
+    public String joinStrings(String str) throws StringException {
         validateNullString(str);
         String[] concatStrArr = str.split("\\s");
         return String.join("", concatStrArr);
@@ -164,8 +159,6 @@ public class StringTask {
 
     // Example17
     public String mergeStringUsingDelimiter(String str, String delimiter) throws StringException {
-        validateNullString(str);
-        validateNullString(delimiter);
         validateEmptyString(str);
         validateEmptyString(delimiter);
         String[] strArr = str.split("\\s+");
@@ -173,7 +166,7 @@ public class StringTask {
     }
 
     // Example18 and 19
-    public boolean toCompareTwoStrings(String firstString, String secondString, boolean caseSensitive) throws StringException {
+    public boolean compareTwoStrings(String firstString, String secondString, boolean caseSensitive) throws StringException {
         validateNullString(firstString);
         validateNullString(secondString);
         if (!caseSensitive) {
@@ -183,7 +176,7 @@ public class StringTask {
     }
 
     // Example20
-    public String toTrimSpace(String str) throws StringException {
+    public String trimSpaces(String str) throws StringException {
         validateNullString(str);
         return str.trim();
     }
