@@ -3,6 +3,7 @@ package runner;
 import exception.StringException;
 import task.StringTask;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class StringRunner{
 	
@@ -23,7 +24,7 @@ public class StringRunner{
 			while(loop){
 				System.out.println("Enter the sequence number for the exercise (1 - 20, or 0 to exit):");
 				int sequenceNumber = scanner.nextInt();
-				scanner.nextLine();				
+				//scanner.nextLine();				
 				
 				if(sequenceNumber==0){
 					System.out.println("Exiting program!!!");
@@ -156,9 +157,10 @@ public class StringRunner{
 								break;
 								
 							case 16:
-								System.out.println("Enter a line withmultiple Strings: ");
+								System.out.println("Enter a line with multiple strings: ");
 								userStr = strObj.getStringInput();
-								System.out.println(strObj.convertToStringArray(userStr));
+								String[] result = strObj.convertToStringArray(userStr);
+								System.out.println(Arrays.toString(result));
 								break;
 								
 							case 17:
