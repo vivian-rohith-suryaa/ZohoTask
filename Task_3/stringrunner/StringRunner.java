@@ -59,7 +59,7 @@ public class StringRunner{
 							case 1:
 								try {
 									if (args.length == 0) {
-										throw new StringException("Invalid String: Null value is given."); // Custom exception if no argument is provided
+										throw new StringException("Invalid String: Null value is given.");
 									}
 									str = args[0];
 									System.out.println("The length of the given string is " + taskObj.getLength(str));
@@ -123,7 +123,7 @@ public class StringRunner{
 								userStr = runnerObj.getStringInput();
 								System.out.println("Enter a position: ");
 								userPos = runnerObj.getIntInput();
-								System.out.println("The characters of the given String is: "+taskObj.getFirstChars(userStr,userPos));
+								System.out.println("The characters of the given String is: "+taskObj.getPrefixChars(userStr,userPos));
 								break;
 							
 							case 8:
