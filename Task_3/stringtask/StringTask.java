@@ -69,7 +69,7 @@ public class StringTask {
     }
 
     // Example5
-    public int findGreatestPosition(String str, char checkChar) throws StringException {
+    public int getGreatestPosition(String str, char checkChar) throws StringException {
 	validateEmptyString(str);
         return str.lastIndexOf(checkChar);
     }
@@ -139,7 +139,7 @@ public class StringTask {
     }
 
     // Example14
-    public String getString(String str) throws StringException {
+    public String getMultipleString(String str) throws StringException {
         validateNullString(str);
         return str;
     }
