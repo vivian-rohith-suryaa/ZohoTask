@@ -76,7 +76,7 @@ public class StringTask {
     }
 
     // Example7
-    public String getFirstChars(String str, int position) throws StringException {
+    public String getPrefixChars(String str, int position) throws StringException {
         validateNullString(str);
         validateEmptyString(str);
         validateIndexInBounds(str, position);
