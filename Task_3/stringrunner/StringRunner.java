@@ -180,7 +180,11 @@ public class StringRunner{
 							case 15:
 								System.out.println("Enter a line with multiple strings to concatenate: ");
 								userStr = runnerObj.getStringInput();
-								System.out.println("The concatenated String is: "+taskObj.joinMultipleString(userStr));
+								System.out.println("Enter a delimiter to split the string: ");
+								String splitDelimiter = runnerObj.getStringInput();
+								System.out.println("Enter a delimiter to join the string: ");
+								String joinDelimiter = runnerObj.getStringInput();
+								System.out.println("The resultant String is: "+taskObj.mergeStringUsingDelimiter(userStr,splitDelimiter,joinDelimiter));
 								break;
 								
 							case 16:
@@ -198,11 +202,13 @@ public class StringRunner{
 								break;
 								
 							case 17:
-								System.out.println("Enter a line with multiple Strings: ");
+								System.out.println("Enter a line with multiple strings to concatenate: ");
 								userStr = runnerObj.getStringInput();
 								System.out.println("Enter a delimiter to split the string: ");
-								String delimiterStr = runnerObj.getStringInput();
-								System.out.println(taskObj.mergeStringUsingDelimiter(userStr,delimiterStr));
+								String splitDelimiter = runnerObj.getStringInput();
+								System.out.println("Enter a delimiter to join the string: ");
+								String joinDelimiter = runnerObj.getStringInput();
+								System.out.println("The resultant String is: "+taskObj.mergeStringUsingDelimiter(userStr,splitDelimiter,joinDelimiter));
 								break;
 								
 							case 18:						

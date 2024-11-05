@@ -1,6 +1,5 @@
 package task;
 
-import java.util.Scanner;
 import exception.StringException;
 
 public class StringTask {
@@ -11,15 +10,14 @@ public class StringTask {
         }
     }
 
-    public void validateEmptyString(String str) throws StringException {
-		validateNullString(str);
-        if (str.isEmpty()) {
+    public void validateEmptyString(int len) throws StringException {
+        if (len == 0) {
             throw new StringException("Invalid String: Empty value is given.");
         }
     }
 
-    public void validateIndexInBounds(String str, int index) throws StringException {
-        if (index < 0 || index >= str.length()) {
+    public void validateIndexInBounds(int index, int length) throws StringException {
+        if (index < 0 || index >= length) {
             throw new StringException("Invalid index: Exceeds string length or out of bounds.");
         }
     }
@@ -39,49 +37,46 @@ public class StringTask {
     // Example3
     public char getCharPosition(String str, int position) throws StringException {
         int len = getLength(str);
-        validateEmptyString(str);
-        validateIndexInBounds(str, position);
-        return str.charAt(position - 1);
+		validateIndexInBounds(position-1,len);
+		return str.charAt(position - 1);
     }
 
     // Example4
-    public int getCharOccurrences(String str, char checkChar, boolean caseSensitive) throws StringException {
+    public int getCharOccurrences(String str, char checkChar, boolean isCaseSensitive) throws StringException {
         int len = getLength(str);
-        validateEmptyString(str);
-        int count = 0;
-        if (!caseSensitive) {
-            str = str.toLowerCase();
-            checkChar = Character.toLowerCase(checkChar);
-        }
-        for (int i = 0; i < len; i++) {
-            if (str.charAt(i) == checkChar) {
-                count++;
-            }
-        }
-        return count;
+		int count = 0;
+		if (!isCaseSensitive) {
+			str = str.toLowerCase();
+			checkChar = Character.toLowerCase(checkChar);
+		}
+		for (int i = 0; i < len; i++) {
+			if (str.charAt(i) == checkChar) {
+				count++;
+			}
+		}
+		return count;
+
     }
 
     // Example5
     public int getGreatestPosition(String str, char checkChar) throws StringException {
-        validateNullString(str);
-        validateEmptyString(str);
+        int len = getLength(str);
+		validateEmptyString(len);
         return str.lastIndexOf(checkChar);
     }
 
     // Example6
     public String getSuffixChars(String str, int position) throws StringException {
         int len = getLength(str);
-        validateEmptyString(str);
-        validateIndexInBounds(str, position);
-        return str.substring(len - position, len);
+		validateIndexInBounds(position,len);
+		return str.substring(len - position, len);
     }
 
     // Example7
     public String getPrefixChars(String str, int position) throws StringException {
-        validateNullString(str);
-        validateEmptyString(str);
-        validateIndexInBounds(str, position);
-        return str.substring(0, position);
+        int len = getLength(str);
+		validateIndexInBounds(position,len);
+		return str.substring(0, position);
     }
 
     // Example8
@@ -93,15 +88,15 @@ public class StringTask {
 
     // Example9
     public boolean checkPrefix(String str, String checkStr) throws StringException {
-        validateEmptyString(str);
-        validateEmptyString(checkStr);
+        validateNullString(str);
+        validateNullString(checkStr);
         return str.startsWith(checkStr);
     }
 
     // Example10
     public boolean checkSuffix(String str, String checkStr) throws StringException {
-        validateEmptyString(str);
-        validateEmptyString(checkStr);
+        validateNullString(str);
+        validateNullString(checkStr);
         return str.endsWith(checkStr);
     }
 
@@ -139,32 +134,28 @@ public class StringTask {
         return str;
     }
 
-    // Example15
-    public String joinMultipleString(String str) throws StringException {
+    // Example15 and 17
+    public String mergeStringUsingDelimiter(String str, String splitDelimiter, String joinDelimiter) throws StringException {
         validateNullString(str);
-        String[] concatStrArr = str.split("\\s");
-        return String.join("", concatStrArr);
+		validateNullString(splitDelimiter);
+		validateNullString(joinDelimiter);
+        String[] splitStrArr = str.split(splitDelimiter);
+        return String.join(joinDelimiter, splitStrArr);
     }
 
     // Example16
-    public String[] convertToStringArray(String str) throws StringException {
+    public String[] convertToStringArray(String str, String delimiter) throws StringException {
         validateNullString(str);
-        return str.split("\\s+");
+		validateNullString(delimiter);
+        return str.split(delimiter);
     }
 
-    // Example17
-    public String mergeStringUsingDelimiter(String str, String delimiter) throws StringException {
-        validateEmptyString(str);
-        validateEmptyString(delimiter);
-        String[] strArr = str.split("\\s+");
-        return String.join(delimiter, strArr);
-    }
 
     // Example18 and 19
-    public boolean compareTwoStrings(String firstString, String secondString, boolean caseSensitive) throws StringException {
+    public boolean compareTwoStrings(String firstString, String secondString, boolean isCaseSensitive) throws StringException {
         validateNullString(firstString);
         validateNullString(secondString);
-        if (!caseSensitive) {
+        if (!isCaseSensitive) {
             return firstString.equalsIgnoreCase(secondString);
         }
         return firstString.equals(secondString);
