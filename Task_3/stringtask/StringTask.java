@@ -1,6 +1,5 @@
 package task;
 
-import java.util.Scanner;
 import exception.StringException;
 
 public class StringTask {
@@ -78,7 +77,6 @@ public class StringTask {
 
     // Example7
     public String getPrefixChars(String str, int position) throws StringException {
-        validateNullString(str);
         validateEmptyString(str);
         validateIndexInBounds(str, position);
         return str.substring(0, position);
