@@ -12,7 +12,8 @@ public class StringTask {
     }
 
     public void validateEmptyString(String str) throws StringException {
-        if (str != null && str.isEmpty()) {
+		validateNullString(str);
+        if (str.isEmpty()) {
             throw new StringException("Invalid String: Empty value is given.");
         }
     }
@@ -92,8 +93,6 @@ public class StringTask {
 
     // Example9
     public boolean checkPrefix(String str, String checkStr) throws StringException {
-        validateNullString(str);
-        validateNullString(checkStr);
         validateEmptyString(str);
         validateEmptyString(checkStr);
         return str.startsWith(checkStr);
@@ -101,8 +100,6 @@ public class StringTask {
 
     // Example10
     public boolean checkSuffix(String str, String checkStr) throws StringException {
-        validateNullString(str);
-        validateNullString(checkStr);
         validateEmptyString(str);
         validateEmptyString(checkStr);
         return str.endsWith(checkStr);
@@ -157,8 +154,6 @@ public class StringTask {
 
     // Example17
     public String mergeStringUsingDelimiter(String str, String delimiter) throws StringException {
-        validateNullString(str);
-        validateNullString(delimiter);
         validateEmptyString(str);
         validateEmptyString(delimiter);
         String[] strArr = str.split("\\s+");
