@@ -78,7 +78,8 @@ public class StringTask {
         int length = getLength(input);
 		validateIndexInBounds(position,length);
 		return input.substring(0, position);
-    }
+	}
+
 
     // Example8
     public String replacedCharInString(String input, String replacedString, int replacedChar) throws StringException {
