@@ -7,13 +7,12 @@ import java.util.Arrays;
 
 public class StringRunner{
 	
-	public static String str;
-	public static int len;
+	public static String input;
 	public static int position;
-	public static String userStr;
-	public static int userPos;
-	public static char userChar;
-	public static boolean userBool;
+	public static String userString;
+	public static int userPosition;
+	public static char userCharacter;
+	public static boolean userBoolean;
     public static Scanner scan = new Scanner(System.in);
 
     public String getStringInput() {
@@ -61,8 +60,8 @@ public class StringRunner{
 									if (args.length == 0) {
 										throw new StringException("Invalid String: Null value is given.");
 									}
-									str = args[0];
-									System.out.println("The length of the given string is " + taskObj.getLength(str));
+									input = args[0];
+									System.out.println("The length of the given string is " + taskObj.getLength(input));
 								} 
 								catch (StringException strEx) {
 									System.out.println(strEx.getMessage());
@@ -71,8 +70,8 @@ public class StringRunner{
 							
 							case 2:
 								System.out.println("Enter a String to convert into character array: ");
-								userStr = runnerObj.getStringInput();
-								char[] charArr = taskObj.convertToCharArray(userStr);
+								userString = runnerObj.getStringInput();
+								char[] charArr = taskObj.convertToCharArray(userString);
 								System.out.print("The String Converted to a character array is: {"); 
 								for (int i = 0; i < charArr.length; i++) {
 									System.out.print("'" + charArr[i] + "'");
@@ -85,112 +84,105 @@ public class StringRunner{
 								
 							case 3:
 								System.out.println("Enter a String to find the position of a character: ");
-								userStr = runnerObj.getStringInput();
+								userString = runnerObj.getStringInput();
 								System.out.println("Enter a position to find: ");
-								userPos = runnerObj.getIntInput();
-								System.out.println("The character at the "+userPos+ " is :"+taskObj.getCharPosition(userStr,userPos));
+								userPosition = runnerObj.getIntInput();
+								System.out.println("The character at the "+userPosition+ " is :"+taskObj.getCharPosition(userString,userPosition));
 								
 								break;
 								
 							case 4:
 								System.out.println("Enter a String to find the number of occurrences: ");
-								userStr = runnerObj.getStringInput();
+								userString = runnerObj.getStringInput();
 								System.out.println("Enter a character to find the occurrence: ");
-								userChar = runnerObj.getCharInput();
+								userCharacter = runnerObj.getCharInput();
 								System.out.println("Should it be case sensitive (true/false)?");
-								userBool = runnerObj.getBoolInput();
-								System.out.println("The number of occurrences of character "+userChar+" are: "+taskObj.getCharOccurrences(userStr,userChar,userBool));
+								userBoolean = runnerObj.getBoolInput();
+								System.out.println("The number of occurrences of character "+userCharacter+" are: "+taskObj.getCharOccurrences(userString,userCharacter,userBoolean));
 								break;
 								
 							case 5:
 								System.out.println("Enter a String to find the greatest position of a character: ");
-								userStr = runnerObj.getStringInput();
+								userString = runnerObj.getStringInput();
 								System.out.println("Enter a character to find: ");
-								userChar = runnerObj.getCharInput();
-								System.out.println("The greatest occurrences of character "+userChar+" is: "+taskObj.getGreatestPosition(userStr,userChar));
+								userCharacter = runnerObj.getCharInput();
+								System.out.println("The greatest occurrences of character "+userCharacter+" is: "+taskObj.getGreatestPosition(userString,userCharacter));
 								break;
 							
 							case 6:
 								System.out.println("Enter a String to print the ending characters: ");
-								userStr = runnerObj.getStringInput();
+								userString = runnerObj.getStringInput();
 								System.out.println("Enter a position:");
-								userPos = runnerObj.getIntInput();
-								System.out.println("The characters of the given String is: "+taskObj.getSuffixChars(userStr,userPos));
+								userPosition = runnerObj.getIntInput();
+								System.out.println("The characters of the given String is: "+taskObj.getSuffixChars(userString,userPosition));
 								break;
 								
 							case 7:
 								System.out.println("Enter a String to print the starting characters: ");
-								userStr = runnerObj.getStringInput();
+								userString = runnerObj.getStringInput();
 								System.out.println("Enter a position: ");
-								userPos = runnerObj.getIntInput();
-								System.out.println("The characters of the given String is: "+taskObj.getPrefixChars(userStr,userPos));
+								userPosition = runnerObj.getIntInput();
+								System.out.println("The characters of the given String is: "+taskObj.getPrefixChars(userString,userPosition));
 								break;
 							
 							case 8:
 								System.out.println("Enter a String that is replaced: ");
-								userStr = runnerObj.getStringInput();
+								userString = runnerObj.getStringInput();
 								System.out.println("Enter a String to be replaced: ");
-								String userStrAdd = runnerObj.getStringInput();
+								String userStringAdd = runnerObj.getStringInput();
 								System.out.println("Enter the number of characters to be replaced: ");
 								int charsToReplace = runnerObj.getIntInput();
-								System.out.println("The resulted string is:"+taskObj.replaceCharInString(userStr, userStrAdd,charsToReplace));
+								System.out.println("The resulted string is:"+taskObj.replacedCharInString(userString, userStringAdd,charsToReplace));
 								break;
 								
 							case 9:
 								System.out.println("Enter a String to check: ");
-								userStr = runnerObj.getStringInput();
+								userString = runnerObj.getStringInput();
 								System.out.println("Enter a String to be checked: ");
-								String userStrCheck = runnerObj.getStringInput();
-								System.out.println("Whether the given String '"+userStr+"' starts with "+userStrCheck+" ? "+taskObj.checkPrefix(userStr, userStrCheck));
+								String userStringCheck = runnerObj.getStringInput();
+								System.out.println("Whether the given String '"+userString+"' starts with "+userStringCheck+" ? "+taskObj.checkPrefix(userString, userStringCheck));
 								break;
 							
 							case 10:
 								System.out.println("Enter a String to check: ");
-								userStr = runnerObj.getStringInput();
+								userString = runnerObj.getStringInput();
 								System.out.println("Enter a String to be checked: ");
-								userStrCheck = runnerObj.getStringInput();
-								System.out.println("Whether the given String '"+userStr+"' ends with "+userStrCheck+" ? "+taskObj.checkSuffix(userStr, userStrCheck));
+								userStringCheck = runnerObj.getStringInput();
+								System.out.println("Whether the given String '"+userString+"' ends with "+userStringCheck+" ? "+taskObj.checkSuffix(userString, userStringCheck));
 								break;
 							
 							case 11:
 								System.out.println("Enter a String to be converted from lowercase: ");
-								userStr = runnerObj.getStringInput();
-								System.out.println("The given string converted to upper case is: "+taskObj.convertToUpperCase(userStr));
+								userString = runnerObj.getStringInput();
+								System.out.println("The given string converted to upper case is: "+taskObj.convertToUpperCase(userString));
 								break;
 								
 							case 12:
 								System.out.println("Enter a String to be converted from uppercase: ");
-								userStr = runnerObj.getStringInput();
-								System.out.println("The given string converted to lower case is: "+taskObj.convertToLowerCase(userStr));
+								userString = runnerObj.getStringInput();
+								System.out.println("The given string converted to lower case is: "+taskObj.convertToLowerCase(userString));
 								break;
 								
 							case 13:
 								System.out.println("Enter a String to reverse: ");
-								userStr = runnerObj.getStringInput();
-								System.out.println("The reversed input String is: "+taskObj.reverseString(userStr));
+								userString = runnerObj.getStringInput();
+								System.out.println("The reversed input String is: "+taskObj.reverseString(userString));
 								break;
 
 						
 							case 14:
 								System.out.println("Enter a line with multiple strings: ");
-								userStr = runnerObj.getStringInput();
-								System.out.println("The result is: "+taskObj.getMultipleString(userStr));
+								userString = runnerObj.getStringInput();
+								System.out.println("The result is: "+taskObj.getMultipleString(userString));
 								break;
 								
-							case 15:
-								System.out.println("Enter a line with multiple strings to concatenate: ");
-								userStr = runnerObj.getStringInput();
-								System.out.println("Enter a delimiter to split the string: ");
-								String splitDelimiter = runnerObj.getStringInput();
-								System.out.println("Enter a delimiter to join the string: ");
-								String joinDelimiter = runnerObj.getStringInput();
-								System.out.println("The resultant String is: "+taskObj.mergeStringUsingDelimiter(userStr,splitDelimiter,joinDelimiter));
-								break;
 								
 							case 16:
 								System.out.println("Enter a line with multiple strings: ");
-								userStr = runnerObj.getStringInput();
-								String[] result = taskObj.convertToStringArray(userStr);
+								userString = runnerObj.getStringInput();
+								System.out.println("Enter a delimiter to split the string: ");
+								String spliterDelimiter = runnerObj.getStringInput();
+								String[] result = taskObj.convertToStringArray(userString,spliterDelimiter);
 								System.out.print("{");
 								for (int i = 0; i<result.length;i++){
 									System.out.print("\""+result[i]+"\"");
@@ -201,31 +193,32 @@ public class StringRunner{
 								System.out.println("}");
 								break;
 								
+							case 15:								
 							case 17:
 								System.out.println("Enter a line with multiple strings to concatenate: ");
-								userStr = runnerObj.getStringInput();
+								userString = runnerObj.getStringInput();
 								System.out.println("Enter a delimiter to split the string: ");
-								String splitDelimiter = runnerObj.getStringInput();
+								spliterDelimiter = runnerObj.getStringInput();
 								System.out.println("Enter a delimiter to join the string: ");
-								String joinDelimiter = runnerObj.getStringInput();
-								System.out.println("The resultant String is: "+taskObj.mergeStringUsingDelimiter(userStr,splitDelimiter,joinDelimiter));
+								String combinerDelimiter = runnerObj.getStringInput();
+								System.out.println("The resultant String is: "+taskObj.mergeStringUsingDelimiter(userString,spliterDelimiter,combinerDelimiter));
 								break;
 								
 							case 18:						
 							case 19:
 								System.out.println("Enter a String to be checked: ");
-								String strOne = runnerObj.getStringInput();
+								String firstString = runnerObj.getStringInput();
 								System.out.println("Enter another String to be checked: ");
-								String strTwo = runnerObj.getStringInput();
+								String secondString = runnerObj.getStringInput();
 								System.out.println("Should it be case sensitive (true/false)?");
-								userBool = runnerObj.getBoolInput();
-								System.out.println("Whether the two strings are equal? "+taskObj.compareTwoStrings(strOne,strTwo,userBool));
+								userBoolean = runnerObj.getBoolInput();
+								System.out.println("Whether the two strings are equal? "+taskObj.compareTwoStrings(firstString,secondString,userBoolean));
 								break;
 								
 							case 20:
 								System.out.println("Enter a String with spaces at front or end or both: ");
-								userStr = runnerObj.getStringInput();
-								System.out.println("The Trimmed version of Original String is "+taskObj.trimSpaces(userStr));
+								userString = runnerObj.getStringInput();
+								System.out.println("The Trimmed version of Original String is "+taskObj.trimSpaces(userString));
 								break;
 									
 

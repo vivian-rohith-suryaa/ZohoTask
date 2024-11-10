@@ -4,53 +4,54 @@ import exception.StringException;
 
 public class StringTask {
 
-    public void validateNullString(String str) throws StringException {
-        if (str == null) {
+    public void validateNullString(String input) throws StringException {
+        if (input == null) {
             throw new StringException("Invalid String: Null value is given.");
         }
     }
 
-    public void validateEmptyString(int len) throws StringException {
-        if (len == 0) {
+    public void validateEmptyString(int length) throws StringException {
+        if (length == 0) {
             throw new StringException("Invalid String: Empty value is given.");
         }
     }
 
     public void validateIndexInBounds(int index, int length) throws StringException {
+		validateEmptyString(length);
         if (index < 0 || index >= length) {
             throw new StringException("Invalid index: Exceeds string length or out of bounds.");
         }
     }
 
     // Example1
-    public int getLength(String str) throws StringException {
-        validateNullString(str);
-        return str.length();
+    public int getLength(String input) throws StringException {
+        validateNullString(input);
+        return input.length();
     }
 
     // Example2
-    public char[] convertToCharArray(String str) throws StringException {
-        validateNullString(str);
-        return str.toCharArray();
+    public char[] convertToCharArray(String input) throws StringException {
+        validateNullString(input);
+        return input.toCharArray();
     }
 
     // Example3
-    public char getCharPosition(String str, int position) throws StringException {
-        int len = getLength(str);
-		validateIndexInBounds(position-1,len);
-		return str.charAt(position - 1);
+    public char getCharPosition(String input, int position) throws StringException {
+        int length = getLength(input);
+		validateIndexInBounds(position-1,length);
+		return input.charAt(position - 1);
     }
 
     // Example4
-    public int getCharOccurrences(String str, char checkChar, boolean isCaseSensitive) throws StringException {
-        int len = getLength(str);
+    public int getCharOccurrences(String input, char checkerChar, boolean caseSensitive) throws StringException {
+        int length = getLength(input);
 		int count = 0;
-		if (!isCaseSensitive) {
-			str = str.toLowerCase();
-			checkChar = Character.toLowerCase(checkChar);
+		if (!caseSensitive) {
+			input = input.toLowerCase();
+			checkerChar = Character.toLowerCase(checkerChar);
 		}
-		for (int i = 0; i < len; i++) {
-			if (str.charAt(i) == checkChar) {
+		for (int i = 0; i < length; i++) {
+			if (input.charAt(i) == checkerChar) {
 				count++;
 			}
 		}
@@ -59,112 +60,112 @@ public class StringTask {
     }
 
     // Example5
-    public int getGreatestPosition(String str, char checkChar) throws StringException {
-        int len = getLength(str);
-		validateEmptyString(len);
-        return str.lastIndexOf(checkChar);
+    public int getGreatestPosition(String input, char checkerChar) throws StringException {
+        int length = getLength(input);
+		validateEmptyString(length);
+        return input.lastIndexOf(checkerChar);
     }
 
     // Example6
-    public String getSuffixChars(String str, int position) throws StringException {
-        int len = getLength(str);
-		validateIndexInBounds(position,len);
-		return str.substring(len - position, len);
+    public String getSuffixChars(String input, int position) throws StringException {
+        int length = getLength(input);
+		validateIndexInBounds(position,length);
+		return input.substring(length - position, length);
     }
 
     // Example7
-    public String getPrefixChars(String str, int position) throws StringException {
-        int len = getLength(str);
-		validateIndexInBounds(position,len);
-		return str.substring(0, position);
+    public String getPrefixChars(String input, int position) throws StringException {
+        int length = getLength(input);
+		validateIndexInBounds(position,length);
+		return input.substring(0, position);
     }
 
     // Example8
-    public String replaceCharInString(String str, String strAdd, int charsToReplace) throws StringException {
-        validateNullString(str);
-        validateNullString(strAdd);
-        return strAdd + str.substring(charsToReplace);
+    public String replacedCharInString(String input, String replacedString, int replacedChar) throws StringException {
+        validateNullString(input);
+        validateNullString(replacedString);
+        return replacedString + input.substring(replacedChar);
     }
 
     // Example9
-    public boolean checkPrefix(String str, String checkStr) throws StringException {
-        validateNullString(str);
-        validateNullString(checkStr);
-        return str.startsWith(checkStr);
+    public boolean checkPrefix(String input, String checkerString) throws StringException {
+        validateNullString(input);
+        validateNullString(checkerString);
+        return input.startsWith(checkerString);
     }
 
     // Example10
-    public boolean checkSuffix(String str, String checkStr) throws StringException {
-        validateNullString(str);
-        validateNullString(checkStr);
-        return str.endsWith(checkStr);
+    public boolean checkSuffix(String input, String checkerString) throws StringException {
+        validateNullString(input);
+        validateNullString(checkerString);
+        return input.endsWith(checkerString);
     }
 
     // Example11
-    public String convertToUpperCase(String str) throws StringException {
-        validateNullString(str);
-        return str.toUpperCase();
+    public String convertToUpperCase(String input) throws StringException {
+        validateNullString(input);
+        return input.toUpperCase();
     }
 
     // Example12
-    public String convertToLowerCase(String str) throws StringException {
-        validateNullString(str);
-        return str.toLowerCase();
+    public String convertToLowerCase(String input) throws StringException {
+        validateNullString(input);
+        return input.toLowerCase();
     }
 
     // Example13
-    public String reverseString(String str) throws StringException {
-        int len = getLength(str);
-        char[] charRev = convertToCharArray(str);
+    public String reverseString(String input) throws StringException {
+        int length = getLength(input);
+        char[] charArr = convertToCharArray(input);
         int leftPoint = 0;
-        int rightPoint = len - 1;
+        int rightPoint = length - 1;
         while (leftPoint < rightPoint) {
-            char temp = charRev[leftPoint];
-            charRev[leftPoint] = charRev[rightPoint];
-            charRev[rightPoint] = temp;
+            char temp = charArr[leftPoint];
+            charArr[leftPoint] = charArr[rightPoint];
+            charArr[rightPoint] = temp;
             leftPoint++;
             rightPoint--;
         }
-        return new String(charRev);
+        return new String(charArr);
     }
 
     // Example14
-    public String getMultipleString(String str) throws StringException {
-        validateNullString(str);
-        return str;
+    public String getMultipleString(String input) throws StringException {
+        validateNullString(input);
+        return input;
     }
 
     // Example15 and 17
-    public String mergeStringUsingDelimiter(String str, String splitDelimiter, String joinDelimiter) throws StringException {
-        validateNullString(str);
-		validateNullString(splitDelimiter);
-		validateNullString(joinDelimiter);
-        String[] splitStrArr = str.split(splitDelimiter);
-        return String.join(joinDelimiter, splitStrArr);
+    public String mergeStringUsingDelimiter(String input, String spliterDelimiter, String combinerDelimiter) throws StringException {
+        validateNullString(input);
+		validateNullString(spliterDelimiter);
+		validateNullString(combinerDelimiter);
+        String[] strArr = input.split(spliterDelimiter);
+        return String.join(combinerDelimiter, strArr);
     }
 
     // Example16
-    public String[] convertToStringArray(String str, String delimiter) throws StringException {
-        validateNullString(str);
+    public String[] convertToStringArray(String input, String delimiter) throws StringException {
+        validateNullString(input);
 		validateNullString(delimiter);
-        return str.split(delimiter);
+        return input.split(delimiter);
     }
 
 
     // Example18 and 19
-    public boolean compareTwoStrings(String firstString, String secondString, boolean isCaseSensitive) throws StringException {
+    public boolean compareTwoStrings(String firstString, String secondString, boolean caseSensitive) throws StringException {
         validateNullString(firstString);
         validateNullString(secondString);
-        if (!isCaseSensitive) {
+        if (!caseSensitive) {
             return firstString.equalsIgnoreCase(secondString);
         }
         return firstString.equals(secondString);
     }
 
     // Example20
-    public String trimSpaces(String str) throws StringException {
-        validateNullString(str);
-        return str.trim();
+    public String trimSpaces(String input) throws StringException {
+        validateNullString(input);
+        return input.trim();
     }
 
     
