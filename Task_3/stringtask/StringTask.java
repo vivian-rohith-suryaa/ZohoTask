@@ -82,7 +82,7 @@ public class StringTask {
 
 
     // Example8
-    public String replacedCharInString(String input, String replacedString, int replacedChar) throws StringException {
+    public String replaceCharInString(String input, String replacedString, int replacedChar, int position) throws StringException {
         validateNullString(input);
         validateNullString(replacedString);
         return replacedString + input.substring(replacedChar);
