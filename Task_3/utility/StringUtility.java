@@ -5,28 +5,28 @@ import exception.StringException;
 
 public class StringUtility{
 	
-	public Scanner scan = new Scanner(System.in);
+	public static Scanner scan = new Scanner(System.in);
 		
-	public void validateNullString(String input) throws StringException {
+	public static void validateNullString(String input) throws StringException {
         if (input == null) {
             throw new StringException("Invalid String: Null value is given.");
         }
     }
 
-    public void validateEmptyString(int length) throws StringException {
+    public static void validateEmptyValue(int length) throws StringException {
         if (length == 0) {
             throw new StringException("Invalid String: Empty value is given.");
         }
     }
 
-    public void validateIndexInBounds(int index, int length) throws StringException {
-		validateEmptyString(length);
+    public static void validateIndexInBounds(int index, int length) throws StringException {
+		validateEmptyValue(length);
         if (index < 0 || index >= length) {
             throw new StringException("Invalid index: Exceeds string length or out of bounds.");
         }
     }
 	
-	public int getLength(String input) throws StringException {
+	public static int getLength(String input) throws StringException {
         try{
 			validateNullString(input);
 			return input.length();
@@ -36,23 +36,23 @@ public class StringUtility{
 		}
     }
 	
-	public String getStringInput() {
+	public static String getStringInput() {
         return scan.nextLine();
     }
 
-    public int getIntInput() {
+    public static int getIntInput() {
 		int input = scan.nextInt();
 		scan.nextLine();
         return input;
     }
 
-    public char getCharInput() {
+    public static char getCharInput() {
         char character = scan.next().charAt(0);
 		scan.nextLine();
 		return character;
     }
 
-    public boolean getBoolInput() {
+    public static boolean getBoolInput() {
         boolean bool = scan.nextBoolean();
 		scan.nextLine();
 		return bool;

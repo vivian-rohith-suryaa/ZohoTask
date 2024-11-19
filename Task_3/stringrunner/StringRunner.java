@@ -6,29 +6,24 @@ import utility.StringUtility;
 import java.util.Scanner;
 
 public class StringRunner{
-	
-	public String input;
-	public int position;
+
 	public String userString;
 	public int userPosition;
-	public char userCharacter;
-	public boolean userBoolean;
-	public Scanner scan = new Scanner(System.in);
+	StringTask taskObj = new StringTask();
 
 	public static void main(String[] args){
-		StringUtility utilObj = new StringUtility();
-		StringTask taskObj = new StringTask();
+		Scanner scan = new Scanner(System.in);
 		StringRunner runnerObj = new StringRunner();
 		boolean loop = true;
 			
 		while(loop){
 			System.out.println("Enter the sequence number for the exercise (1 - 20, or 0 to exit):");
-			int sequenceNumber = utilObj.getIntInput();		
+			int sequenceNumber = StringUtility.getIntInput();		
 				
 			if(sequenceNumber==0){
 				System.out.println("Exiting program!!!");
 				loop = false;
-				runnerObj.scan.close();
+				scan.close();
 			}
 				
 			else{
@@ -36,7 +31,7 @@ public class StringRunner{
 					switch(sequenceNumber){
 						case 1:
 							try{
-								runnerObj.printLength(utilObj,args);
+								runnerObj.printLength(args);
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 1",e);
@@ -45,7 +40,7 @@ public class StringRunner{
 							
 						case 2:
 							try{
-								runnerObj.printCharArray(taskObj,utilObj);
+								runnerObj.printCharArray();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 2",e);
@@ -54,7 +49,7 @@ public class StringRunner{
 						
 						case 3:
 							try{
-								runnerObj.printCharPosition(taskObj,utilObj);
+								runnerObj.printCharPosition();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 3",e);
@@ -63,7 +58,7 @@ public class StringRunner{
 						
 						case 4:
 							try{
-								runnerObj.printCharOccurrence(taskObj,utilObj);
+								runnerObj.printCharOccurrence();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 4",e);
@@ -72,7 +67,7 @@ public class StringRunner{
 						
 						case 5:
 							try{
-								runnerObj.printGreatestPosition(taskObj,utilObj);
+								runnerObj.printGreatestPosition();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 5",e);
@@ -81,7 +76,7 @@ public class StringRunner{
 							
 						case 6:
 							try{
-								runnerObj.printSuffixChar(taskObj,utilObj);
+								runnerObj.printSuffixChar();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 6",e);
@@ -90,7 +85,7 @@ public class StringRunner{
 						
 						case 7:
 							try{
-								runnerObj.printPrefixChar(taskObj,utilObj);
+								runnerObj.printPrefixChar();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 7",e);
@@ -99,7 +94,7 @@ public class StringRunner{
 							
 						case 8:
 							try{
-								runnerObj.printReplacedString(taskObj,utilObj);
+								runnerObj.printReplacedString();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 8",e);
@@ -108,7 +103,7 @@ public class StringRunner{
 						
 						case 9:
 							try{
-								runnerObj.runCheckPrefix(taskObj,utilObj);
+								runnerObj.runCheckPrefix();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 9",e);
@@ -117,7 +112,7 @@ public class StringRunner{
 							
 						case 10:
 							try{
-								runnerObj.runCheckSuffix(taskObj,utilObj);
+								runnerObj.runCheckSuffix();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 10",e);
@@ -126,7 +121,7 @@ public class StringRunner{
 							
 						case 11:
 							try{
-								runnerObj.printUpperCaseString(taskObj,utilObj);
+								runnerObj.printUpperCaseString();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 11",e);
@@ -135,7 +130,7 @@ public class StringRunner{
 						
 						case 12:
 							try{
-								runnerObj.printLowerCaseString(taskObj,utilObj);
+								runnerObj.printLowerCaseString();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 12",e);
@@ -144,7 +139,7 @@ public class StringRunner{
 						
 						case 13:
 							try{
-								runnerObj.printReversedtring(taskObj,utilObj);
+								runnerObj.printReversedtring();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 13",e);
@@ -153,7 +148,7 @@ public class StringRunner{
 		
 						case 14:
 							try{
-								runnerObj.printMultipleString(taskObj,utilObj);
+								runnerObj.printMultipleString();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 14",e);
@@ -162,7 +157,7 @@ public class StringRunner{
 						
 						case 16:
 							try{
-								runnerObj.printStringArray(taskObj,utilObj);
+								runnerObj.printStringArray();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 16",e);
@@ -172,7 +167,7 @@ public class StringRunner{
 						case 15:								
 						case 17:
 							try{
-								runnerObj.printMergedString(taskObj,utilObj);
+								runnerObj.printMergedString();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 15/17",e);
@@ -182,7 +177,7 @@ public class StringRunner{
 						case 18:						
 						case 19:
 							try{
-								runnerObj.runCompareStrings(taskObj,utilObj);
+								runnerObj.runCompareStrings();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 18/19",e);
@@ -191,7 +186,7 @@ public class StringRunner{
 						
 						case 20:
 							try{
-								runnerObj.printTrimmedString(taskObj,utilObj);
+								runnerObj.printTrimmedString();
 							}
 							catch (StringException e){
 								throw new StringException ("Exception caught in StringRunner class - Case 20",e);
@@ -212,23 +207,23 @@ public class StringRunner{
 	}
 	
 	//method 1
-	public void printLength(StringUtility utilObj, String[] args) throws StringException{
+	public void printLength(String[] args) throws StringException{
 		try {
 			if (args.length == 0) {
 				throw new StringException("Invalid String: Empty argument is given.");
 			}
-			input = args[0];
-			System.out.println("The length of the given string is " + utilObj.getLength(input));
+			String input = args[0];
+			System.out.println("The length of the given string is " + StringUtility.getLength(input));
 		}
 		catch (StringException e){
 			throw new StringException("Exception caught in StringRunner Class - printLength method",e);
 		}
 	}
 	//method 2
-	public void printCharArray(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printCharArray() throws StringException{
 		try{
 			System.out.println("Enter a String to convert into character array: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			char[] charArr = taskObj.convertToCharArray(userString);
 			System.out.print("The String Converted to a character array is: {"); 
 			for (int i = 0; i < charArr.length; i++) {
@@ -244,12 +239,12 @@ public class StringRunner{
 		}
 	}
 	//method 3
-	public void printCharPosition(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printCharPosition() throws StringException{
 		try{
 			System.out.println("Enter a String to find the position of a character: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("Enter a position to find: ");
-			userPosition = utilObj.getIntInput();
+			userPosition = StringUtility.getIntInput();
 			System.out.println("The character at the "+userPosition+ " is :"+taskObj.getCharPosition(userString,userPosition));
 		}
 		catch(StringException e){
@@ -257,14 +252,14 @@ public class StringRunner{
 		}
 	}
 	//method 4
-	public void printCharOccurrence(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printCharOccurrence() throws StringException{
 		try{
 			System.out.println("Enter a String to find the number of occurrences: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("Enter a character to find the occurrence: ");
-			userCharacter = utilObj.getCharInput();
+			char userCharacter = StringUtility.getCharInput();
 			System.out.println("Should it be case sensitive (true/false)?");
-			userBoolean = utilObj.getBoolInput();
+			boolean userBoolean = StringUtility.getBoolInput();
 			System.out.println("The number of occurrences of character "+userCharacter+" are: "+taskObj.getCharOccurrences(userString,userCharacter,userBoolean));
 		}
 		catch(StringException e){
@@ -272,12 +267,12 @@ public class StringRunner{
 		}
 	}
 	//method 5
-	public void printGreatestPosition(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printGreatestPosition() throws StringException{
 		try{
 			System.out.println("Enter a String to find the greatest position of a character: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("Enter a character to find: ");
-			userCharacter = utilObj.getCharInput();
+			char userCharacter = StringUtility.getCharInput();
 			System.out.println("The greatest occurrences of character "+userCharacter+" is: "+taskObj.getGreatestPosition(userString,userCharacter));
 		}
 		catch(StringException e){
@@ -285,12 +280,12 @@ public class StringRunner{
 		}
 	}
 	//method 6
-	public void printSuffixChar(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printSuffixChar() throws StringException{
 		try{
 			System.out.println("Enter a String to print the ending characters: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("Enter a position:");
-			userPosition = utilObj.getIntInput();
+			userPosition = StringUtility.getIntInput();
 			System.out.println("The characters of the given String is: "+taskObj.getSuffixChars(userString,userPosition));
 		}
 		catch(StringException e){
@@ -298,12 +293,12 @@ public class StringRunner{
 		}
 	}
 	//method 7
-	public void printPrefixChar(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printPrefixChar() throws StringException{
 		try{
 			System.out.println("Enter a String to print the starting characters: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("Enter a position: ");
-			userPosition = utilObj.getIntInput();
+			userPosition = StringUtility.getIntInput();
 			System.out.println("The characters of the given String is: "+taskObj.getPrefixChars(userString,userPosition));
 		}
 		catch(StringException e){
@@ -311,14 +306,14 @@ public class StringRunner{
 		}
 	}
 	//method 8
-	public void printReplacedString(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printReplacedString() throws StringException{
 		try{
 			System.out.println("Enter a String that is replaced: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("Enter a String to be replaced: ");
-			String userStringAdd = utilObj.getStringInput();
+			String userStringAdd = StringUtility.getStringInput();
 			System.out.println("Enter the number of characters to be replaced: ");
-			int charsToReplace = utilObj.getIntInput();
+			int charsToReplace = StringUtility.getIntInput();
 			System.out.println("The resulted string is:"+taskObj.replaceCharInString(userString, userStringAdd,charsToReplace));
 		}
 		catch(StringException e){
@@ -326,12 +321,12 @@ public class StringRunner{
 		}
 	}
 	//method 9
-	public void runCheckPrefix(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void runCheckPrefix() throws StringException{
 		try{
 			System.out.println("Enter a String to check: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("Enter a String to be checked: ");
-			String userStringCheck = utilObj.getStringInput();
+			String userStringCheck = StringUtility.getStringInput();
 			System.out.println("Whether the given String '"+userString+"' starts with "+userStringCheck+" ? "+taskObj.checkPrefix(userString, userStringCheck));
 		}
 		catch(StringException e){
@@ -339,12 +334,12 @@ public class StringRunner{
 		}
 	}
 	//method 10
-	public void runCheckSuffix(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void runCheckSuffix() throws StringException{
 		try{
 			System.out.println("Enter a String to check: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("Enter a String to be checked: ");
-			String userStringCheck = utilObj.getStringInput();
+			String userStringCheck = StringUtility.getStringInput();
 			System.out.println("Whether the given String '"+userString+"' ends with "+userStringCheck+" ? "+taskObj.checkSuffix(userString, userStringCheck));
 		}
 		catch(StringException e){
@@ -352,10 +347,10 @@ public class StringRunner{
 		}
 	}
 	//method 11
-	public void printUpperCaseString(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printUpperCaseString() throws StringException{
 		try{
 			System.out.println("Enter a String to be converted from lowercase: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("The given string converted to upper case is: "+taskObj.convertToUpperCase(userString));
 		}
 		catch(StringException e){
@@ -363,10 +358,10 @@ public class StringRunner{
 		}
 	}
 	//method 12
-	public void printLowerCaseString(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printLowerCaseString() throws StringException{
 		try{
 			System.out.println("Enter a String to be converted from uppercase: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("The given string converted to lower case is: "+taskObj.convertToLowerCase(userString));
 		}
 		catch(StringException e){
@@ -374,10 +369,10 @@ public class StringRunner{
 		}
 	}
 	//method 13
-	public void printReversedtring(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printReversedtring() throws StringException{
 		try{
 			System.out.println("Enter a String to reverse: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("The reversed input String is: "+taskObj.reverseString(userString));
 		}
 		catch(StringException e){
@@ -385,10 +380,10 @@ public class StringRunner{
 		}
 	}
 	//method 14
-	public void printMultipleString(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printMultipleString() throws StringException{
 		try{
 			System.out.println("Enter a line with multiple strings: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("The result is: "+taskObj.getMultipleString(userString));
 		}
 		catch(StringException e){
@@ -396,14 +391,14 @@ public class StringRunner{
 		}
 	}
 	//method 15
-	public void printMergedString(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printMergedString() throws StringException{
 		try{
 			System.out.println("Enter a line with multiple strings to concatenate: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("Enter a delimiter to split the string: ");
-			String spliterDelimiter = utilObj.getStringInput();
+			String spliterDelimiter = StringUtility.getStringInput();
 			System.out.println("Enter a delimiter to join the string: ");
-			String combinerDelimiter = utilObj.getStringInput();
+			String combinerDelimiter = StringUtility.getStringInput();
 			System.out.println("The resultant String is: "+taskObj.mergeStringUsingDelimiter(userString,spliterDelimiter,combinerDelimiter));
 		}
 		catch(StringException e){
@@ -411,12 +406,12 @@ public class StringRunner{
 		}
 	}
 	//method 16
-	public void printStringArray(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printStringArray() throws StringException{
 		try{
 			System.out.println("Enter a line with multiple strings: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("Enter a delimiter to split the string: ");
-			String spliterDelimiter = utilObj.getStringInput();
+			String spliterDelimiter = StringUtility.getStringInput();
 			String[] result = taskObj.convertToStringArray(userString,spliterDelimiter);
 			System.out.print("{");
 			for (int i = 0; i<result.length;i++){
@@ -432,14 +427,14 @@ public class StringRunner{
 		}
 	}
 	//method 17
-	public void runCompareStrings(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void runCompareStrings() throws StringException{
 		try{
 			System.out.println("Enter a String to be checked: ");
-			String firstString = utilObj.getStringInput();
+			String firstString = StringUtility.getStringInput();
 			System.out.println("Enter another String to be checked: ");
-			String secondString = utilObj.getStringInput();
+			String secondString = StringUtility.getStringInput();
 			System.out.println("Should it be case sensitive (true/false)?");
-			userBoolean = utilObj.getBoolInput();
+			boolean userBoolean = StringUtility.getBoolInput();
 			System.out.println("Whether the two strings are equal? "+taskObj.compareTwoStrings(firstString,secondString,userBoolean));
 		}
 		catch(StringException e){
@@ -447,10 +442,10 @@ public class StringRunner{
 		}
 	}
 	//method 18
-	public void printTrimmedString(StringTask taskObj,StringUtility utilObj) throws StringException{
+	public void printTrimmedString() throws StringException{
 		try{
 			System.out.println("Enter a String with spaces at front or end or both: ");
-			userString = utilObj.getStringInput();
+			userString = StringUtility.getStringInput();
 			System.out.println("The Trimmed version of Original String is "+taskObj.trimSpaces(userString));
 		}
 		catch(StringException e){

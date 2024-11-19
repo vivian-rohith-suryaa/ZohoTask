@@ -5,12 +5,11 @@ import utility.StringUtility;
 
 public class StringTask {
 	
-	StringUtility utilObj = new StringUtility();
 
     // Example2
     public char[] convertToCharArray(String input) throws StringException {
         try{
-			utilObj.validateNullString(input);
+			StringUtility.validateNullString(input);
 			return input.toCharArray();
 		}
 		catch(StringException e){
@@ -21,8 +20,8 @@ public class StringTask {
     // Example3
     public char getCharPosition(String input, int position) throws StringException {
 		try{
-			int length = utilObj.getLength(input);
-			utilObj.validateIndexInBounds(position-1,length);
+			int length = StringUtility.getLength(input);
+			StringUtility.validateIndexInBounds(position-1,length);
 			return input.charAt(position - 1);
 		}
 		catch(StringException e){
@@ -33,7 +32,7 @@ public class StringTask {
     // Example4
     public int getCharOccurrences(String input, char checkerChar, boolean caseSensitive) throws StringException {
 		try{
-			int length = utilObj.getLength(input);
+			int length = StringUtility.getLength(input);
 			int count = 0;
 			if (!caseSensitive) {
 				input = input.toLowerCase();
@@ -54,8 +53,8 @@ public class StringTask {
     // Example5
     public int getGreatestPosition(String input, char checkerChar) throws StringException {
 		try{
-			int length = utilObj.getLength(input);
-			utilObj.validateEmptyString(length);
+			int length = StringUtility.getLength(input);
+			StringUtility.validateEmptyValue(length);
 			return input.lastIndexOf(checkerChar);
 		}
 		catch(StringException e){
@@ -66,8 +65,8 @@ public class StringTask {
     // Example6
     public String getSuffixChars(String input, int position) throws StringException {
 		try{
-			int length = utilObj.getLength(input);
-			utilObj.validateIndexInBounds(position,length);
+			int length = StringUtility.getLength(input);
+			StringUtility.validateIndexInBounds(position,length);
 			return input.substring(length - position, length);
 		}
 		catch(StringException e){
@@ -78,8 +77,8 @@ public class StringTask {
     // Example7
     public String getPrefixChars(String input, int position) throws StringException {
 		try{
-			int length = utilObj.getLength(input);
-			utilObj.validateIndexInBounds(position,length);
+			int length = StringUtility.getLength(input);
+			StringUtility.validateIndexInBounds(position,length);
 			return input.substring(0, position);
 		}
 		catch(StringException e){
@@ -91,8 +90,8 @@ public class StringTask {
     // Example8
     public String replaceCharInString(String input, String replacedString, int replacedChar) throws StringException {
 		try{
-			utilObj.validateNullString(input);
-			utilObj.validateNullString(replacedString);
+			StringUtility.validateNullString(input);
+			StringUtility.validateNullString(replacedString);
 			return replacedString + input.substring(replacedChar);
 		}
 		catch(StringException e){
@@ -103,8 +102,8 @@ public class StringTask {
     // Example9
     public boolean checkPrefix(String input, String checkerString) throws StringException {
 		try{
-			utilObj.validateNullString(input);
-			utilObj.validateNullString(checkerString);
+			StringUtility.validateNullString(input);
+			StringUtility.validateNullString(checkerString);
 			return input.startsWith(checkerString);
 		}
 		catch(StringException e){
@@ -115,8 +114,8 @@ public class StringTask {
     // Example10
     public boolean checkSuffix(String input, String checkerString) throws StringException {
 		try{
-			utilObj.validateNullString(input);
-			utilObj.validateNullString(checkerString);
+			StringUtility.validateNullString(input);
+			StringUtility.validateNullString(checkerString);
 			return input.endsWith(checkerString);
 		}
 		catch(StringException e){
@@ -127,7 +126,7 @@ public class StringTask {
     // Example11
     public String convertToUpperCase(String input) throws StringException {
 		try{
-			utilObj.validateNullString(input);
+			StringUtility.validateNullString(input);
 			return input.toUpperCase();
 		}
 		catch(StringException e){
@@ -138,7 +137,7 @@ public class StringTask {
     // Example12
     public String convertToLowerCase(String input) throws StringException {
 		try{
-			utilObj.validateNullString(input);
+			StringUtility.validateNullString(input);
 			return input.toLowerCase();
 		}
 		catch(StringException e){
@@ -149,7 +148,7 @@ public class StringTask {
     // Example13
     public String reverseString(String input) throws StringException {
 		try{
-			int length = utilObj.getLength(input);
+			int length = StringUtility.getLength(input);
 			char[] charArr = convertToCharArray(input);
 			int leftPoint = 0;
 			int rightPoint = length - 1;
@@ -170,7 +169,7 @@ public class StringTask {
     // Example14
     public String getMultipleString(String input) throws StringException {
 		try{
-			utilObj.validateNullString(input);
+			StringUtility.validateNullString(input);
 			return input;
 		}
 		catch(StringException e){
@@ -181,9 +180,9 @@ public class StringTask {
     // Example15 and 17
     public String mergeStringUsingDelimiter(String input, String spliterDelimiter, String combinerDelimiter) throws StringException {
 		try{
-			utilObj.validateNullString(input);
-			utilObj.validateNullString(spliterDelimiter);
-			utilObj.validateNullString(combinerDelimiter);
+			StringUtility.validateNullString(input);
+			StringUtility.validateNullString(spliterDelimiter);
+			StringUtility.validateNullString(combinerDelimiter);
 			String[] strArr = input.split(spliterDelimiter);
 			return String.join(combinerDelimiter, strArr);
 		}
@@ -195,8 +194,8 @@ public class StringTask {
     // Example16
     public String[] convertToStringArray(String input, String delimiter) throws StringException {
 		try{
-			utilObj.validateNullString(input);
-			utilObj.validateNullString(delimiter);
+			StringUtility.validateNullString(input);
+			StringUtility.validateNullString(delimiter);
 			return input.split(delimiter);
 		}
 		catch(StringException e){
@@ -208,8 +207,8 @@ public class StringTask {
     // Example18 and 19
     public boolean compareTwoStrings(String firstString, String secondString, boolean caseSensitive) throws StringException {
 		try{
-			utilObj.validateNullString(firstString);
-			utilObj.validateNullString(secondString);
+			StringUtility.validateNullString(firstString);
+			StringUtility.validateNullString(secondString);
 			if (!caseSensitive) {
 				return firstString.equalsIgnoreCase(secondString);
 			}
@@ -223,7 +222,7 @@ public class StringTask {
     // Example20
     public String trimSpaces(String input) throws StringException {
 		try{
-			utilObj.validateNullString(input);
+			StringUtility.validateNullString(input);
 			return input.trim();
 		}
 		catch(StringException e){
