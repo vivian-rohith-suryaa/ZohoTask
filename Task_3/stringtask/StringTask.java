@@ -1,233 +1,150 @@
-package task;
+package stringtask;
 
-import exception.StringException;
-import utility.StringUtility;
+import taskexception.TaskException;
+import nullexception.NullValueException;
+import stringexception.StringException;
+import utility.TaskUtility;
+import indexexception.IndexBoundException;
 
 public class StringTask {
 	
 
-    // Example2
-    public char[] convertToCharArray(String input) throws StringException {
-        try{
-			StringUtility.validateNullString(input);
-			return input.toCharArray();
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - convertToCharArray method",e);
-		}
+    public char[] convertToCharArray(String input) throws TaskException {
+		TaskUtility.validateNullValue(input);
+		return input.toCharArray();
     }
 
-    // Example3
-    public char getCharPosition(String input, int position) throws StringException {
-		try{
-			int length = StringUtility.getLength(input);
-			StringUtility.validateIndexInBounds(position-1,length);
-			return input.charAt(position - 1);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - getCharPosition method",e);
-		}
+
+    public char getCharPosition(String input, int position) throws TaskException {
+		int length = TaskUtility.getLength(input);
+		TaskUtility.validateIndexInBounds(position-1,length);
+		return input.charAt(position - 1);
     }
 
-    // Example4
-    public int getCharOccurrences(String input, char checkerChar, boolean caseSensitive) throws StringException {
-		try{
-			int length = StringUtility.getLength(input);
-			int count = 0;
-			if (!caseSensitive) {
-				input = input.toLowerCase();
-				checkerChar = Character.toLowerCase(checkerChar);
+
+    public int getCharOccurrences(String input, char checkerChar, boolean caseSensitive) throws TaskException {
+		int length = TaskUtility.getLength(input);
+		int count = 0;
+		if (!caseSensitive) {
+			input = input.toLowerCase();
+			checkerChar = Character.toLowerCase(checkerChar);
+		}
+		for (int i = 0; i < length; i++) {
+			if (input.charAt(i) == checkerChar) {
+				count++;
 			}
-			for (int i = 0; i < length; i++) {
-				if (input.charAt(i) == checkerChar) {
-					count++;
-				}
-			}
-			return count;
 		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - getCharOccurrences method",e);
-		}
+		return count;
     }
 
-    // Example5
-    public int getGreatestPosition(String input, char checkerChar) throws StringException {
-		try{
-			int length = StringUtility.getLength(input);
-			StringUtility.validateEmptyValue(length);
-			return input.lastIndexOf(checkerChar);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - getGreatestPosition method",e);
-		}
+
+    public int getGreatestPosition(String input, char checkerChar) throws TaskException {
+		int length = TaskUtility.getLength(input);
+		TaskUtility.validateEmptyValue(length);
+		return input.lastIndexOf(checkerChar);
     }
 
-    // Example6
-    public String getSuffixChars(String input, int position) throws StringException {
-		try{
-			int length = StringUtility.getLength(input);
-			StringUtility.validateIndexInBounds(position,length);
-			return input.substring(length - position, length);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - getSuffixChars method",e);
-		}
-    }
 
-    // Example7
-    public String getPrefixChars(String input, int position) throws StringException {
-		try{
-			int length = StringUtility.getLength(input);
-			StringUtility.validateIndexInBounds(position,length);
-			return input.substring(0, position);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - getPrefixChars method",e);
-		}
+    public String getSuffixChars(String input, int position) throws TaskException {
+		int length = TaskUtility.getLength(input);
+		TaskUtility.validateIndexInBounds(position,length);
+		return input.substring(length - position, length);
+    }
+	
+	
+    public String getPrefixChars(String input, int position) throws TaskException {
+		int length = TaskUtility.getLength(input);
+		TaskUtility.validateIndexInBounds(position,length);
+		return input.substring(0, position);
 	}
 
 
-    // Example8
-    public String replaceCharInString(String input, String replacedString, int replacedChar) throws StringException {
-		try{
-			StringUtility.validateNullString(input);
-			StringUtility.validateNullString(replacedString);
-			return replacedString + input.substring(replacedChar);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - replaceCharInString method",e);
-		}		
-    }
 
-    // Example9
-    public boolean checkPrefix(String input, String checkerString) throws StringException {
-		try{
-			StringUtility.validateNullString(input);
-			StringUtility.validateNullString(checkerString);
-			return input.startsWith(checkerString);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - checkPrefix method",e);
-		}
-    }
-
-    // Example10
-    public boolean checkSuffix(String input, String checkerString) throws StringException {
-		try{
-			StringUtility.validateNullString(input);
-			StringUtility.validateNullString(checkerString);
-			return input.endsWith(checkerString);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - checkSuffix method",e);
-		}
-    }
-
-    // Example11
-    public String convertToUpperCase(String input) throws StringException {
-		try{
-			StringUtility.validateNullString(input);
-			return input.toUpperCase();
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - convertToUpperCase method",e);
-		}
-    }
-
-    // Example12
-    public String convertToLowerCase(String input) throws StringException {
-		try{
-			StringUtility.validateNullString(input);
-			return input.toLowerCase();
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - convertToLowerCase method",e);
-		}
-    }
-
-    // Example13
-    public String reverseString(String input) throws StringException {
-		try{
-			int length = StringUtility.getLength(input);
-			char[] charArr = convertToCharArray(input);
-			int leftPoint = 0;
-			int rightPoint = length - 1;
-			while (leftPoint < rightPoint) {
-				char temp = charArr[leftPoint];
-				charArr[leftPoint] = charArr[rightPoint];
-				charArr[rightPoint] = temp;
-				leftPoint++;
-				rightPoint--;
-			}
-			return new String(charArr);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - reverseString method",e);
-		}
-    }
-
-    // Example14
-    public String getMultipleString(String input) throws StringException {
-		try{
-			StringUtility.validateNullString(input);
-			return input;
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - getMultipleString method",e);
-		}
-    }
-
-    // Example15 and 17
-    public String mergeStringUsingDelimiter(String input, String spliterDelimiter, String combinerDelimiter) throws StringException {
-		try{
-			StringUtility.validateNullString(input);
-			StringUtility.validateNullString(spliterDelimiter);
-			StringUtility.validateNullString(combinerDelimiter);
-			String[] strArr = input.split(spliterDelimiter);
-			return String.join(combinerDelimiter, strArr);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - mergeStringUsingDelimiter method",e);
-		}
-    }
-
-    // Example16
-    public String[] convertToStringArray(String input, String delimiter) throws StringException {
-		try{
-			StringUtility.validateNullString(input);
-			StringUtility.validateNullString(delimiter);
-			return input.split(delimiter);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - convertToStringArray method",e);
-		}
+    public String replaceCharInString(String input, String replacedString, int replacedChar) throws TaskException {
+		TaskUtility.validateNullValue(input);
+		TaskUtility.validateNullValue(replacedString);
+		return replacedString + input.substring(replacedChar);	
     }
 
 
-    // Example18 and 19
-    public boolean compareTwoStrings(String firstString, String secondString, boolean caseSensitive) throws StringException {
-		try{
-			StringUtility.validateNullString(firstString);
-			StringUtility.validateNullString(secondString);
-			if (!caseSensitive) {
-				return firstString.equalsIgnoreCase(secondString);
-			}
-			return firstString.equals(secondString);
-		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - compareTwoStrings method",e);
-		}
+    public boolean checkPrefix(String input, String checkerString) throws TaskException {
+		TaskUtility.validateNullValue(input);
+		TaskUtility.validateNullValue(checkerString);
+		return input.startsWith(checkerString);
     }
 
-    // Example20
-    public String trimSpaces(String input) throws StringException {
-		try{
-			StringUtility.validateNullString(input);
-			return input.trim();
+
+    public boolean checkSuffix(String input, String checkerString) throws TaskException {
+		TaskUtility.validateNullValue(input);
+		TaskUtility.validateNullValue(checkerString);
+		return input.endsWith(checkerString);
+    }
+
+
+    public String convertToUpperCase(String input) throws TaskException {
+		TaskUtility.validateNullValue(input);
+		return input.toUpperCase();
+    }
+
+
+    public String convertToLowerCase(String input) throws TaskException {
+		TaskUtility.validateNullValue(input);
+		return input.toLowerCase();
+    }
+
+
+    public String reverseString(String input) throws TaskException {
+		int length = TaskUtility.getLength(input);
+		char[] charArr = convertToCharArray(input);
+		int leftPoint = 0;
+		int rightPoint = length - 1;
+		while (leftPoint < rightPoint) {
+			char temp = charArr[leftPoint];
+			charArr[leftPoint] = charArr[rightPoint];
+			charArr[rightPoint] = temp;
+			leftPoint++;
+			rightPoint--;
 		}
-		catch(StringException e){
-			throw new StringException("Exception caught in StringTask Class - trimSpaces method",e);
+		return new String(charArr);
+    }
+
+
+    public String getMultipleString(String input) throws TaskException {
+		TaskUtility.validateNullValue(input);
+		return input;
+    }
+
+
+    public String mergeStringUsingDelimiter(String input, String spliterDelimiter, String combinerDelimiter) throws TaskException {
+		TaskUtility.validateNullValue(input);
+		TaskUtility.validateNullValue(spliterDelimiter);
+		TaskUtility.validateNullValue(combinerDelimiter);
+		String[] strArr = input.split(spliterDelimiter);
+		return String.join(combinerDelimiter, strArr);
+    }
+
+
+    public String[] convertToStringArray(String input, String delimiter) throws TaskException {
+		TaskUtility.validateNullValue(input);
+		TaskUtility.validateNullValue(delimiter);
+		return input.split(delimiter);
+    }
+
+
+
+    public boolean compareTwoStrings(String firstString, String secondString, boolean caseSensitive) throws TaskException {
+		TaskUtility.validateNullValue(firstString);
+		TaskUtility.validateNullValue(secondString);
+		if (!caseSensitive) {
+			return firstString.equalsIgnoreCase(secondString);
 		}
+		return firstString.equals(secondString);
+    }
+
+
+    public String trimSpaces(String input) throws TaskException {
+		TaskUtility.validateNullValue(input);
+		return input.trim();
     }
 
     

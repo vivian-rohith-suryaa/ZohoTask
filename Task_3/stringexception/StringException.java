@@ -1,7 +1,8 @@
-package exception;
+package stringexception;
+import taskexception.TaskException;
 
-public class StringException extends Exception{
-
+public class StringException extends TaskException{
+	
 	public StringException(String message){
 		super(message);
 	}
