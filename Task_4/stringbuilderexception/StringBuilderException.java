@@ -11,4 +11,3 @@ public class StringBuilderException extends TaskException{
 		super(message,cause);
 	}
 }
-		

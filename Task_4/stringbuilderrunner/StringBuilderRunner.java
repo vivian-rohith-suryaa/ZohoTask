@@ -165,8 +165,8 @@ public class StringBuilderRunner{
 		System.out.println("Enter the limit to number of chars: ");
 		int limit = TaskUtility.getIntInput();
 		System.out.println("Enter String(s): ");
-		input = TaskUtility.getStringInput();
-		TaskUtility.validateMinimumChars(input,limit);
+		String input = TaskUtility.getStringInput();
+		TaskUtility.validateMinimumChars(limit,input);
 		TaskUtility.appendString(strBuilder,input);
 		System.out.println("The Input is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 		System.out.println("Enter starting position to delete: ");
@@ -182,8 +182,8 @@ public class StringBuilderRunner{
 		System.out.println("Enter the limit to number of chars: ");
 		int limit = TaskUtility.getIntInput();
 		System.out.println("Enter String(s): ");
-		input = TaskUtility.getStringInput();
-		TaskUtility.validateMinimumChars(input,limit);
+		String input = TaskUtility.getStringInput();
+		TaskUtility.validateMinimumChars(limit,input);
 		TaskUtility.appendString(strBuilder,input);
 		System.out.println("The Input is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 		System.out.println("Enter starting position to insert: ");
