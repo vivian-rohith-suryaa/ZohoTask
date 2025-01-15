@@ -5,7 +5,7 @@ import nullexception.NullValueException;
 import java.util.Scanner;
 import stringexception.StringException;
 import indexexception.IndexBoundException;
-import stringbuilderexception.StringBuilderException;
+import minimumcharexception.MinimumCharException;
 
 
 public class TaskUtility{
@@ -26,7 +26,7 @@ public class TaskUtility{
 
     public static void validateIndexInBounds(int index, int length) throws TaskException {
 		validateEmptyValue(length);
-        if (index < 0 || index >= length) {
+        if (index-1< 0 || index-1>= length+1) {
             throw new IndexBoundException("Invalid index: Exceeds input length or out of bounds.");
         }
     }
@@ -36,7 +36,7 @@ public class TaskUtility{
 		validateEmptyValue(limit);
 		int len = getLength(input);
 		if(len<limit){
-			throw new StringBuilderException("Invalid Input: Minimum of "+limit+" characters to be given");
+			throw new MinimumCharException("Invalid Input: Minimum of "+limit+" characters to be given");
 		}
 	}
 	

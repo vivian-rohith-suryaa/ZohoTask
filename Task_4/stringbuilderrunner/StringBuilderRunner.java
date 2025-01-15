@@ -6,7 +6,7 @@ import utility.TaskUtility;
 import stringbuildertask.StringBuilderTask;
 import indexexception.IndexBoundException;
 import java.util.Scanner;
-import stringbuilderexception.StringBuilderException;
+import minimumcharexception.MinimumCharException;
 
 public class StringBuilderRunner{
 	public StringBuilderTask taskObj = new StringBuilderTask();
@@ -80,7 +80,7 @@ public class StringBuilderRunner{
 	}
 	
 	public void runCaseOne() throws TaskException{
-		StringBuilder strBuilder = new StringBuilder();
+		StringBuilder strBuilder = taskObj.getStringBuilder();
 		System.out.println("The Input is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 		System.out.println("Enter a String(s): ");
 		input = TaskUtility.getStringInput();
@@ -89,7 +89,7 @@ public class StringBuilderRunner{
 	}
 	
 	public void runCaseTwo() throws TaskException{
-		StringBuilder strBuilder = new StringBuilder();
+		StringBuilder strBuilder = taskObj.getStringBuilder();
 		System.out.println("Enter a String(s): ");
 		input = TaskUtility.getStringInput();
 		TaskUtility.appendString(strBuilder,input);
@@ -107,7 +107,7 @@ public class StringBuilderRunner{
 	}
 	
 	public void runCaseThree() throws TaskException{
-		StringBuilder strBuilder = new StringBuilder();
+		StringBuilder strBuilder = taskObj.getStringBuilder();
 		System.out.println("Enter String(s): ");
 		input = TaskUtility.getStringInput();
 		TaskUtility.appendString(strBuilder,input);
@@ -123,7 +123,7 @@ public class StringBuilderRunner{
 	}
 	
 	public void runCaseFour() throws TaskException{
-		StringBuilder strBuilder = new StringBuilder();
+		StringBuilder strBuilder = taskObj.getStringBuilder();
 		System.out.println("Enter String(s): ");
 		input = TaskUtility.getStringInput();
 		TaskUtility.appendString(strBuilder,input);
@@ -137,7 +137,7 @@ public class StringBuilderRunner{
 	}
 	
 	public void runCaseFive() throws TaskException{
-		StringBuilder strBuilder = new StringBuilder();
+		StringBuilder strBuilder = taskObj.getStringBuilder();
 		System.out.println("Enter String(s): ");
 		input = TaskUtility.getStringInput();
 		TaskUtility.appendString(strBuilder,input);
@@ -161,7 +161,7 @@ public class StringBuilderRunner{
 	}
 	
 	public void runCaseSeven() throws TaskException{
-		StringBuilder strBuilder = new StringBuilder();
+		StringBuilder strBuilder = taskObj.getStringBuilder();
 		System.out.println("Enter the limit to number of chars: ");
 		int limit = TaskUtility.getIntInput();
 		System.out.println("Enter String(s): ");
@@ -178,7 +178,7 @@ public class StringBuilderRunner{
 	}
 	
 	public void runCaseEight() throws TaskException{
-		StringBuilder strBuilder = new StringBuilder();
+		StringBuilder strBuilder = taskObj.getStringBuilder();
 		System.out.println("Enter the limit to number of chars: ");
 		int limit = TaskUtility.getIntInput();
 		System.out.println("Enter String(s): ");
@@ -197,7 +197,7 @@ public class StringBuilderRunner{
 	}
 	
 	public void runCaseNineAndTen() throws TaskException{
-		StringBuilder strBuilder = new StringBuilder();
+		StringBuilder strBuilder = taskObj.getStringBuilder();
 		System.out.println("Enter String(s): ");
 		input = TaskUtility.getStringInput();
 		TaskUtility.appendString(strBuilder,input);

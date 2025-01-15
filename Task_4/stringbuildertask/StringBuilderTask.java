@@ -4,9 +4,13 @@ import taskexception.TaskException;
 import nullexception.NullValueException;
 import indexexception.IndexBoundException;
 import utility.TaskUtility;
-import stringbuilderexception.StringBuilderException;
+import minimumcharexception.MinimumCharException;
 
 public class StringBuilderTask{
+	
+	public StringBuilder getStringBuilder() throws TaskException{
+		return new StringBuilder();
+	}
 	
 	public StringBuilder appendDelimiter(StringBuilder strBuilder, String delimiter,String helperStr) throws TaskException{
 		TaskUtility.validateNullValue(strBuilder);
@@ -22,8 +26,8 @@ public class StringBuilderTask{
 		String str = TaskUtility.convertToString(strBuilder);
 		String[] strArray = str.split(delimiter);
 		int len = strArray.length;
-		TaskUtility.validateIndexInBounds(position - 1, len + 1);
-		StringBuilder result = new StringBuilder();
+		TaskUtility.validateIndexInBounds(position, len);
+		StringBuilder result = getStringBuilder();
 
 		for (int i = 0; i < len; i++) {
 			if (i == position-1) {
@@ -50,8 +54,8 @@ public class StringBuilderTask{
 		String str = TaskUtility.convertToString(strBuilder);
 		String[] strArray = str.split(delimiter);
 		int len = strArray.length;
-		TaskUtility.validateIndexInBounds(position-1,len+1);
-		StringBuilder result = new StringBuilder();
+		TaskUtility.validateIndexInBounds(position,len);
+		StringBuilder result = getStringBuilder();
 		
 		for(int i=0;i<len;i++){
 			if(i==position-1){
@@ -71,7 +75,7 @@ public class StringBuilderTask{
 		TaskUtility.validateNullValue(replacerDelimiter);
 		String str = TaskUtility.convertToString(strBuilder);
 		String[] strArray = str.split(splitterDelimiter);
-		StringBuilder result = new StringBuilder();
+		StringBuilder result = getStringBuilder();
 		int len = strArray.length;
 		for (int i=0; i<len;i++){
 			result.append(strArray[i]);
@@ -91,7 +95,7 @@ public class StringBuilderTask{
 		int len = TaskUtility.getLength(strBuilder);
 		TaskUtility.validateNullValue(strBuilder);
 		TaskUtility.validateIndexInBounds(startValue,len);
-		TaskUtility.validateIndexInBounds(endValue-1,len);
+		TaskUtility.validateIndexInBounds(endValue,len);
 		return strBuilder.delete(startValue-1,endValue);
 	}
 
@@ -100,7 +104,7 @@ public class StringBuilderTask{
 		TaskUtility.validateNullValue(strBuilder);
 		TaskUtility.validateNullValue(replacerString);
 		TaskUtility.validateIndexInBounds(startValue,len);
-		TaskUtility.validateIndexInBounds(endValue-1,len);
+		TaskUtility.validateIndexInBounds(endValue,len);
 		return strBuilder.replace(startValue,endValue,replacerString);
 	}
 
@@ -108,7 +112,7 @@ public class StringBuilderTask{
 		TaskUtility.validateNullValue(strBuilder);
 		TaskUtility.validateNullValue(delimiter);
 		String str = TaskUtility.convertToString(strBuilder);
-		StringBuilder result = new StringBuilder();
+		StringBuilder result = getStringBuilder();
 		int index = str.indexOf(delimiter);
 		while(index != -1){
 			result.append(index+1).append(" ");
