@@ -19,6 +19,7 @@ public class StringBuilderTask{
 		return strBuilder.append(delimiter).append(helperStr);
 	}
 
+	/*
 	public StringBuilder insertAtPosition(StringBuilder strBuilder, String helperStr, String delimiter, int position) throws TaskException {
 		TaskUtility.validateNullValue(strBuilder);
 		TaskUtility.validateNullValue(delimiter);
@@ -46,8 +47,38 @@ public class StringBuilderTask{
 		}
 		return result;
 	}
+	*/
 
+	public StringBuilder insertAtPosition(StringBuilder strBuilder,String helperStr, String delimiter, int position) throws TaskException{
+		TaskUtility.validateNullValue(strBuilder);
+		TaskUtility.validateNullValue(delimiter);
+		TaskUtility.validateNullValue(helperStr);
+		int currentposition = 1;
+		int len = TaskUtility.getLength(strBuilder);
+		TaskUtility.validateIndexInBounds(position, len);
+		StringBuilder result = getStringBuilder();
+		int start = 0;
+		
+		for (int i=0;i<len;i++){
+			if(strBuilder.charAt(i)== delimiter.charAt(0) || i==len-1){
+				if(currentposition == position){
+					result.append(helperStr).append(delimiter);
+				}
+				result.append(strBuilder,start,i+1);
+				start = i+1;
+				currentposition++;
+				if (currentposition < position) {
+					result.append(delimiter);
+				}
+			}
+		}
+		if(currentposition==position){
+			result.append(delimiter).append(helperStr);
+		}
+		return result;
+	}
 	
+	/*
 	public StringBuilder deleteAtPosition(StringBuilder strBuilder,String delimiter,int position) throws TaskException{
 		TaskUtility.validateNullValue(strBuilder);
 		TaskUtility.validateNullValue(delimiter);
@@ -68,7 +99,34 @@ public class StringBuilderTask{
 		}
 		return result;
 	}
+	*/
 	
+	public StringBuilder deleteAtPosition(StringBuilder strBuilder,String delimiter, int position) throws TaskException{
+		TaskUtility.validateNullValue(strBuilder);
+		TaskUtility.validateNullValue(delimiter);
+		int currentposition = 1;
+		int len = TaskUtility.getLength(strBuilder);
+		TaskUtility.validateIndexInBounds(position, len);
+		StringBuilder result = getStringBuilder();
+		int start = 0;
+		while (start < len) {
+			int end = strBuilder.indexOf(delimiter, start);  
+			if (end == -1) {
+				end = len;
+			}
+			if (currentposition != position) {
+				result.append(strBuilder, start, end); 
+				if (end != len) {
+					result.append(delimiter);
+				}
+			}
+			start = end + TaskUtility.getLength(delimiter);
+			currentposition++;
+		}
+		return result;
+	}
+	
+	/*
 	public StringBuilder replaceDelimiter(StringBuilder strBuilder, String splitterDelimiter, String replacerDelimiter) throws TaskException{
 		TaskUtility.validateNullValue(strBuilder);
 		TaskUtility.validateNullValue(splitterDelimiter);
@@ -82,6 +140,29 @@ public class StringBuilderTask{
 			if(i<len-1){
 				result.append(replacerDelimiter);
 			}
+		}
+		return result;
+	}
+	*/
+	
+	public StringBuilder replaceDelimiter(StringBuilder strBuilder, String splitterDelimiter, String replacerDelimiter) throws TaskException {
+		TaskUtility.validateNullValue(strBuilder);
+		TaskUtility.validateNullValue(splitterDelimiter);
+		TaskUtility.validateNullValue(replacerDelimiter);
+		int len = strBuilder.length();
+		StringBuilder result = new StringBuilder();
+		int start = 0;
+		while (start < len) {
+			int end = strBuilder.indexOf(splitterDelimiter, start);
+
+			if (end == -1) {
+				result.append(strBuilder.substring(start));
+				break;
+			} else {
+				result.append(strBuilder.substring(start, end));
+				result.append(replacerDelimiter);
+			}
+			start = end + splitterDelimiter.length();
 		}
 		return result;
 	}
@@ -108,17 +189,16 @@ public class StringBuilderTask{
 		return strBuilder.replace(startValue,endValue,replacerString);
 	}
 
-	public StringBuilder getIndices(StringBuilder strBuilder,String delimiter) throws TaskException{
+	public int getFirstIndexOf(StringBuilder strBuilder,String delimiter) throws TaskException{
 		TaskUtility.validateNullValue(strBuilder);
 		TaskUtility.validateNullValue(delimiter);
-		String str = TaskUtility.convertToString(strBuilder);
-		StringBuilder result = getStringBuilder();
-		int index = str.indexOf(delimiter);
-		while(index != -1){
-			result.append(index+1).append(" ");
-			index = str.indexOf(delimiter,index+1);
-		}
-		return result;
+		return strBuilder.indexOf(delimiter);
+	}
+	
+	public int getLastIndexOf(StringBuilder strBuilder,String delimiter) throws TaskException{
+		TaskUtility.validateNullValue(strBuilder);
+		TaskUtility.validateNullValue(delimiter);
+		return strBuilder.lastIndexOf(delimiter);
 	}
 		
 }

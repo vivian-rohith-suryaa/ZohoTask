@@ -11,6 +11,7 @@ import minimumcharexception.MinimumCharException;
 public class StringBuilderRunner{
 	public StringBuilderTask taskObj = new StringBuilderTask();
 	String input;
+	int index;
 	
 	public static void main(String[] args){
 		
@@ -62,8 +63,11 @@ public class StringBuilderRunner{
 							break;
 						
 						case 9:
+							runnerObj.runCaseNine();
+							break;
+							
 						case 10:
-							runnerObj.runCaseNineAndTen();
+							runnerObj.runCaseTen();
 							break;
 							
 						default:
@@ -196,7 +200,7 @@ public class StringBuilderRunner{
 		System.out.println("The position of the delimiters are: "+strBuilder);
 	}
 	
-	public void runCaseNineAndTen() throws TaskException{
+	public void runCaseNine() throws TaskException{
 		StringBuilder strBuilder = taskObj.getStringBuilder();
 		System.out.println("Enter String(s): ");
 		input = TaskUtility.getStringInput();
@@ -204,7 +208,19 @@ public class StringBuilderRunner{
 		System.out.println("The Input is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 		System.out.println("Enter the delimiter: ");
 		String delimiter = TaskUtility.getStringInput();
-		strBuilder = taskObj.getIndices(strBuilder,delimiter);
-		System.out.println("The position of the delimiters are: "+strBuilder);
+		index = taskObj.getFirstIndexOf(strBuilder,delimiter)+1;
+		System.out.println("The position of the delimiter is: "+index);
+	}
+	
+	public void runCaseTen() throws TaskException{
+		StringBuilder strBuilder = taskObj.getStringBuilder();
+		System.out.println("Enter String(s): ");
+		input = TaskUtility.getStringInput();
+		TaskUtility.appendString(strBuilder,input);
+		System.out.println("The Input is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
+		System.out.println("Enter the delimiter: ");
+		String delimiter = TaskUtility.getStringInput();
+		index = taskObj.getLastIndexOf(strBuilder,delimiter)+1;
+		System.out.println("The position of the delimiter is: "+index);
 	}
 }
