@@ -8,6 +8,8 @@ import minimumcharexception.MinimumCharException;
 
 public class StringBuilderTask{
 	
+	public int len;
+	
 	public StringBuilder getStringBuilder() throws TaskException{
 		return new StringBuilder();
 	}
@@ -18,171 +20,71 @@ public class StringBuilderTask{
 		TaskUtility.validateNullValue(helperStr);
 		return strBuilder.append(delimiter).append(helperStr);
 	}
-
-	/*
+	
 	public StringBuilder insertAtPosition(StringBuilder strBuilder, String helperStr, String delimiter, int position) throws TaskException {
-		TaskUtility.validateNullValue(strBuilder);
-		TaskUtility.validateNullValue(delimiter);
 		TaskUtility.validateNullValue(helperStr);
-		String str = TaskUtility.convertToString(strBuilder);
-		String[] strArray = str.split(delimiter);
-		int len = strArray.length;
-		TaskUtility.validateIndexInBounds(position, len);
-		StringBuilder result = getStringBuilder();
-
-		for (int i = 0; i < len; i++) {
-			if (i == position-1) {
-				result.append(helperStr);
-				if(i<len){
-					result.append(delimiter);
-				}
-			}
-			result.append(strArray[i]);
-			if (i < len - 1) {
-				result.append(delimiter);
-			}
-		}
-		if (position == len + 1) {
-			result.append(delimiter).append(helperStr);
-		}
-		return result;
-	}
-	*/
-
-	public StringBuilder insertAtPosition(StringBuilder strBuilder,String helperStr, String delimiter, int position) throws TaskException{
-		TaskUtility.validateNullValue(strBuilder);
-		TaskUtility.validateNullValue(delimiter);
-		TaskUtility.validateNullValue(helperStr);
-		int currentposition = 1;
+		int delimiterLen = TaskUtility.getLength(delimiter);
 		int len = TaskUtility.getLength(strBuilder);
 		TaskUtility.validateIndexInBounds(position, len);
-		StringBuilder result = getStringBuilder();
-		int start = 0;
-		
-		for (int i=0;i<len;i++){
-			if(strBuilder.charAt(i)== delimiter.charAt(0) || i==len-1){
-				if(currentposition == position){
-					result.append(helperStr).append(delimiter);
-				}
-				result.append(strBuilder,start,i+1);
-				start = i+1;
-				currentposition++;
-				if (currentposition < position) {
-					result.append(delimiter);
-				}
-			}
+		int insertPosition;
+		if (position == 1) {
+			insertPosition = 0;
 		}
-		if(currentposition==position){
-			result.append(delimiter).append(helperStr);
+		else {
+			insertPosition = getDelimiterIndex(strBuilder,delimiter,position-1);
+			insertPosition+=delimiterLen;
 		}
-		return result;
+		return strBuilder.insert(insertPosition, helperStr+delimiter);
 	}
-	
-	/*
-	public StringBuilder deleteAtPosition(StringBuilder strBuilder,String delimiter,int position) throws TaskException{
-		TaskUtility.validateNullValue(strBuilder);
-		TaskUtility.validateNullValue(delimiter);
-		String str = TaskUtility.convertToString(strBuilder);
-		String[] strArray = str.split(delimiter);
-		int len = strArray.length;
-		TaskUtility.validateIndexInBounds(position,len);
-		StringBuilder result = getStringBuilder();
 		
-		for(int i=0;i<len;i++){
-			if(i==position-1){
-				continue;
-			}
-			result.append(strArray[i]);
-			if(i<len-1 && !(i==len-2 && position ==len)){
-				result.append(delimiter);
-			}
-		}
-		return result;
-	}
-	*/
-	
 	public StringBuilder deleteAtPosition(StringBuilder strBuilder,String delimiter, int position) throws TaskException{
-		TaskUtility.validateNullValue(strBuilder);
-		TaskUtility.validateNullValue(delimiter);
-		int currentposition = 1;
+		int delimiterLen = TaskUtility.getLength(delimiter);
 		int len = TaskUtility.getLength(strBuilder);
 		TaskUtility.validateIndexInBounds(position, len);
-		StringBuilder result = getStringBuilder();
-		int start = 0;
-		while (start < len) {
-			int end = strBuilder.indexOf(delimiter, start);  
-			if (end == -1) {
-				end = len;
-			}
-			if (currentposition != position) {
-				result.append(strBuilder, start, end); 
-				if (end != len) {
-					result.append(delimiter);
-				}
-			}
-			start = end + TaskUtility.getLength(delimiter);
-			currentposition++;
+		int startIndex = getDelimiterIndex(strBuilder,delimiter,position-1);
+		int endIndex = getDelimiterIndex(strBuilder, delimiter, position);
+		if (position == 1) {
+			endIndex = endIndex+TaskUtility.getLength(delimiter);
 		}
-		return result;
-	}
-	
-	/*
-	public StringBuilder replaceDelimiter(StringBuilder strBuilder, String splitterDelimiter, String replacerDelimiter) throws TaskException{
-		TaskUtility.validateNullValue(strBuilder);
-		TaskUtility.validateNullValue(splitterDelimiter);
-		TaskUtility.validateNullValue(replacerDelimiter);
-		String str = TaskUtility.convertToString(strBuilder);
-		String[] strArray = str.split(splitterDelimiter);
-		StringBuilder result = getStringBuilder();
-		int len = strArray.length;
-		for (int i=0; i<len;i++){
-			result.append(strArray[i]);
-			if(i<len-1){
-				result.append(replacerDelimiter);
-			}
+		else if(endIndex == -1){
+			endIndex = len;
 		}
-		return result;
+		return strBuilder.delete(startIndex,endIndex);
 	}
-	*/
-	
+
 	public StringBuilder replaceDelimiter(StringBuilder strBuilder, String splitterDelimiter, String replacerDelimiter) throws TaskException {
-		TaskUtility.validateNullValue(strBuilder);
 		TaskUtility.validateNullValue(splitterDelimiter);
 		TaskUtility.validateNullValue(replacerDelimiter);
-		int len = strBuilder.length();
-		StringBuilder result = new StringBuilder();
-		int start = 0;
-		while (start < len) {
-			int end = strBuilder.indexOf(splitterDelimiter, start);
-
-			if (end == -1) {
-				result.append(strBuilder.substring(start));
-				break;
-			} else {
-				result.append(strBuilder.substring(start, end));
-				result.append(replacerDelimiter);
+		len = TaskUtility.getLength(strBuilder);
+		int delimiterLen = TaskUtility.getLength(splitterDelimiter);
+		boolean loop = true;
+		int position = 0;
+		while(loop){
+			int index = getIndexNumber(strBuilder,splitterDelimiter,position);
+			if(index>=0){
+				strBuilder = strBuilder.replace(index,(index+delimiterLen),replacerDelimiter);
 			}
-			start = end + splitterDelimiter.length();
+			else{
+				loop = false;
+			}
 		}
-		return result;
+		return strBuilder;
 	}
-
+	
 	public StringBuilder reverseStrBuilder (StringBuilder strBuilder) throws TaskException{
 		TaskUtility.validateNullValue(strBuilder);
 		return strBuilder.reverse();
 	}
 
 	public StringBuilder deleteChars(StringBuilder strBuilder,int startValue,int endValue) throws TaskException{
-		int len = TaskUtility.getLength(strBuilder);
-		TaskUtility.validateNullValue(strBuilder);
+		len = TaskUtility.getLength(strBuilder);
 		TaskUtility.validateIndexInBounds(startValue,len);
 		TaskUtility.validateIndexInBounds(endValue,len);
 		return strBuilder.delete(startValue-1,endValue);
 	}
 
 	public StringBuilder insertChars(StringBuilder strBuilder,int startValue,int endValue, String replacerString) throws TaskException{
-		int len = TaskUtility.getLength(strBuilder);
-		TaskUtility.validateNullValue(strBuilder);
+		len = TaskUtility.getLength(strBuilder);
 		TaskUtility.validateNullValue(replacerString);
 		TaskUtility.validateIndexInBounds(startValue,len);
 		TaskUtility.validateIndexInBounds(endValue,len);
@@ -200,6 +102,24 @@ public class StringBuilderTask{
 		TaskUtility.validateNullValue(delimiter);
 		return strBuilder.lastIndexOf(delimiter);
 	}
+	
+	public int getDelimiterIndex(StringBuilder strBuilder, String delimiter, int position) throws TaskException {
+		int index = 0;
+		int start = 0;
+		for(int i = 0;i<position;i++){
+			index = strBuilder.indexOf(delimiter,start);
+			 if (index == -1) {
+				throw new TaskException("Delimiter not found.");
+			}
+			start = index+TaskUtility.getLength(delimiter);
+		}
+		return index;
+	}
+	
+	public int getIndexNumber (StringBuilder strBuilder,String delimiter, int position) throws TaskException{
+		return strBuilder.indexOf(delimiter,position);
+	}
+	
 		
 }
 	
