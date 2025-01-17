@@ -27,11 +27,11 @@ public class StringBuilderTask{
 		int len = TaskUtility.getLength(strBuilder);
 		TaskUtility.validateIndexInBounds(position, len);
 		int insertPosition;
-		if (position == 1) {
+		if (position == 0) {
 			insertPosition = 0;
 		}
 		else {
-			insertPosition = getDelimiterIndex(strBuilder,delimiter,position-1);
+			insertPosition = getDelimiterIndex(strBuilder,delimiter,position);
 			insertPosition+=delimiterLen;
 		}
 		strBuilder.insert(insertPosition, helperStr+delimiter);
@@ -41,13 +41,21 @@ public class StringBuilderTask{
 		int delimiterLen = TaskUtility.getLength(delimiter);
 		int len = TaskUtility.getLength(strBuilder);
 		TaskUtility.validateIndexInBounds(position, len);
-		int startIndex = getDelimiterIndex(strBuilder,delimiter,position-1);
-		int endIndex = getDelimiterIndex(strBuilder, delimiter, position);
-		if (position == 1) {
-			endIndex = endIndex+delimiterLen;
+		int startIndex = getDelimiterIndex(strBuilder,delimiter,position);
+		int endIndex = getDelimiterIndex(strBuilder, delimiter, position+1);
+		if (position == 0) {
+			if(endIndex == -1){
+				endIndex = len;
+			}
+			else{
+				endIndex+=delimiterLen;
+			}
 		}
-		else if(endIndex == -1){
-			endIndex = len;
+		else{ 
+			startIndex+=delimiterLen;
+			if(endIndex==-1){
+				endIndex=len;
+			}
 		}
 		strBuilder.delete(startIndex,endIndex);
 	}
@@ -79,7 +87,7 @@ public class StringBuilderTask{
 		len = TaskUtility.getLength(strBuilder);
 		TaskUtility.validateIndexInBounds(startValue,len);
 		TaskUtility.validateIndexInBounds(endValue,len);
-		strBuilder.delete(startValue-1,endValue);
+		strBuilder.delete(startValue,endValue);
 	}
 
 	public void insertChars(StringBuilder strBuilder,int startValue,int endValue, String replacerString) throws TaskException{

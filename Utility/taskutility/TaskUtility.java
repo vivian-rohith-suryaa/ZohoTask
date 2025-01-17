@@ -26,7 +26,7 @@ public class TaskUtility{
 
     public static void validateIndexInBounds(int index, int length) throws TaskException {
 		validateEmptyValue(length);
-        if (index-1< 0 || index-1>= length+1) {
+        if (index< 0 || index>length-1) {
             throw new IndexBoundException("Invalid index: Exceeds input length or out of bounds.");
         }
     }

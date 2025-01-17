@@ -274,10 +274,10 @@ public class StringRunner{
 			System.out.println("Enter a String to find the number of occurrences: ");
 			userString = TaskUtility.getStringInput();
 			System.out.println("Enter a character to find the occurrence: ");
-			char userCharacter = TaskUtility.getCharInput();
+			String helperStr = TaskUtility.getStringInput();
 			System.out.println("Should it be case sensitive (true/false)?");
 			boolean userBoolean = TaskUtility.getBoolInput();
-			System.out.println("The number of occurrences of character "+userCharacter+" are: "+taskObj.getCharOccurrences(userString,userCharacter,userBoolean));
+			System.out.println("The number of occurrences of character "+helperStr+" are: "+taskObj.getCharOccurrences(userString,helperStr,userBoolean));
 		}
 		catch(TaskException e){
 			throw new TaskException("Exception caught in StringRunner Class - printCharOccurrence method",e);
@@ -289,8 +289,8 @@ public class StringRunner{
 			System.out.println("Enter a String to find the greatest position of a character: ");
 			userString = TaskUtility.getStringInput();
 			System.out.println("Enter a character to find: ");
-			char userCharacter = TaskUtility.getCharInput();
-			System.out.println("The greatest occurrences of character "+userCharacter+" is: "+taskObj.getGreatestPosition(userString,userCharacter));
+			String helperStr = TaskUtility.getStringInput();
+			System.out.println("The greatest occurrences of character "+helperStr+" is: "+taskObj.getGreatestPosition(userString,helperStr));
 		}
 		catch(TaskException e){
 			throw new TaskException("Exception caught in StringRunner Class - printGreatestPosition method",e);

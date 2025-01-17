@@ -17,20 +17,20 @@ public class StringTask {
 
     public char getCharPosition(String input, int position) throws TaskException {
 		int length = TaskUtility.getLength(input);
-		TaskUtility.validateIndexInBounds(position-1,length);
-		return input.charAt(position - 1);
+		TaskUtility.validateIndexInBounds(position,length);
+		return input.charAt(position);
     }
 
 
-    public int getCharOccurrences(String input, char checkerChar, boolean caseSensitive) throws TaskException {
+    public int getCharOccurrences(String input, String helperStr, boolean caseSensitive) throws TaskException {
 		int length = TaskUtility.getLength(input);
 		int count = 0;
 		if (!caseSensitive) {
-			input = input.toLowerCase();
-			checkerChar = Character.toLowerCase(checkerChar);
+			input = convertToLowerCase(input);
+			helperStr = convertToLowerCase(helperStr);
 		}
 		for (int i = 0; i < length; i++) {
-			if (input.charAt(i) == checkerChar) {
+			if (input.charAt(i) == helperStr) {
 				count++;
 			}
 		}
@@ -38,10 +38,10 @@ public class StringTask {
     }
 
 
-    public int getGreatestPosition(String input, char checkerChar) throws TaskException {
+    public int getGreatestPosition(String input, String helperStr) throws TaskException {
 		int length = TaskUtility.getLength(input);
 		TaskUtility.validateEmptyValue(length);
-		return input.lastIndexOf(checkerChar);
+		return input.lastIndexOf(helperStr);
     }
 
 

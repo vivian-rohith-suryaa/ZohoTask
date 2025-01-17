@@ -208,7 +208,7 @@ public class StringBuilderRunner{
 		System.out.println("The Input is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 		System.out.println("Enter the delimiter: ");
 		String delimiter = TaskUtility.getStringInput();
-		index = taskObj.getFirstIndexOf(strBuilder,delimiter)+1;
+		index = taskObj.getFirstIndexOf(strBuilder,delimiter);
 		System.out.println("The position of the delimiter is: "+index);
 	}
 	
@@ -220,7 +220,7 @@ public class StringBuilderRunner{
 		System.out.println("The Input is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 		System.out.println("Enter the delimiter: ");
 		String delimiter = TaskUtility.getStringInput();
-		index = taskObj.getLastIndexOf(strBuilder,delimiter)+1;
+		index = taskObj.getLastIndexOf(strBuilder,delimiter);
 		System.out.println("The position of the delimiter is: "+index);
 	}
 }
