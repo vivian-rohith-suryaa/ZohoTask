@@ -26,11 +26,8 @@ public class StringBuilderTask{
 		int delimiterLen = TaskUtility.getLength(delimiter);
 		int len = TaskUtility.getLength(strBuilder);
 		TaskUtility.validateIndexInBounds(position, len);
-		int insertPosition;
-		if (position == 0) {
-			insertPosition = 0;
-		}
-		else {
+		int insertPosition = 0;
+		if(position!=0) {
 			insertPosition = getDelimiterIndex(strBuilder,delimiter,position);
 			insertPosition+=delimiterLen;
 		}
