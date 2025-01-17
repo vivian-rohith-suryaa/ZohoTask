@@ -88,7 +88,7 @@ public class StringBuilderRunner{
 		System.out.println("The Input is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 		System.out.println("Enter a String(s): ");
 		input = TaskUtility.getStringInput();
-		strBuilder = TaskUtility.appendString(strBuilder,input);
+		TaskUtility.appendString(strBuilder,input);
 		System.out.println("The Result is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 	}
 	
@@ -105,7 +105,7 @@ public class StringBuilderRunner{
 		for(int i =0;i<strNumber;i++){
 			System.out.println("Enter the "+(i+1)+" String: ");
 			String helperStr  = TaskUtility.getStringInput();
-			strBuilder = taskObj.appendDelimiter(strBuilder,delimiter,helperStr);
+			taskObj.appendDelimiter(strBuilder,delimiter,helperStr);
 		}
 		System.out.println("The Result is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 	}
@@ -122,7 +122,7 @@ public class StringBuilderRunner{
 		String helperStr  = TaskUtility.getStringInput();
 		System.out.println("Enter the position to append: ");
 		int position= TaskUtility.getIntInput();
-		strBuilder = taskObj.insertAtPosition(strBuilder,helperStr,delimiter,position);
+		taskObj.insertAtPosition(strBuilder,helperStr,delimiter,position);
 		System.out.println("The Result is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 	}
 	
@@ -136,7 +136,7 @@ public class StringBuilderRunner{
 		String delimiter = TaskUtility.getStringInput();
 		System.out.println("Enter the position to delete: ");
 		int position= TaskUtility.getIntInput();
-		strBuilder = taskObj.deleteAtPosition(strBuilder,delimiter,position);
+		taskObj.deleteAtPosition(strBuilder,delimiter,position);
 		System.out.println("The Result is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 	}
 	
@@ -150,7 +150,7 @@ public class StringBuilderRunner{
 		String splitterDelimiter = TaskUtility.getStringInput();
 		System.out.println("Enter the replacing delimiter: ");
 		String replacerDelimiter = TaskUtility.getStringInput();
-		strBuilder = taskObj.replaceDelimiter(strBuilder,splitterDelimiter,replacerDelimiter);
+		taskObj.replaceDelimiter(strBuilder,splitterDelimiter,replacerDelimiter);
 		System.out.println("The Result is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 	}
 	
@@ -160,7 +160,7 @@ public class StringBuilderRunner{
 		input = TaskUtility.getStringInput();
 		TaskUtility.appendString(strBuilder,input);
 		System.out.println("The Input is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
-		strBuilder = taskObj.reverseStrBuilder(strBuilder);
+		taskObj.reverseStrBuilder(strBuilder);
 		System.out.println("The Result is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 	}
 	
@@ -177,7 +177,7 @@ public class StringBuilderRunner{
 		int startValue= TaskUtility.getIntInput();
 		System.out.println("Enter ending position to delete: ");
 		int endValue= TaskUtility.getIntInput();
-		strBuilder = taskObj.deleteChars(strBuilder,startValue,endValue);
+		taskObj.deleteChars(strBuilder,startValue,endValue);
 		System.out.println("The Result is: "+strBuilder+" and its length is: "+TaskUtility.getLength(strBuilder));
 	}
 	
@@ -196,7 +196,7 @@ public class StringBuilderRunner{
 		int endValue= TaskUtility.getIntInput();
 		System.out.println("Enter a String to replace: ");
 		String replacerString = TaskUtility.getStringInput();
-		strBuilder = taskObj.insertChars(strBuilder,startValue,endValue,replacerString);
+		taskObj.insertChars(strBuilder,startValue,endValue,replacerString);
 		System.out.println("The position of the delimiters are: "+strBuilder);
 	}
 	
