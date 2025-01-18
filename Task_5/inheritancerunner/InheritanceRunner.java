@@ -96,6 +96,7 @@ public class InheritanceRunner{
 		
 		TaskUtility.validateNullValue(swiftObj);
 		
+		System.out.println("Enter the detials of Car:");
 		System.out.println("Enter number of seats: ");
 		int seatNumber = TaskUtility.getIntInput();
 		TaskUtility.validateNullValue(seatNumber);
@@ -127,6 +128,7 @@ public class InheritanceRunner{
 		
 		TaskUtility.validateNullValue(scObj);
 		
+		System.out.println("Enter the detials of Car:");
 		System.out.println("Enter the year of Manufacture: ");
 		int yearOfMake = TaskUtility.getIntInput();
 		TaskUtility.validateNullValue(yearOfMake);
@@ -195,6 +197,7 @@ public class InheritanceRunner{
 		System.out.println("Please enter the type of Object which can be used to invoke the method.\nAvailable Options:\nCar\nXUV\nSwift\nSCross");
 		input = TaskUtility.getStringInput();
 		TaskUtility.validateNullValue(input);
+		boolean bool = true;
 		switch(input.toLowerCase()){
 			
 			case "car":
@@ -238,25 +241,29 @@ public class InheritanceRunner{
 		TaskUtility.validateNullValue(input);
 		switch(input.toLowerCase()){
 			
-			case "car":
-				Car swiftCar = new Swift();
-				identifySwiftArgument(swiftCar);
-				break;
+			//Downcasting should be done in order to allow the below case
 			
-			//case "xuv":
-			//	identifySwiftArgument(xuvObj);
+			//case "car":
+			//	Car swiftCar = new Swift();
+			//	identifySwiftArgument((Swift) swiftCar);
 			//	break;
-				
+			
 			case "swift":
 				identifySwiftArgument(swiftObj);
 				break;
 				
+			//XUV and Scross cant be converted to Swift	
+			
+			//case "xuv":
+			//	identifySwiftArgument(xuvObj);
+			//	break;
+			
 			//case "scross":
 			//	identifySwiftArgument(scObj);
 			//	break;
 				
 			default:
-				System.out.println("Please select between the given choices.");
+				System.out.println("Object Instances of types other than Swift instance cannot be used.");
 				break;
 		}
 	}
@@ -265,10 +272,14 @@ public class InheritanceRunner{
 		
 		Car scCar = new SCross();
 		TaskUtility.validateNullValue(scCar);
-		System.out.println("Case 1: Maintenance method called by SCross object.\n"+scObj.maintenance());
-		System.out.println("Case 2: Maintenance method called by an instance of SCross which have a reference type of Car Class.\n"+scCar.maintenance());
-		System.out.println("Case 3: Maintenance method called by Car object.\n"+carObj.maintenance());
-		System.out.println("Case 4: Maintenance method called by Swift object.\n"+swiftObj.maintenance());
+		System.out.println("\nCase 1: Maintenance method called by SCross object.");
+		scObj.maintenance();
+		System.out.println("\nCase 2: Maintenance method called by an instance of SCross which have a reference type of Car Class.");
+		scCar.maintenance();
+		System.out.println("\nCase 3: Maintenance method called by Car object.");
+		carObj.maintenance();
+		System.out.println("\nCase 4: Maintenance method called by Swift object.");
+		swiftObj.maintenance();
 	}
 	
 	public void runCaseSix() throws TaskException{
@@ -276,12 +287,17 @@ public class InheritanceRunner{
 		System.out.println("Default Constructor");
 		XUV xuv1 = new XUV();
 		TaskUtility.validateNullValue(xuv1);
+		
+		//No such overloaded constructor is available in XUV class to accept a String argument
+		
 		//System.out.println("Overloaded Constructor");
 		//XUV xuv2 = new XUV("Input");
 		//TaskUtility.validateNullValue(xuv2);
 	}
 	
 	public void runCaseSeven() throws TaskException{
+		
+		//Object instance cannot be created for an Abstract class
 		
 		//TaskUtility.validateNullValue(absObj);
 		//System.out.println("Methods called using BirdAbstract Class");

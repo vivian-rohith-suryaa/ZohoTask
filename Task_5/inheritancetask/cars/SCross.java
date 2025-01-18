@@ -37,7 +37,6 @@ public class SCross extends Car{
 		return carColor;
 	}
 	
-	@Override
 	public void maintenance(){
 		System.out.println("Maruti SCross under maintenance.");
 	}
