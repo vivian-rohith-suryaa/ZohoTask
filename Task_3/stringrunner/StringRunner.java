@@ -15,7 +15,6 @@ public class StringRunner{
 	StringTask taskObj = new StringTask();
 
 	public static void main(String[] args){
-		Scanner scan = new Scanner(System.in);
 		StringRunner runnerObj = new StringRunner();
 		boolean loop = true;
 			
@@ -26,7 +25,6 @@ public class StringRunner{
 			if(sequenceNumber==0){
 				System.out.println("Exiting program!!!");
 				loop = false;
-				scan.close();
 			}
 				
 			else{

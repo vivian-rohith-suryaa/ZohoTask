@@ -67,6 +67,18 @@ public class TaskUtility{
 		return bool;
     }
 	
+	public static float getFloatInput() {
+		float input = scan.nextFloat();
+		scan.nextLine();
+        return input;
+    }
+	
+	public static long getLongInput() {
+		long input = scan.nextLong();
+		scan.nextLine();
+        return input;
+    }
+	
 	public static StringBuilder appendString(StringBuilder strBuilder, String str) throws TaskException{
 		validateNullValue(strBuilder);
 		validateNullValue(str);

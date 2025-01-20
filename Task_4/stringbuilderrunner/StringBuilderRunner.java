@@ -17,15 +17,13 @@ public class StringBuilderRunner{
 		
 		StringBuilderRunner runnerObj = new StringBuilderRunner();
 		boolean loop = true;
-				
+		
 		while(loop){
 			System.out.println("Enter the sequence number for the exercise (1 -10, or 0 to exit):");
 			int sequenceNumber = TaskUtility.getIntInput();		
-			Scanner scan = new Scanner(System.in);	
 			if(sequenceNumber==0){
 				System.out.println("Exiting program!!!");
 				loop = false;
-				scan.close();
 			}
 			
 			else{
@@ -71,7 +69,7 @@ public class StringBuilderRunner{
 							break;
 							
 						default:
-							System.out.println("Please choose the number between 1 to 20");
+							System.out.println("Please choose the number between 1 to 10");
 							break;
 					}
 				}

@@ -34,11 +34,9 @@ public class InheritanceRunner{
 		while(loop){
 			System.out.println("Enter the sequence number for the exercise (1 - 10, or 0 to exit):");
 			int sequenceNumber = TaskUtility.getIntInput();		
-			Scanner scan = new Scanner(System.in);	
 			if(sequenceNumber==0){
 				System.out.println("Exiting program!!!");
 				loop = false;
-				scan.close();
 			}
 			
 			else{
@@ -251,7 +249,7 @@ public class InheritanceRunner{
 			case "swift":
 				identifySwiftArgument(swiftObj);
 				break;
-				
+		
 			//XUV and Scross cant be converted to Swift	
 			
 			//case "xuv":
