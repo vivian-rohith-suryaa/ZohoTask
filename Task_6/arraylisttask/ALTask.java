@@ -67,13 +67,11 @@ public class ALTask{
 	}
 	
 	
-	public <T> List<T> addLists(List<T> first,List<T> second,List<T> arrList3) throws TaskException{
+	public <T> List<T> addLists(List<T> first,List<T> second) throws TaskException{
 		TaskUtility.validateNullValue(first);
 		TaskUtility.validateNullValue(second);
-		TaskUtility.validateNullValue(arrList3);
-		arrList3.addAll(first);
-		arrList3.addAll(second);
-		return arrList3;
+		first.addAll(second);
+		return first;
 	}
 	
 	public <T> void removeElementAtIndex(List<T> arrList, int position) throws TaskException{

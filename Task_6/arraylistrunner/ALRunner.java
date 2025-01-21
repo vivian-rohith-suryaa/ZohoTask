@@ -343,19 +343,15 @@ public class ALRunner{
 		}
 		System.out.println("Enter whether First ArrayList should be ahead of Second ArrayList (true/false): ");
 		boolean order = TaskUtility.getBoolInput();
-	
-		List<String> arrList3 = taskObj.getArrayList();
+
 		if(order){
-			taskObj.addLists(arrList1,arrList2,arrList3);
+			taskObj.addLists(arrList1,arrList2);
+			System.out.println("The ArrayList is: "+arrList1+" and its size is: "+taskObj.getSize(arrList1));
 		}
 		else{
-			taskObj.addLists(arrList2,arrList1,arrList3);
+			taskObj.addLists(arrList2,arrList1);
+			System.out.println("The ArrayList is: "+arrList2+" and its size is: "+taskObj.getSize(arrList2));
 		}
-		System.out.println("The First ArrayList is: "+arrList1+" and its size is: "+taskObj.getSize(arrList1));
-		System.out.println("The Second ArrayList is: "+arrList2+" and its size is: "+taskObj.getSize(arrList2));
-		System.out.println("The Third ArrayList is: "+arrList3+" and its size is: "+taskObj.getSize(arrList3));
-				System.out.println("The result is of type: "+((Object)arrList3).getClass().getSimpleName());		
-
 	}
 	
 	public void runCaseFourteen() throws TaskException{
