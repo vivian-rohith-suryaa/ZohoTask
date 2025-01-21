@@ -141,7 +141,7 @@ public class ALRunner{
 	public void runCaseOne() throws TaskException{
 		
 		List<Object> arrList = taskObj.getArrayList();
-		System.out.println("An ArrayList has been created "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("An ArrayList has been created "+arrList+" and its size is: "+taskObj.getSize(arrList));
 		System.out.println("The result is of type: "+((Object)arrList).getClass().getSimpleName());		
 	}
 	
@@ -155,7 +155,7 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList,str);
 		}
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 	}
 
 	public void runCaseThree() throws TaskException{
@@ -168,7 +168,7 @@ public class ALRunner{
 			int value = TaskUtility.getIntInput();
 			taskObj.addElement(arrList,value);
 		}
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 	}
 	
 	public void runCaseFour() throws TaskException{
@@ -180,7 +180,7 @@ public class ALRunner{
 			Custom obj = new Custom("Obj"+(i+1));
 			taskObj.addElement(arrList,obj);
 		}
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 	}
 	
 	public void runCaseFive() throws TaskException{
@@ -206,7 +206,7 @@ public class ALRunner{
 			Custom obj = new Custom("Obj"+(i+1));
 			taskObj.addElement(arrList,obj);
 		}
-		System.out.println("The Resultant ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The Resultant ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 	}
 	
 	public void runCaseSix() throws TaskException{
@@ -221,7 +221,7 @@ public class ALRunner{
 		}
 		System.out.println("Enter the string to find in the arraylist: ");
 		String helper = TaskUtility.getStringInput();
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 		System.out.println("The index of "+helper+" is at position: "+taskObj.getElementIndex(arrList,helper));
 	}
 	
@@ -235,7 +235,7 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList,str);
 		}
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 		System.out.println("The elements in the ArrayList are (using for loop): ");
 		for(String value : arrList){
 			System.out.println(value);
@@ -258,7 +258,7 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList,str);
 		}
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 		System.out.println("Enter the index of the element: ");
 		int index = TaskUtility.getIntInput();
 		String str = taskObj.getElementAtIndex(arrList,index);
@@ -275,7 +275,7 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList,str);
 		}
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 		System.out.println("Enter the string to find in the arraylist: ");
 		String helper = TaskUtility.getStringInput();
 		System.out.println("The first index of "+helper+" is at position: "+taskObj.getElementIndex(arrList,helper));
@@ -292,13 +292,13 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList,str);
 		}
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 		System.out.println("Enter the string to add in the array list: ");
 		String helper = TaskUtility.getStringInput();
 		System.out.println("Enter the position to add the string: ");
 		int position = TaskUtility.getIntInput();
 		taskObj.addElementAtIndex(arrList,helper,position);
-		System.out.println("The Resultant ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The Resultant ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 	}
 	
 	public void runCaseEleven() throws TaskException{
@@ -311,13 +311,13 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList,str);
 		}
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 		System.out.println("Enter the starting position: ");
 		int start = TaskUtility.getIntInput();
 		System.out.println("Enter the ending position: ");
 		int end = TaskUtility.getIntInput();
-		List<String> result = taskObj.createArrListOfPosition(arrList,start,end);
-		System.out.println("The Resultant ArrayList is: "+result+" and its size is: "+taskObj.getListSize(result));
+		List<String> result = taskObj.createListByPositions(arrList,start,end);
+		System.out.println("The Resultant ArrayList is: "+result+" and its size is: "+taskObj.getSize(result));
 	}
 	
 	public void runCaseTwelve() throws TaskException{
@@ -346,14 +346,14 @@ public class ALRunner{
 	
 		List<String> arrList3 = taskObj.getArrayList();
 		if(order){
-			taskObj.addArrLists(arrList1,arrList2,arrList3);
+			taskObj.addLists(arrList1,arrList2,arrList3);
 		}
 		else{
-			taskObj.addArrLists(arrList2,arrList1,arrList3);
+			taskObj.addLists(arrList2,arrList1,arrList3);
 		}
-		System.out.println("The First ArrayList is: "+arrList1+" and its size is: "+taskObj.getALSize(arrList1));
-		System.out.println("The Second ArrayList is: "+arrList2+" and its size is: "+taskObj.getALSize(arrList2));
-		System.out.println("The Third ArrayList is: "+arrList3+" and its size is: "+taskObj.getALSize(arrList3));
+		System.out.println("The First ArrayList is: "+arrList1+" and its size is: "+taskObj.getSize(arrList1));
+		System.out.println("The Second ArrayList is: "+arrList2+" and its size is: "+taskObj.getSize(arrList2));
+		System.out.println("The Third ArrayList is: "+arrList3+" and its size is: "+taskObj.getSize(arrList3));
 				System.out.println("The result is of type: "+((Object)arrList3).getClass().getSimpleName());		
 
 	}
@@ -368,11 +368,11 @@ public class ALRunner{
 			float value = TaskUtility.getFloatInput();
 			taskObj.addElement(arrList,value);
 		}
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 		System.out.println("Enter the position to remove: ");
 		int position = TaskUtility.getIntInput();
 		taskObj.removeElementAtIndex(arrList,position);
-		System.out.println("The Resultant ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The Resultant ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 	}
 	
 	public void runCaseFifteen() throws TaskException{
@@ -386,7 +386,7 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList1,str);
 		}
-		System.out.println("The First ArrayList is: "+arrList1+" and its size is: "+taskObj.getALSize(arrList1));
+		System.out.println("The First ArrayList is: "+arrList1+" and its size is: "+taskObj.getSize(arrList1));
 
 		//Second Array List
 		List<String> arrList2 = taskObj.getArrayList();
@@ -397,10 +397,10 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList2,str);
 		}
-		System.out.println("The Second ArrayList is: "+arrList2+" and its size is: "+taskObj.getALSize(arrList2));
+		System.out.println("The Second ArrayList is: "+arrList2+" and its size is: "+taskObj.getSize(arrList2));
 
-		taskObj.removeArrListElements(arrList1,arrList2);
-		System.out.println("The Resultant ArrayList is: "+arrList1+" and its size is: "+taskObj.getALSize(arrList1));
+		taskObj.removeListElements(arrList1,arrList2);
+		System.out.println("The Resultant ArrayList is: "+arrList1+" and its size is: "+taskObj.getSize(arrList1));
 	}
 
 	public void runCaseSixteen() throws TaskException{
@@ -414,7 +414,7 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList1,str);
 		}
-		System.out.println("The First ArrayList is: "+arrList1+" and its size is: "+taskObj.getALSize(arrList1));
+		System.out.println("The First ArrayList is: "+arrList1+" and its size is: "+taskObj.getSize(arrList1));
 
 		//Second Array List
 		List<String> arrList2 = taskObj.getArrayList();
@@ -425,10 +425,10 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList2,str);
 		}
-		System.out.println("The Second ArrayList is: "+arrList2+" and its size is: "+taskObj.getALSize(arrList2));
+		System.out.println("The Second ArrayList is: "+arrList2+" and its size is: "+taskObj.getSize(arrList2));
 
-		taskObj.retainArrListElements(arrList1,arrList2);
-		System.out.println("The Resultant ArrayList is: "+arrList1+" and its size is: "+taskObj.getALSize(arrList1));
+		taskObj.retainListElements(arrList1,arrList2);
+		System.out.println("The Resultant ArrayList is: "+arrList1+" and its size is: "+taskObj.getSize(arrList1));
 	}
 	
 	public void runCaseSeventeen() throws TaskException{
@@ -442,7 +442,7 @@ public class ALRunner{
 			taskObj.addElement(arrList,value);
 		}
 		taskObj.clearAllElements(arrList);
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 	}
 	
 	public void runCaseEighteen() throws TaskException{
@@ -455,7 +455,7 @@ public class ALRunner{
 			String str = TaskUtility.getStringInput();
 			taskObj.addElement(arrList,str);
 		}
-		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getALSize(arrList));
+		System.out.println("The ArrayList is: "+arrList+" and its size is: "+taskObj.getSize(arrList));
 		System.out.println("Enter the string to check in the arraylist: ");
 		String helper = TaskUtility.getStringInput();
 		System.out.println("Whether the given string is present? "+taskObj.checkElement(arrList,helper));

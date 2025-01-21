@@ -23,7 +23,7 @@ public class ALTask{
 		return arrList.iterator();
 	}
 	
-	public <T> int getALSize(List<T> arrList) throws TaskException{
+	public <T> int getSize(List<T> arrList) throws TaskException{
 		TaskUtility.validateNullValue(arrList);
 		return arrList.size();
 	}
@@ -59,19 +59,15 @@ public class ALTask{
 		arrList.add(index,element);
 	}
 	
-	public <T> List<T> createArrListOfPosition(List<T> arrList,int start,int end) throws TaskException{
+	public <T> List<T> createListByPositions(List<T> arrList,int start,int end) throws TaskException{
 		TaskUtility.validateNullValue(arrList);
 		TaskUtility.validateNullValue(start);
 		TaskUtility.validateNullValue(end);
 		return arrList.subList(start,end);
 	}
 	
-	public <T> int getListSize(List<T> list) throws TaskException{
-		TaskUtility.validateNullValue(list);
-		return list.size();
-	}
 	
-	public <T> List<T> addArrLists(List<T> first,List<T> second,List<T> arrList3) throws TaskException{
+	public <T> List<T> addLists(List<T> first,List<T> second,List<T> arrList3) throws TaskException{
 		TaskUtility.validateNullValue(first);
 		TaskUtility.validateNullValue(second);
 		TaskUtility.validateNullValue(arrList3);
@@ -86,13 +82,13 @@ public class ALTask{
 		arrList.remove(position);
 	}
 	
-	public <T> void removeArrListElements(List<T> arrList1, List<T> arrList2) throws TaskException{
+	public <T> void removeListElements(List<T> arrList1, List<T> arrList2) throws TaskException{
 		TaskUtility.validateNullValue(arrList1);
 		TaskUtility.validateNullValue(arrList2);
 		arrList1.removeAll(arrList2);
 	}
 	
-	public <T> void retainArrListElements(List<T> arrList1, List<T> arrList2) throws TaskException{
+	public <T> void retainListElements(List<T> arrList1, List<T> arrList2) throws TaskException{
 		TaskUtility.validateNullValue(arrList1);
 		TaskUtility.validateNullValue(arrList2);
 		arrList1.retainAll(arrList2);
