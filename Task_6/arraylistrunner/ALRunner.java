@@ -27,7 +27,7 @@ public class ALRunner{
 			System.out.println("Enter the sequence number for the exercise (1-18, or 0 to exit):");
 			int sequenceNumber = TaskUtility.getIntInput();		
 			if(sequenceNumber==0){
-				System.out.println("Exarraylisting program!!!");
+				System.out.println("Exiting program!!!");
 				loop = false;
 			}
 			
