@@ -344,7 +344,12 @@ public class ALRunner{
 		boolean order = TaskUtility.getBoolInput();
 			
 		ArrayList<String> arrList3 = taskObj.getArrayList();
-		taskObj.addArrLists(arrList1,arrList2,arrList3,order);
+		if(order){
+			taskObj.addArrLists(arrList1,arrList2,arrList3);
+		}
+		else{
+			taskObj.addArrLists(arrList2,arrList1,arrList3);
+		}
 		System.out.println("The First ArrayList is: "+arrList1+" and its size is: "+taskObj.getALSize(arrList1));
 		System.out.println("The Second ArrayList is: "+arrList2+" and its size is: "+taskObj.getALSize(arrList2));
 		System.out.println("The Third ArrayList is: "+arrList3+" and its size is: "+taskObj.getALSize(arrList3));

@@ -71,20 +71,13 @@ public class ALTask{
 		return list.size();
 	}
 	
-	public <T> ArrayList<T> addArrLists(ArrayList<T> arrList1,ArrayList<T> arrList2,ArrayList<T> arrList3,boolean order) throws TaskException{
-		TaskUtility.validateNullValue(arrList1);
-		TaskUtility.validateNullValue(arrList2);
-		TaskUtility.validateNullValue(order);
-		if(order){
-			arrList3.addAll(arrList1);
-			arrList3.addAll(arrList2);
-			return arrList3;
-		}
-		else{
-			arrList3.addAll(arrList2);
-			arrList3.addAll(arrList1);
-			return arrList3;
-		}
+	public <T> ArrayList<T> addArrLists(ArrayList<T> first,ArrayList<T> second,ArrayList<T> arrList3) throws TaskException{
+		TaskUtility.validateNullValue(first);
+		TaskUtility.validateNullValue(second);
+		TaskUtility.validateNullValue(arrList3);
+		arrList3.addAll(first);
+		arrList3.addAll(second);
+		return arrList3;
 	}
 	
 	public <T> void removeElementAtIndex(ArrayList<T> arrList, int position) throws TaskException{
