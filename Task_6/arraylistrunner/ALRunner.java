@@ -109,7 +109,7 @@ public class ALRunner{
 					}
 				}
 				catch(TaskException e){
-					System.err.println("Exception caught in StringBuilderRunner class - Main method\n"+e.getMessage());
+					System.err.println("Exception caught in ArrayList Runner class - Main method\n"+e.getMessage());
 					e.printStackTrace();
 				}
 			}

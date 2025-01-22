@@ -30,13 +30,11 @@ public class ALTask{
 	
 	public <T> void addElement(List<T> arrList, T element) throws TaskException{
 		TaskUtility.validateNullValue(arrList);
-		TaskUtility.validateNullValue(element);
 		arrList.add(element);
 	}
 	
 	public <T> int getElementIndex(List<T> arrList, T element) throws TaskException{
 		TaskUtility.validateNullValue(arrList);
-		TaskUtility.validateNullValue(element);
 		return arrList.indexOf(element);		
 	}
 	
@@ -48,13 +46,11 @@ public class ALTask{
 	
 	public <T> int getElementLastIndex(List<T> arrList, T element) throws TaskException{
 		TaskUtility.validateNullValue(arrList);
-		TaskUtility.validateNullValue(element);
 		return arrList.lastIndexOf(element);		
 	}
 	
 	public <T> void addElementAtIndex(List<T> arrList, T element,int index) throws TaskException{
 		TaskUtility.validateNullValue(arrList);
-		TaskUtility.validateNullValue(element);
 		TaskUtility.validateNullValue(index);
 		arrList.add(index,element);
 	}
@@ -99,7 +95,6 @@ public class ALTask{
 	
 	public <T> boolean checkElement(List<T> arrList,T element) throws TaskException{
 		TaskUtility.validateNullValue(arrList);
-		TaskUtility.validateNullValue(element);
 		return arrList.contains(element);
 	}
 }
