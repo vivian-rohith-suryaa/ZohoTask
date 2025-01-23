@@ -8,6 +8,7 @@ import minimumcharexception.MinimumCharException;
 import utility.TaskUtility;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
 import custom.Custom;
 
 public class HMTask{
@@ -116,6 +117,24 @@ public class HMTask{
 		TaskUtility.validateNullValue(map);
 		TaskUtility.validateNullValue(newMap);
 		newMap.putAll(map);
+	}
+	
+	public <K,V> Set<Map.Entry<K,V>> createEntrySet(Map<K,V> map) throws TaskException{
+		
+		TaskUtility.validateNullValue(map);
+		return map.entrySet();
+	}
+	
+	public <K,V> K returnKey(Map.Entry<K,V> mapEntry) throws TaskException{
+		
+		TaskUtility.validateNullValue(mapEntry);
+		return mapEntry.getKey();
+	}
+	
+	public <K,V> V returnValue(Map.Entry<K,V> mapEntry) throws TaskException{
+		
+		TaskUtility.validateNullValue(mapEntry);
+		return mapEntry.getValue();
 	}
 	
 	public <K,V> void clearMap(Map<K,V> map) throws TaskException{

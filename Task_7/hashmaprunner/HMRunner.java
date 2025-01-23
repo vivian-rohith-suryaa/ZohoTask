@@ -9,6 +9,7 @@ import indexexception.IndexBoundException;
 import minimumcharexception.MinimumCharException;
 import utility.TaskUtility;
 import hashmaptask.HMTask;
+import java.util.Set;
 import custom.Custom;
 
 public class HMRunner{
@@ -446,7 +447,9 @@ public class HMRunner{
 			taskObj.putKeyValue(hmap,strKey,strValue);
 		}
 		System.out.println("The HashMap is "+hmap+" and its size is: "+taskObj.getSize(hmap));
-		hmap.forEach((strKey,strValue) -> System.out.println("Key: "+strKey+" - Value: "+strValue));
+		for(Map.Entry<String, String> mapEntry : taskObj.createEntrySet(hmap)) {
+			System.out.println("Key: "+taskObj.returnKey(mapEntry)+" Value: "+taskObj.returnValue(mapEntry));
+		}
 	}
 	
 	public void runCaseTwenty() throws TaskException{
