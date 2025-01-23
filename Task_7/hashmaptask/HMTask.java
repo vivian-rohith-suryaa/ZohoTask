@@ -33,7 +33,7 @@ public class HMTask{
 		
 		TaskUtility.validateNullValue(map);
 		TaskUtility.validateNullValue(order);
-		if(map.containsKey(key)){
+		if(checkKey(map,key)){
 			V value = removeKey(key,map);
 			if(order){
 				key = null;
@@ -56,18 +56,7 @@ public class HMTask{
 		TaskUtility.validateNullValue(map);
 		return map.containsValue(value);
 	}
-	
-	public <K,V> void replaceNewValues(Map<K,V> map, K key, V newValue) throws TaskException{
 		
-		TaskUtility.validateNullValue(map);
-		if(map.containsKey(key)){
-			map.put(key,newValue);
-		}
-		else{
-			throw new TaskException("The given Key does not match with the existing Key");
-		}
-	}
-	
 	public <K,V> V findValue(Map<K,V> map, K key) throws TaskException{
 		
 		TaskUtility.validateNullValue(map);

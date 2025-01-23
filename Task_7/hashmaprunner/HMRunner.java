@@ -226,7 +226,7 @@ public class HMRunner{
 		System.out.println("The HashMap is "+hmap+" and its size is: "+taskObj.getSize(hmap));
 		System.out.println("Enter 'True' to allocate 'Null' for Key and 'False' to allocate 'Null' for Value: ");
 		boolean order = TaskUtility.getBoolInput();
-		System.out.println("Enter the key for which NULL KEY should be alloted: ");
+		System.out.println("Enter the key for which NULL KEY/VALUE should be alloted: ");
 		String nullKey = TaskUtility.getStringInput();
 		taskObj.replaceNullKeyValue(hmap,nullKey,order);
 		System.out.println("The resultant HashMap is: "+hmap);
@@ -287,7 +287,7 @@ public class HMRunner{
 			String strKey = TaskUtility.getStringInput();
 			System.out.println("Enter String Value "+(i+1)+" : ");
 			String newValue = TaskUtility.getStringInput();
-			taskObj.replaceNewValues(hmap,strKey,newValue);
+			taskObj.replaceValue(hmap,strKey,newValue);
 		}
 		System.out.println("The New Valued HashMap is "+hmap+" and its size is: "+taskObj.getSize(hmap));
 
