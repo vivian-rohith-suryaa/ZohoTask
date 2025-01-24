@@ -1,5 +1,6 @@
-package minimumcharexception;
-import taskexception.TaskException;
+package exceptions.minimumcharexception;
+
+import exceptions.taskexception.TaskException;
 
 public class MinimumCharException extends TaskException{
 	

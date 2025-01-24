@@ -1,5 +1,6 @@
-package indexexception;
-import taskexception.TaskException;
+package exceptions.indexexception;
+
+import exceptions.taskexception.TaskException;
 
 public class IndexBoundException extends TaskException{
 	

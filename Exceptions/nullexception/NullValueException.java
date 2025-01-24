@@ -1,5 +1,6 @@
-package nullexception;
-import taskexception.TaskException;
+package exceptions.nullexception;
+
+import exceptions.taskexception.TaskException;
 
 public class NullValueException extends TaskException{
 	

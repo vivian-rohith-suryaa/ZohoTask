@@ -1,4 +1,4 @@
-package taskexception;
+package exceptions.taskexception;
 
 public class TaskException extends Exception{
 	
