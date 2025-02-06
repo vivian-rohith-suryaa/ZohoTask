@@ -1,15 +1,10 @@
 package task7.hashmaptask;
 
 import exceptions.taskexception.TaskException;
-import exceptions.nullexception.NullValueException;
-import task3.stringexception.StringException;
-import exceptions.indexexception.IndexBoundException;
-import exceptions.minimumcharexception.MinimumCharException;
 import utility.TaskUtility;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
-import task6.custom.Custom;
 
 public class HMTask{
 	

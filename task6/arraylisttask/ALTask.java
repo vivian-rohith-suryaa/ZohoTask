@@ -1,21 +1,27 @@
 package task6.arraylisttask;
 
+import exceptions.custom.CustomException;
 import exceptions.taskexception.TaskException;
-import exceptions.nullexception.NullValueException;
-import java.util.Scanner;
 import java.util.List;
-import java.util.ArrayList;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
-import task3.stringexception.StringException;
-import exceptions.indexexception.IndexBoundException;
-import exceptions.minimumcharexception.MinimumCharException;
 import utility.TaskUtility;
-import task6.custom.Custom;
 
 public class ALTask{
 	
-	public <T> List<T> getArrayList(){
-		return new ArrayList<>();
+	public <T> List<T> getArrayList(String clsName) throws CustomException{
+		try {
+			TaskUtility.validateNullValue(clsName);
+			Class<?> clsInst = Class.forName(clsName);
+			Constructor<?> clsConstructor = clsInst.getConstructor();
+			Object clsObj = clsConstructor.newInstance();
+			return (List<T>) clsObj;
+		}
+		catch(NoSuchMethodException|SecurityException|ClassNotFoundException|InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException|TaskException e) {
+			throw new CustomException("Exception Occured",e);
+		}
+		
 	}
 	
 	public <T> Iterator<T> getIterator(List<T> arrList) throws TaskException{

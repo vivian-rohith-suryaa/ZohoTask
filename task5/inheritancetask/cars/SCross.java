@@ -1,7 +1,5 @@
 package task5.inheritancetask.cars;
 
-import task5.inheritancetask.cars.Car;
-
 public class SCross extends Car{
 	
 	private int seatNumber;

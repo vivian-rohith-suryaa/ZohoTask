@@ -1,12 +1,8 @@
 package task6.arraylistrunner;
 
+import exceptions.custom.CustomException;
 import exceptions.taskexception.TaskException;
-import exceptions.nullexception.NullValueException;
-import java.util.ArrayList;
 import java.util.List;
-import task3.stringexception.StringException;
-import exceptions.indexexception.IndexBoundException;
-import exceptions.minimumcharexception.MinimumCharException;
 import utility.TaskUtility;
 import java.util.Iterator;
 import task6.arraylisttask.ALTask;
@@ -17,7 +13,9 @@ public class ALRunner{
 	ALTask taskObj = new ALTask();
 	int number;
 	
-	public static void main(String[] args){
+	String clsName = System.getProperty("impl.arrList");
+	
+	public static void main(String[] args) throws CustomException{
 		
 		ALRunner runnerObj = new ALRunner();
 		boolean loop = true;
@@ -117,6 +115,7 @@ public class ALRunner{
 	}
 	
 	public void showTask(){
+		System.out.println("property is"+clsName);
 		System.out.println("1. Create an arraylist & print its size.");
 		System.out.println("2. Create an ArrayList & add Strings and print the size of arraylist");
 		System.out.println("3. Create an ArrayList & add integers and print the size of arraylist");
@@ -140,14 +139,14 @@ public class ALRunner{
 	
 	public void runCaseOne() throws TaskException{
 		
-		List<Object> arrList = taskObj.getArrayList();
+		List<Object> arrList = taskObj.getArrayList(clsName);
 		System.out.println("An ArrayList has been created "+arrList+" and its size is: "+taskObj.getSize(arrList));
 		System.out.println("The result is of type: "+((Object)arrList).getClass().getSimpleName());		
 	}
 	
 	public void runCaseTwo() throws TaskException{
 		
-		List<String> arrList = taskObj.getArrayList();
+		List<String> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -160,7 +159,7 @@ public class ALRunner{
 
 	public void runCaseThree() throws TaskException{
 		
-		List<Integer> arrList = taskObj.getArrayList();
+		List<Integer> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of Integer elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -173,7 +172,7 @@ public class ALRunner{
 	
 	public void runCaseFour() throws TaskException{
 		
-		List<Object> arrList = taskObj.getArrayList();
+		List<Object> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of Object elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -185,7 +184,7 @@ public class ALRunner{
 	
 	public void runCaseFive() throws TaskException{
 	
-		List<Object> arrList = taskObj.getArrayList();
+		List<Object> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -211,7 +210,7 @@ public class ALRunner{
 	
 	public void runCaseSix() throws TaskException{
 	
-		List<String> arrList = taskObj.getArrayList();
+		List<String> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -227,7 +226,7 @@ public class ALRunner{
 	
 	public void runCaseSeven() throws TaskException{
 		
-		List<String> arrList = taskObj.getArrayList();
+		List<String> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -250,7 +249,7 @@ public class ALRunner{
 	
 	public void runCaseEight() throws TaskException{
 		
-		List<String> arrList = taskObj.getArrayList();
+		List<String> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -267,7 +266,7 @@ public class ALRunner{
 	
 	public void runCaseNine() throws TaskException{
 		
-		List<String> arrList = taskObj.getArrayList();
+		List<String> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -284,7 +283,7 @@ public class ALRunner{
 	
 	public void runCaseTen() throws TaskException{
 		
-		List<String> arrList = taskObj.getArrayList();
+		List<String> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -303,7 +302,7 @@ public class ALRunner{
 	
 	public void runCaseEleven() throws TaskException{
 		
-		List<String> arrList = taskObj.getArrayList();
+		List<String> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -323,7 +322,7 @@ public class ALRunner{
 	public void runCaseTwelve() throws TaskException{
 		
 		//First Array List
-		List<String> arrList1 = taskObj.getArrayList();
+		List<String> arrList1 = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the First ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -333,7 +332,7 @@ public class ALRunner{
 		}
 		
 		//Second Array List
-		List<String> arrList2 = taskObj.getArrayList();
+		List<String> arrList2 = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the Second ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -356,7 +355,7 @@ public class ALRunner{
 	
 	public void runCaseFourteen() throws TaskException{
 		
-		List<Float> arrList = taskObj.getArrayList();
+		List<Float> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of float elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -374,7 +373,7 @@ public class ALRunner{
 	public void runCaseFifteen() throws TaskException{
 		
 		//First Array List
-		List<String> arrList1 = taskObj.getArrayList();
+		List<String> arrList1 = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the First ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -385,7 +384,7 @@ public class ALRunner{
 		System.out.println("The First ArrayList is: "+arrList1+" and its size is: "+taskObj.getSize(arrList1));
 
 		//Second Array List
-		List<String> arrList2 = taskObj.getArrayList();
+		List<String> arrList2 = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the Second ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -402,7 +401,7 @@ public class ALRunner{
 	public void runCaseSixteen() throws TaskException{
 		
 		//First Array List
-		List<String> arrList1 = taskObj.getArrayList();
+		List<String> arrList1 = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the First ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -413,7 +412,7 @@ public class ALRunner{
 		System.out.println("The First ArrayList is: "+arrList1+" and its size is: "+taskObj.getSize(arrList1));
 
 		//Second Array List
-		List<String> arrList2 = taskObj.getArrayList();
+		List<String> arrList2 = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the Second ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -429,7 +428,7 @@ public class ALRunner{
 	
 	public void runCaseSeventeen() throws TaskException{
 		
-		List<Long> arrList = taskObj.getArrayList();
+		List<Long> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of Long numbers to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){
@@ -443,7 +442,7 @@ public class ALRunner{
 	
 	public void runCaseEighteen() throws TaskException{
 		
-		List<String> arrList = taskObj.getArrayList();
+		List<String> arrList = taskObj.getArrayList(clsName);
 		System.out.println("Enter the number of String elements to add in the ArrayList: ");
 		number = TaskUtility.getIntInput();
 		for (int i =0;i<number;i++){

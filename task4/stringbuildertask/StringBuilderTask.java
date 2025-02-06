@@ -1,10 +1,7 @@
 package task4.stringbuildertask;
 
 import exceptions.taskexception.TaskException;
-import exceptions.nullexception.NullValueException;
-import exceptions.indexexception.IndexBoundException;
 import utility.TaskUtility;
-import exceptions.minimumcharexception.MinimumCharException;
 
 public class StringBuilderTask{
 	

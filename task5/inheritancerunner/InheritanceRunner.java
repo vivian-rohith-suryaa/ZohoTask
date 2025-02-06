@@ -1,13 +1,7 @@
 package task5.inheritancerunner;
 
 import exceptions.taskexception.TaskException;
-import exceptions.nullexception.NullValueException;
-import java.util.Scanner;
-import exceptions.indexexception.IndexBoundException;
-import exceptions.minimumcharexception.MinimumCharException;
 import utility.TaskUtility;
-import task5.inheritancetask.birds.BirdAbstract;
-import task5.inheritancetask.birds.Bird;
 import task5.inheritancetask.birds.ParrotMod;
 import task5.inheritancetask.birds.Duck;
 import task5.inheritancetask.cars.Car;
@@ -195,7 +189,6 @@ public class InheritanceRunner{
 		System.out.println("Please enter the type of Object which can be used to invoke the method.\nAvailable Options:\nCar\nXUV\nSwift\nSCross");
 		input = TaskUtility.getStringInput();
 		TaskUtility.validateNullValue(input);
-		boolean bool = true;
 		switch(input.toLowerCase()){
 			
 			case "car":

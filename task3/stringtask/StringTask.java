@@ -1,10 +1,7 @@
 package task3.stringtask;
 
 import exceptions.taskexception.TaskException;
-import exceptions.nullexception.NullValueException;
-import task3.stringexception.StringException;
 import utility.TaskUtility;
-import exceptions.indexexception.IndexBoundException;
 
 public class StringTask {
 	

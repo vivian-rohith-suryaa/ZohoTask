@@ -6,7 +6,6 @@ import task3.stringexception.StringException;
 import task3.stringtask.StringTask;
 import utility.TaskUtility;
 import exceptions.indexexception.IndexBoundException;
-import java.util.Scanner;
 
 public class StringRunner{
 

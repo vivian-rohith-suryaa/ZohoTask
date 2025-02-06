@@ -1,15 +1,9 @@
 package task7.hashmaprunner;
 
 import exceptions.taskexception.TaskException;
-import exceptions.nullexception.NullValueException;
 import java.util.Map;
-import java.util.HashMap;
-import task3.stringexception.StringException;
-import exceptions.indexexception.IndexBoundException;
-import exceptions.minimumcharexception.MinimumCharException;
 import utility.TaskUtility;
 import task7.hashmaptask.HMTask;
-import java.util.Set;
 import task6.custom.Custom;
 
 public class HMRunner{

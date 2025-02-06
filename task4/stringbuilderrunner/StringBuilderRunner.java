@@ -1,12 +1,8 @@
 package task4.stringbuilderrunner;
 
 import exceptions.taskexception.TaskException;
-import exceptions.nullexception.NullValueException;
 import utility.TaskUtility;
 import task4.stringbuildertask.StringBuilderTask;
-import exceptions.indexexception.IndexBoundException;
-import java.util.Scanner;
-import exceptions.minimumcharexception.MinimumCharException;
 
 public class StringBuilderRunner{
 	public StringBuilderTask taskObj = new StringBuilderTask();
