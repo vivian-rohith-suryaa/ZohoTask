@@ -25,20 +25,21 @@ import java.time.ZonedDateTime;
 import task8.files.enumerator.Colors;
 import task8.files.time.TimeTask;
 
+
 public class FileRunner {
 	
 	FileTask filetaskObj = new FileTask();
 	PropertiesTask propObj = new PropertiesTask();
 	TimeTask timeObj = new TimeTask();
 	
-	private static final Logger fileLogger  = TaskUtility.getLogger();
+	private static final Logger LOG  = TaskUtility.createLogger(FileRunner.class.getName());
 	
 	static {
 		showTasks();
 		try {
-			TaskUtility.setupLogger();
+			TaskUtility.setupLogger(LOG);
 		} catch (TaskException e) {
-			fileLogger.severe("Exception in creating a Logger");
+			LOG.severe("Exception in creating a Logger");
 		}
 			
 	}
@@ -52,7 +53,7 @@ public class FileRunner {
 			System.out.println("Enter the sequence number for the exercise (1 -11, or 0 to exit):");
 			int sequenceNumber = TaskUtility.getIntInput();		
 			if(sequenceNumber==0){
-				fileLogger.info("Exiting program!!!");
+				LOG.info("Exiting program!!!");
 				loop = false;
 			}
 			
@@ -109,7 +110,7 @@ public class FileRunner {
 					}
 				}
 				catch(Exception e){
-					fileLogger.log(Level.SEVERE,"Exception Occured:",e);
+					LOG.log(Level.SEVERE,"Exception Occured:",e);
 
 				}
 			}
@@ -134,7 +135,7 @@ public class FileRunner {
 	
 	public void runCaseOne(String path) throws TaskException,IOException{
 		
-		fileLogger.info("Creating a file.");
+		LOG.info("Creating a file.");
 
 		System.out.println("Enter the file name: ");
 		String fileName = TaskUtility.getStringInput();
@@ -144,7 +145,7 @@ public class FileRunner {
 		System.out.println("Enter the number of lines to write in the file: ");
 		int number = TaskUtility.getIntInput();
 		filetaskObj.writeInFile(pathName,number);
-		fileLogger.info("Writing in file completed!!!. Go and Check it.");
+		LOG.info("Writing in file completed!!!. Go and Check it.");
 
 	}
 	
@@ -170,7 +171,7 @@ public class FileRunner {
 		System.out.println("Enter the comments to write in properties file: ");
 		String comment = TaskUtility.getStringInput();
 		filetaskObj.storeProperties(propStore,pathName,comment);
-		fileLogger.info("Property file created!!!. Go and Check it.");
+		LOG.info("Property file created!!!. Go and Check it.");
 		
 	}
 	
@@ -186,7 +187,7 @@ public class FileRunner {
 		filetaskObj.loadProperties(propLoad, pathName);
 			
 		for(String key : filetaskObj.getPropertyKeys(propLoad)) {
-			fileLogger.info(key+" = "+filetaskObj.getPropertyValues(propLoad,key));
+			LOG.info(key+" = "+filetaskObj.getPropertyValues(propLoad,key));
 		}
 	}
 	
@@ -204,7 +205,7 @@ public class FileRunner {
 		System.out.println("Enter the String to pass to the instance: ");
 		String str = TaskUtility.getStringInput();
 		Custom cusObj = new Custom(str);
-		fileLogger.info(cusObj+("\n"));
+		LOG.info(cusObj+("\n"));
 		
 	}
 	
@@ -215,7 +216,7 @@ public class FileRunner {
 		System.out.println("Enter the Integer to pass to the instance: ");
 		int number= TaskUtility.getIntInput();
 		Example exObj = new Example(str,number);
-		fileLogger.info(exObj+("\n"));
+		LOG.info(exObj+("\n"));
 	}
 	
 	public void runCaseSeven() {
@@ -227,7 +228,7 @@ public class FileRunner {
 		System.out.println("Enter the string value: ");
 		String str= TaskUtility.getStringInput();
 		exObj.setStrValue(str);
-		fileLogger.info("String: "+exObj.getStrValue()+" Integer: "+exObj.getIntValue());
+		LOG.info("String: "+exObj.getStrValue()+" Integer: "+exObj.getIntValue());
 		
 	}
 	
@@ -247,8 +248,8 @@ public class FileRunner {
 			
 			Method method2 = exClass.getMethod("getStrValue");
 			
-			fileLogger.info("Overloaded Constructor- "+overloadObj);
-			fileLogger.info("Default Constructor - String: "+method2.invoke(defObj));
+			LOG.info("Overloaded Constructor- "+overloadObj);
+			LOG.info("Default Constructor - String: "+method2.invoke(defObj));
 		}
 		catch(ClassNotFoundException|SecurityException|NoSuchMethodException|InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException e) {
 			throw new CustomException("Exception Occured in runCaseEight()");
@@ -259,24 +260,24 @@ public class FileRunner {
 	public void runCaseNine() throws TaskException{
 		
 		for(Colors color : Colors.values()) {
-			fileLogger.info("Index "+color.ordinal()+" - Color: "+color+" - Colorcode: "+color.getValues());
+			LOG.info("Index "+color.ordinal()+" - Color: "+color+" - Colorcode: "+color.getValues());
 			
 		}
 	}
 	
 	public void runCaseTen() throws TaskException{
-		fileLogger.info("Singleton Class- Lazy Initialization: "+LazySingleton.getInstance());
-		fileLogger.info("Singleton Class- Early/Eager Initialization: "+EarlySingleton.getInstance());
-		fileLogger.info("Singleton Class- Static Initialization: "+StaticSingleton.getInstance());
-		fileLogger.info("Singleton Class- Thread Safe Initialization: "+StaticSingleton.getInstance());
-		fileLogger.info("Singleton Class- Double check Locked Initialization: "+StaticSingleton.getInstance());
-		fileLogger.info("Singleton Class- Inner Class Initialization: "+InnerClassSingleton.getInstance());
-		fileLogger.info("Singleton Class- Enum Singleton: "+EnumSingleton.getInstance());
+		LOG.info("Singleton Class- Lazy Initialization: "+LazySingleton.getInstance());
+		LOG.info("Singleton Class- Early/Eager Initialization: "+EarlySingleton.getInstance());
+		LOG.info("Singleton Class- Static Initialization: "+StaticSingleton.getInstance());
+		LOG.info("Singleton Class- Thread Safe Initialization: "+StaticSingleton.getInstance());
+		LOG.info("Singleton Class- Double check Locked Initialization: "+StaticSingleton.getInstance());
+		LOG.info("Singleton Class- Inner Class Initialization: "+InnerClassSingleton.getInstance());
+		LOG.info("Singleton Class- Enum Singleton: "+EnumSingleton.getInstance());
 	}
 	
 	public void runCaseEleven() throws TaskException{
 		
-		fileLogger.info("\n1. Return currentTime with Date,seconds ,etc\n");
+		LOG.info("\n1. Return currentTime with Date,seconds ,etc\n");
 		
 		System.out.println("Date and Time Formatters:\n1. yyyy-MM-dd\n2. dd-MM-yyyy\n3. MM/dd/yyyy (US Format)\n4. yyyyMMdd (Compact Format)\n5. EEEE, MMM dd, yyyy (Full weekday name, short month name)\n6. yyyy-MM-dd HH:mm:ss (Date and time (24-hour format))\n7. yyyy-MM-dd hh:mm:ss a (Date and time (12-hour format with AM/PM))\n8. yyyy-MM-dd HH:mm:ss.SSS (Date, time with milliseconds)\n9. yyyy-MM-dd HH:mm:ss Z (Date, time with time zone offset)\n10. yyyy-MM-dd'T'HH:mm:ss'Z' (	ISO 8601 UTC format)");
 		
@@ -284,30 +285,30 @@ public class FileRunner {
 		int format = TaskUtility.getIntInput();
 		ZonedDateTime zdt = TimeTask.getZoneDateTime(ZoneId.systemDefault());
 		
-		fileLogger.info("Date and Time: "+timeObj.getDateTimePattern(zdt, format));
-		fileLogger.info("The Day of the Week is: "+timeObj.getDayOfWeek(zdt)+"\nThe Day of the Month is: "+timeObj.getDayOfMonth(zdt)+"\nThe Day of the Year is: "+timeObj.getDayOfYear(zdt));
-		fileLogger.info("Month: "+timeObj.getMonthName(zdt));
-		fileLogger.info("Local Zone Id: "+timeObj.getZoneId(zdt));
-		fileLogger.info("The Current Time in Nanoseconds: "+timeObj.getTimeInNanos());
+		LOG.info("Date and Time: "+timeObj.getDateTimePattern(zdt, format));
+		LOG.info("The Day of the Week is: "+timeObj.getDayOfWeek(zdt)+"\nThe Day of the Month is: "+timeObj.getDayOfMonth(zdt)+"\nThe Day of the Year is: "+timeObj.getDayOfYear(zdt));
+		LOG.info("Month: "+timeObj.getMonthName(zdt));
+		LOG.info("Local Zone Id: "+timeObj.getZoneId(zdt));
+		LOG.info("The Current Time in Nanoseconds: "+timeObj.getTimeInNanos());
 		
-		fileLogger.info("\n2. Return currentTime in milliseconds\n");
-		fileLogger.info("The Current time in Milliseconds(Using Instant): "+timeObj.getMillisByInstant());
-		fileLogger.info("The Current time in Milliseconds(Using System): "+timeObj.getMillisBySystem());
+		LOG.info("\n2. Return currentTime in milliseconds\n");
+		LOG.info("The Current time in Milliseconds(Using Instant): "+timeObj.getMillisByInstant());
+		LOG.info("The Current time in Milliseconds(Using System): "+timeObj.getMillisBySystem());
 		
 		
-		fileLogger.info("\n3. Return currentTime of Zone Ids\n");
+		LOG.info("\n3. Return currentTime of Zone Ids\n");
 		
 		List<String> zones = new ArrayList<String>(ZoneId.getAvailableZoneIds());
 		Collections.sort(zones);
 		for(String zone : zones) {
-			fileLogger.info(zone+"\n");
+			LOG.info(zone+"\n");
 		}
 		
 		System.out.println("\nEnter the Zone ID to get the Date and Time of that Zone: ");
 		String zoneId = TaskUtility.getStringInput();
-		fileLogger.info(zoneId+" Date and Time: "+TimeTask.getZoneDateTime(ZoneId.of(zoneId)));
+		LOG.info(zoneId+" Date and Time: "+TimeTask.getZoneDateTime(ZoneId.of(zoneId)));
 		
-		fileLogger.info("\n4.Return the week day, month name and year for the currentTime in millis or any given time in millis\n");
+		LOG.info("\n4.Return the week day, month name and year for the currentTime in millis or any given time in millis\n");
 		System.out.println("Enter the time in milliseconds to find out the Weekday, Month and Year of: ");
 		long millis = TaskUtility.getLongInput();
 		
@@ -316,16 +317,16 @@ public class FileRunner {
 		
 		ZonedDateTime userZDt = timeObj.convertMillisToZonedDateTime(millis, timeZone);
 		
-		fileLogger.info("The Day of the Week is:"+timeObj.getDayOfWeek(userZDt));
-		fileLogger.info("The Month Name is: "+timeObj.getMonthName(userZDt));
-		fileLogger.info("The Year is:"+timeObj.getYear(userZDt));
+		LOG.info("The Day of the Week is:"+timeObj.getDayOfWeek(userZDt));
+		LOG.info("The Month Name is: "+timeObj.getMonthName(userZDt));
+		LOG.info("The Year is:"+timeObj.getYear(userZDt));
 		
 		System.out.println("Enter the Time Zone to find Daylight Save Time: ");
 		String dstZone = TaskUtility.getStringInput();
 		System.out.println("Enter the Date (dd-MM-yyyy) for which the Daylight saving time offset should be shown in milliseconds: ");
 		String dstDate = TaskUtility.getStringInput();
 		ZoneOffset  zo= timeObj.getZoneOffset(ZoneId.of(dstZone), dstDate);
-		fileLogger.info("Offset: "+zo+" Offset in Milliseconds: "+zo.getTotalSeconds()*1000);
+		LOG.info("Offset: "+zo+" Offset in Milliseconds: "+zo.getTotalSeconds()*1000);
 	}
 
 	

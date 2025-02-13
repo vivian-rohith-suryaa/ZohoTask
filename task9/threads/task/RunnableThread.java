@@ -1,19 +1,19 @@
 package task9.threads.task;
 
 import java.util.logging.Logger;
-import utility.TaskUtility;
+import task9.threads.logger.ThreadLogger;
 
 public class RunnableThread implements Runnable{
 	
-	private static final Logger LOG = TaskUtility.createLogger(RunnableThread.class.getName());
+	private static final Logger LOG = ThreadLogger.createLogger();
 	private String threadName;
-	private int delay;
+	private long delay;
 	private boolean loop;
 	
-	private volatile boolean running = true;
+	private boolean running = true;
 	
 	public RunnableThread() {}
-	public RunnableThread(String threadName,int delay,boolean loop) {
+	public RunnableThread(String threadName,long delay,boolean loop) {
 		this.threadName=threadName;
 		this.delay=delay;
 		this.loop = loop;

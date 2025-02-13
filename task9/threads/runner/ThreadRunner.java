@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import exceptions.taskexception.TaskException;
+import task9.threads.logger.ThreadLogger;
 import task9.threads.task.ExtendedThread;
 import task9.threads.task.RunnableThread;
 import utility.TaskUtility;
 
 public class ThreadRunner {
 	
-	private static final Logger LOG = TaskUtility.createLogger(ThreadRunner.class.getName());
+	private static final Logger LOG = ThreadLogger.createLogger();
 	static {
 		showTasks();
 			try {
@@ -152,16 +153,25 @@ public class ThreadRunner {
 	public void runCaseFour() throws InterruptedException {
 		
 		List<Thread> threadList = new ArrayList<>();
-		List<Integer> exThreadDelay = new ArrayList<>();
-		List<Integer> runThreadDelay = new ArrayList<>();
+		List<Long> exThreadDelay = new ArrayList<>();
+		List<Long> runThreadDelay = new ArrayList<>();
 		
 		System.out.println("Enter the number of threads to create for ExtendedThread Classes: ");
 		int exThreadCount = TaskUtility.getIntInput();
 		
 		for(int i = 0; i<exThreadCount;i++) {
 			System.out.println("Enter the time of delay for thread "+(i+1)+": ");
-			int delay = TaskUtility.getIntInput();
+			long delay = TaskUtility.getLongInput();
 			exThreadDelay.add(delay);
+		}
+		
+		System.out.println("Enter the number of threads to create for RunnableThread Classes: ");
+		int runThreadCount = TaskUtility.getIntInput();
+		
+		for(int i=0;i<runThreadCount;i++) {
+			System.out.println("Enter the time of delay for thread "+(i+1)+": ");
+			long delay = TaskUtility.getLongInput();
+			runThreadDelay.add(delay);
 		}
 		
 		for(int i = 1;i<=exThreadCount;i++) {
@@ -170,15 +180,6 @@ public class ThreadRunner {
 			exThread.start();
 			Thread.sleep(exThreadDelay.get(i-1));
 			exThread.setRunning(false);
-		}
-		
-		System.out.println("Enter the number of threads to create for RunnableThread Classes: ");
-		int runThreadCount = TaskUtility.getIntInput();
-		
-		for(int i=0;i<runThreadCount;i++) {
-			System.out.println("Enter the time of delay for thread "+(i+1)+": ");
-			int delay = TaskUtility.getIntInput();
-			runThreadDelay.add(delay);
 		}
 		
 		for(int i = 1;i<=runThreadCount;i++) {
@@ -200,8 +201,8 @@ public class ThreadRunner {
 		
 		List<RunnableThread> runThreadObjList = new ArrayList<>();
 		
-		List<Integer> exThreadDelay = new ArrayList<>();
-		List<Integer> runThreadDelay = new ArrayList<>();
+		List<Long> exThreadDelay = new ArrayList<>();
+		List<Long> runThreadDelay = new ArrayList<>();
 		
 		
 		System.out.println("Enter the number of threads to create for ExtendedThread Classes: ");
@@ -209,15 +210,8 @@ public class ThreadRunner {
 		
 		for(int i = 0; i<exThreadCount;i++) {
 			System.out.println("Enter the time of delay for thread "+(i+1)+": ");
-			int delay = TaskUtility.getIntInput();
+			long delay = TaskUtility.getLongInput();
 			exThreadDelay.add(delay);
-		}
-		
-		for(int i = 1;i<=exThreadCount;i++) {
-
-			ExtendedThread exThread = new ExtendedThread("ExtendThread-"+i,exThreadDelay.get(i-1),true);
-			exThreadList.add(exThread);
-			exThread.start();
 		}
 		
 		System.out.println("Enter the number of threads to create for RunnableThread Classes: ");
@@ -225,8 +219,15 @@ public class ThreadRunner {
 		
 		for(int i=0;i<runThreadCount;i++) {
 			System.out.println("Enter the time of delay for thread "+(i+1)+": ");
-			int delay = TaskUtility.getIntInput();
+			long delay = TaskUtility.getLongInput();
 			runThreadDelay.add(delay);
+		}
+		
+		for(int i = 1;i<=exThreadCount;i++) {
+
+			ExtendedThread exThread = new ExtendedThread("ExtendThread-"+i,exThreadDelay.get(i-1),true);
+			exThreadList.add(exThread);
+			exThread.start();
 		}
 		
 		for(int i = 1;i<=runThreadCount;i++) {
@@ -265,22 +266,16 @@ public void runCaseSeven() throws InterruptedException {
 		
 		List<RunnableThread> runThreadObjList = new ArrayList<>();
 		
-		List<Integer> exThreadDelay = new ArrayList<>();
-		List<Integer> runThreadDelay = new ArrayList<>();
+		List<Long> exThreadDelay = new ArrayList<>();
+		List<Long> runThreadDelay = new ArrayList<>();
 		
 		System.out.println("Enter the number of threads to create for ExtendedThread Classes: ");
 		int exThreadCount = TaskUtility.getIntInput();
 		
 		for(int i = 0; i<exThreadCount;i++) {
 			System.out.println("Enter the time of delay for thread "+(i+1)+": ");
-			int delay = TaskUtility.getIntInput();
+			long delay = TaskUtility.getLongInput();
 			exThreadDelay.add(delay);
-		}
-		
-		for(int i = 1;i<=exThreadCount;i++) {
-			ExtendedThread exThread = new ExtendedThread("ExtendThread-"+i,exThreadDelay.get(i-1),true);
-			exThreadList.add(exThread);
-			exThread.start();
 		}
 		
 		System.out.println("Enter the number of threads to create for RunnableThread Classes: ");
@@ -288,8 +283,14 @@ public void runCaseSeven() throws InterruptedException {
 		
 		for(int i=0;i<runThreadCount;i++) {
 			System.out.println("Enter the time of delay for thread "+(i+1)+": ");
-			int delay = TaskUtility.getIntInput();
+			long delay = TaskUtility.getLongInput();
 			runThreadDelay.add(delay);
+		}
+		
+		for(int i = 1;i<=exThreadCount;i++) {
+			ExtendedThread exThread = new ExtendedThread("ExtendThread-"+i,exThreadDelay.get(i-1),true);
+			exThreadList.add(exThread);
+			exThread.start();
 		}
 		
 		for(int i = 1;i<=runThreadCount;i++) {
@@ -347,15 +348,17 @@ public void runCaseSeven() throws InterruptedException {
 	    ThreadRunner.getThreadDump();
 
 	    LOG.info("Final thread dump taken after all tasks completed.");
+	    
+	    System.out.println("========Work Done========");
 		
 	}
 			
 	private static void getThreadDump() {
 		ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
 		ThreadInfo[] threadInfos = threadBean.dumpAllThreads(true, true);
-		System.out.println("\n===== Thread Dump =====\n");
+		LOG.info("\n===== Thread Dump =====\n");
         for (ThreadInfo info : threadInfos) {
-            System.out.println(info);
+            LOG.info(info+"");
         }
 	}
 }

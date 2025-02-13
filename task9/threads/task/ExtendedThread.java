@@ -1,19 +1,19 @@
 package task9.threads.task;
 
 import java.util.logging.Logger;
-import utility.TaskUtility;
+import task9.threads.logger.ThreadLogger;
 
 public class ExtendedThread extends Thread{
 	
-	private static final Logger LOG = TaskUtility.createLogger(ExtendedThread.class.getName());
+	private static final Logger LOG = ThreadLogger.createLogger();
 	private String threadName;
-	private int delay;
+	private long delay;
 	private boolean loop;
 	
-	private volatile boolean running = true;
+	private boolean running = true;
 	
 	public ExtendedThread() {}
-	public ExtendedThread(String threadName,int delay,boolean loop) {
+	public ExtendedThread(String threadName,long delay,boolean loop) {
 		super(threadName);
 		this.threadName=threadName;
 		this.delay=delay;
