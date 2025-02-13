@@ -10,6 +10,7 @@ import utility.TaskUtility;
 
 public class ALTask{
 	
+	@SuppressWarnings("unchecked")
 	public <T> List<T> getArrayList(String clsName) throws CustomException{
 		try {
 			TaskUtility.validateNullValue(clsName);

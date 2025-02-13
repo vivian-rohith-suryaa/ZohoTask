@@ -1,0 +1,44 @@
+Feb 11, 2025 3:25:34 PM task9.threads.task.ExtendedThread run
+INFO: Going to sleep: ExtendThread-1 for: 1000 ms.
+Feb 11, 2025 3:25:35 PM task9.threads.task.ExtendedThread run
+INFO: Going to sleep: ExtendThread-2 for: 1000 ms.
+Feb 11, 2025 3:25:35 PM task9.threads.task.ExtendedThread run
+INFO: After sleeping: ExtendThread-1
+Feb 11, 2025 3:25:35 PM task9.threads.task.ExtendedThread run
+INFO: ExtendThread-1 is stopped.
+Feb 11, 2025 3:25:36 PM task9.threads.task.ExtendedThread run
+INFO: Going to sleep: ExtendThread-3 for: 1000 ms.
+Feb 11, 2025 3:25:36 PM task9.threads.task.ExtendedThread run
+INFO: After sleeping: ExtendThread-2
+Feb 11, 2025 3:25:36 PM task9.threads.task.ExtendedThread run
+INFO: ExtendThread-2 is stopped.
+Feb 11, 2025 3:25:37 PM task9.threads.task.ExtendedThread run
+INFO: Going to sleep: ExtendThread-4 for: 1000 ms.
+Feb 11, 2025 3:25:37 PM task9.threads.task.ExtendedThread run
+INFO: After sleeping: ExtendThread-3
+Feb 11, 2025 3:25:37 PM task9.threads.task.ExtendedThread run
+INFO: ExtendThread-3 is stopped.
+Feb 11, 2025 3:25:38 PM task9.threads.task.ExtendedThread run
+INFO: Going to sleep: ExtendThread-5 for: 1000 ms.
+Feb 11, 2025 3:25:38 PM task9.threads.task.ExtendedThread run
+INFO: After sleeping: ExtendThread-4
+Feb 11, 2025 3:25:38 PM task9.threads.task.ExtendedThread run
+INFO: ExtendThread-4 is stopped.
+Feb 11, 2025 3:25:39 PM task9.threads.task.ExtendedThread run
+INFO: After sleeping: ExtendThread-5
+Feb 11, 2025 3:25:39 PM task9.threads.task.ExtendedThread run
+INFO: ExtendThread-5 is stopped.
+Feb 11, 2025 3:26:00 PM task9.threads.task.RunnableThread run
+INFO: Going to sleep: RunnableThread-1 for: 2000 ms.
+Feb 11, 2025 3:26:02 PM task9.threads.task.RunnableThread run
+INFO: Going to sleep: RunnableThread-2 for: 2000 ms.
+Feb 11, 2025 3:26:02 PM task9.threads.task.RunnableThread run
+INFO: After sleeping: RunnableThread-1
+Feb 11, 2025 3:26:02 PM task9.threads.task.RunnableThread run
+INFO: RunnableThread-1 is stopped.
+Feb 11, 2025 3:26:04 PM task9.threads.task.RunnableThread run
+INFO: After sleeping: RunnableThread-2
+Feb 11, 2025 3:26:04 PM task9.threads.task.RunnableThread run
+INFO: RunnableThread-2 is stopped.
+Feb 11, 2025 4:15:36 PM task9.threads.runner.ThreadRunner main
+INFO: Exiting the program!!!!

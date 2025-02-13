@@ -4,6 +4,8 @@ import exceptions.taskexception.TaskException;
 
 public class IndexBoundException extends TaskException{
 	
+	private static final long serialVersionUID = 1L;
+
 	public IndexBoundException(String message){
 		super(message);
 	}

@@ -2,7 +2,13 @@ package utility;
 
 import exceptions.taskexception.TaskException;
 import exceptions.nullexception.NullValueException;
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import task3.stringexception.StringException;
 import exceptions.indexexception.IndexBoundException;
 import exceptions.minimumcharexception.MinimumCharException;
@@ -11,6 +17,7 @@ import exceptions.minimumcharexception.MinimumCharException;
 public class TaskUtility{
 	
 	public static Scanner scan = new Scanner(System.in);
+	private static boolean logConfig = false; 
 	
 	public static void validateNullValue(Object input) throws TaskException {
         if (input == null) {
@@ -88,5 +95,50 @@ public class TaskUtility{
 	public static String convertToString(StringBuilder strBuilder) throws TaskException{
 		validateNullValue(strBuilder);
 		return strBuilder.toString();
+	}
+	
+	public static void setupLogger(Logger LOG) throws TaskException{
+		
+		if(logConfig) return;
+		
+		System.out.println("Enter the directory path in which the LOG files should be stored: ");
+		String directoryPath = TaskUtility.getStringInput();
+		System.out.println("Enter the file name to save the \"INFO\" LOG files: ");
+		String infoFile = TaskUtility.getStringInput();
+		System.out.println("Enter the file name to save the \"SEVERE\" LOG files: ");
+		String severeFile = TaskUtility.getStringInput();
+		try {
+			TaskUtility.createInfoFileHandler(LOG,directoryPath+File.separator+infoFile);
+			TaskUtility.createSevereFileHandler(LOG,directoryPath+File.separator+severeFile);
+			logConfig=true;
+		} 
+		catch (SecurityException | TaskException | IOException e) {
+			LOG.severe("Exception in creating info handler");
+		}
+
+	}
+	
+	public static void createInfoFileHandler(Logger LOG,String filePath) throws TaskException, SecurityException, IOException{
+		validateNullValue(filePath);
+		FileHandler infoHandler = new FileHandler(filePath,true);
+		infoHandler.setFormatter(new SimpleFormatter());
+		infoHandler.setFilter(record -> record.getLevel() == Level.INFO);
+		LOG.addHandler(infoHandler);
+		LOG.setUseParentHandlers(false);	
+        LOG.setLevel(Level.ALL);
+	}
+	
+	public static void createSevereFileHandler(Logger LOG,String filePath) throws TaskException, SecurityException, IOException{
+		validateNullValue(filePath);
+		FileHandler severeHandler = new FileHandler(filePath,true);
+        severeHandler.setFormatter(new SimpleFormatter());
+        severeHandler.setFilter(record -> record.getLevel() == Level.SEVERE);
+        LOG.addHandler(severeHandler);
+        LOG.setUseParentHandlers(false);
+        LOG.setLevel(Level.ALL);
+	}
+	
+	public static Logger createLogger(String className){
+		return Logger.getLogger(className);
 	}
 }

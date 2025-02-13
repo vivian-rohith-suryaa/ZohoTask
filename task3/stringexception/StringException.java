@@ -4,6 +4,8 @@ import exceptions.taskexception.TaskException;
 
 public class StringException extends TaskException{
 	
+	private static final long serialVersionUID = 1L;
+
 	public StringException(String message){
 		super(message);
 	}

@@ -12,8 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import task6.custom.Custom;
 import task8.files.example.Example;
@@ -33,30 +31,16 @@ public class FileRunner {
 	PropertiesTask propObj = new PropertiesTask();
 	TimeTask timeObj = new TimeTask();
 	
-	private static final Logger fileLogger = Logger.getLogger(FileRunner.class.getName());
+	private static final Logger fileLogger  = TaskUtility.getLogger();
 	
 	static {
-		try {
-			FileHandler infoHandler = new FileHandler("info.log",true);
-			FileHandler severeHandler = new FileHandler("severe.log",true);
-			
-			infoHandler.setFormatter(new SimpleFormatter());
-            severeHandler.setFormatter(new SimpleFormatter());
-            
-            infoHandler.setFilter(record -> record.getLevel() == Level.INFO);
-            severeHandler.setFilter(record -> record.getLevel() == Level.SEVERE);
-            
-            fileLogger.addHandler(infoHandler);
-            fileLogger.addHandler(severeHandler);
-            
-            fileLogger.setUseParentHandlers(false);
-			
-            fileLogger.setLevel(Level.ALL);
-		}
-		catch(IOException e) {
-			fileLogger.severe("Error in Creating a logger file.");
-		}
 		showTasks();
+		try {
+			TaskUtility.setupLogger();
+		} catch (TaskException e) {
+			fileLogger.severe("Exception in creating a Logger");
+		}
+			
 	}
 	public static void main(String[] args) {
 		
