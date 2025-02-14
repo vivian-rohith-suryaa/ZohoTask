@@ -4,6 +4,10 @@ import exceptions.taskexception.TaskException;
 import exceptions.nullexception.NullValueException;
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -140,5 +144,23 @@ public class TaskUtility{
 	
 	public static Logger createLogger(String className){
 		return Logger.getLogger(className);
+	}
+	
+	public static void getThreadDump(Logger LOG) {
+		ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
+		ThreadInfo[] threadInfos = threadBean.dumpAllThreads(true, true);
+		LOG.info("\n===== Thread Dump =====\n");
+        for (ThreadInfo info : threadInfos) {
+           LOG.info(info+"");
+        }
+	}
+	
+	public static void getAllThreadDump(Logger LOG) {
+		for(Map.Entry<Thread, StackTraceElement[]> entry : Thread.getAllStackTraces().entrySet()) {
+			LOG.info(entry.getKey()+" "+entry.getKey().getState());
+			for(StackTraceElement element : entry.getValue()) {
+				LOG.info("\tat "+element+"\n");
+			}
+		}
 	}
 }

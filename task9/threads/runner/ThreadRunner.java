@@ -1,8 +1,5 @@
 package task9.threads.runner;
 
-import java.lang.management.ManagementFactory;
-import java.lang.management.ThreadInfo;
-import java.lang.management.ThreadMXBean;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,6 +7,7 @@ import exceptions.taskexception.TaskException;
 import task9.threads.logger.ThreadLogger;
 import task9.threads.task.ExtendedThread;
 import task9.threads.task.RunnableThread;
+import task9.threads.task.ThreadTask;
 import utility.TaskUtility;
 
 public class ThreadRunner {
@@ -65,6 +63,10 @@ public class ThreadRunner {
 							runnerObj.runCaseSeven();
 							break;
 							
+						case 8:
+							runnerObj.runCaseEight();
+							break;
+							
 						default:
 							LOG.info("Please choose between numbers 1 to 7.");
 							break;
@@ -88,39 +90,42 @@ public class ThreadRunner {
 		System.out.println("5. Giving each thread a name and seperate delay.");
 		System.out.println("6. Creating threads for both classes and making them to run in a loop for a period of time and then stoping them. Thread Dumps are taken at intervals of time during the execution.");
 		System.out.println("7. Creating threads for both classes and making them to run in a loop for a period of time and then stoping them one at a time. Thread Dumps are taken at intervals of time during and after execution.");
+		System.out.println("8. Taking a Thread Dump for a synchronized method and also viewing the states of  various threads.");
 	}
 	
-	public void runCaseOne(){
+	public void runCaseOne() throws TaskException{
 		
+		ThreadTask taskObj = new ThreadTask();
 		ExtendedThread exThread = new ExtendedThread();
 		LOG.info("run() method called before invoking the start() method.");
 		exThread.run();
 		System.out.println("Enter the value of priority to set to the thread: ");
 		int priority = TaskUtility.getIntInput();
-		exThread.setPriority(priority);
+		taskObj.setThreadPriority(exThread,priority);
 		LOG.info("run() method called after invoking the start() method.");
 		exThread.start();
 		
 	}
 	
-	public void runCaseTwo() {
+	public void runCaseTwo() throws TaskException {
 		
+		ThreadTask taskObj = new ThreadTask();
 		RunnableThread thread = new RunnableThread();
 		Thread runThread = new Thread(thread);
 		LOG.info("run() method called before invoking the start() method.");
 		runThread.run();
 		System.out.println("Enter the value of priority to set to the thread: ");
 		int priority = TaskUtility.getIntInput();
-		runThread.setPriority(priority);
+		taskObj.setThreadPriority(runThread,priority);
 		LOG.info("run() method called after invoking the start() method.");
 		runThread.start();
 
 	}
 	
-	public void runCaseThree() throws InterruptedException {
+	public void runCaseThree() throws InterruptedException,TaskException {
 		
+		ThreadTask taskObj = new ThreadTask();
 		ExtendedThread exThread = new ExtendedThread();
-		
 		RunnableThread thread = new RunnableThread();
 		Thread runThread = new Thread(thread);
 		
@@ -132,15 +137,15 @@ public class ThreadRunner {
 		
 		System.out.println("Enter the name to be set for the ExtendedThread Class's thread: ");
 		String exThreadName = TaskUtility.getStringInput();
-		exThread.setName(exThreadName);
+		taskObj.setThreadName(exThread,exThreadName);
 		System.out.println("Enter the name to be set for the RunnableThread Class's thread: ");
 		String runThreadName = TaskUtility.getStringInput();
-		runThread.setName(runThreadName);
+		taskObj.setThreadName(runThread,runThreadName);
 		
 		System.out.println("Enter the value of priority to set for the threads: ");
 		int priority = TaskUtility.getIntInput();
-		exThread.setPriority(priority);
-		runThread.setPriority(priority);
+		taskObj.setThreadPriority(exThread,priority);
+		taskObj.setThreadPriority(runThread,priority);
 		
 		LOG.info("ExtendedThread Class's run() method called after invoking the start() method.");
 		exThread.start();
@@ -150,8 +155,9 @@ public class ThreadRunner {
 
 	}
 	
-	public void runCaseFour() throws InterruptedException {
+	public void runCaseFour() throws InterruptedException, TaskException {
 		
+		ThreadTask taskObj = new ThreadTask();
 		List<Thread> threadList = new ArrayList<>();
 		List<Long> exThreadDelay = new ArrayList<>();
 		List<Long> runThreadDelay = new ArrayList<>();
@@ -175,30 +181,29 @@ public class ThreadRunner {
 		}
 		
 		for(int i = 1;i<=exThreadCount;i++) {
-			ExtendedThread exThread = new ExtendedThread("ExtendThread-"+i,exThreadDelay.get(i-1),true);
-			threadList.add(exThread);
-			exThread.start();
+			ExtendedThread exThread = new ExtendedThread("ExtendThread-"+i,exThreadDelay.get(i-1));
+			taskObj.runThreads(threadList, exThread);
 			Thread.sleep(exThreadDelay.get(i-1));
 			exThread.setRunning(false);
 		}
 		
 		for(int i = 1;i<=runThreadCount;i++) {
-			RunnableThread thread = new RunnableThread("RunnableThread-"+i,runThreadDelay.get(i-1),true);
+			RunnableThread thread = new RunnableThread("RunnableThread-"+i,runThreadDelay.get(i-1));
 			Thread runThread = new Thread(thread);
-			threadList.add(runThread);
-			runThread.start();
+			taskObj.runThreads(threadList, runThread);
 			Thread.sleep(runThreadDelay.get(i-1));
 			thread.setRunnable(false);
 		}
 		
 	}
 	
-	public void runCaseSix() throws InterruptedException {
+	public void runCaseSix() throws InterruptedException, TaskException {
 		
-		List<ExtendedThread> exThreadList = new ArrayList<>();
+		ThreadTask taskObj = new ThreadTask();
 		
-		List<Thread> runThreadList = new ArrayList<>();
+		List<Thread> threadList = new ArrayList<>();
 		
+		List<ExtendedThread> exThreadObjList = new ArrayList<>();
 		List<RunnableThread> runThreadObjList = new ArrayList<>();
 		
 		List<Long> exThreadDelay = new ArrayList<>();
@@ -225,28 +230,28 @@ public class ThreadRunner {
 		
 		for(int i = 1;i<=exThreadCount;i++) {
 
-			ExtendedThread exThread = new ExtendedThread("ExtendThread-"+i,exThreadDelay.get(i-1),true);
-			exThreadList.add(exThread);
-			exThread.start();
+			ExtendedThread exThread = new ExtendedThread("ExtendThread-"+i,exThreadDelay.get(i-1));
+			exThreadObjList.add(exThread);
+			taskObj.runThreads(threadList, exThread);
 		}
 		
 		for(int i = 1;i<=runThreadCount;i++) {
-			RunnableThread thread = new RunnableThread("RunnableThread-"+i,runThreadDelay.get(i-1),true);
+			RunnableThread thread = new RunnableThread("RunnableThread-"+i,runThreadDelay.get(i-1));
 			Thread runThread = new Thread(thread,"RunnableThread-"+i);
 			runThreadObjList.add(thread);
-			runThreadList.add(runThread);
-			runThread.start();
+			taskObj.runThreads(threadList, runThread);
 		}
 		
-		Thread.sleep(120000);
+		Thread.sleep(1000);
 		
 		for (int i = 1; i <= 3; i++) {
 			LOG.info("\nTaking Thread Dump #" + i);
-	        ThreadRunner.getThreadDump();
-	        Thread.sleep(30000);
+			TaskUtility.getThreadDump(LOG);
+			TaskUtility.getAllThreadDump(LOG);
+	        Thread.sleep(3000);
 	    }
 
-	    for (ExtendedThread thread : exThreadList) {
+	    for (ExtendedThread thread : exThreadObjList) {
 	        thread.setRunning(false);
 	    }
 
@@ -255,15 +260,17 @@ public class ThreadRunner {
 	    }
 
 	    LOG.info("All threads stopped.");
+	    System.out.println("======= Task 7 Done =======");
 	}
 
 	
-public void runCaseSeven() throws InterruptedException {
+	public void runCaseSeven() throws InterruptedException, TaskException {
 		
-		List<ExtendedThread> exThreadList = new ArrayList<>();
+		ThreadTask taskObj = new ThreadTask();
 		
-		List<Thread> runThreadList = new ArrayList<>();
+		List<Thread> threadList = new ArrayList<>();
 		
+		List<ExtendedThread> exThreadObjList = new ArrayList<>();
 		List<RunnableThread> runThreadObjList = new ArrayList<>();
 		
 		List<Long> exThreadDelay = new ArrayList<>();
@@ -288,77 +295,67 @@ public void runCaseSeven() throws InterruptedException {
 		}
 		
 		for(int i = 1;i<=exThreadCount;i++) {
-			ExtendedThread exThread = new ExtendedThread("ExtendThread-"+i,exThreadDelay.get(i-1),true);
-			exThreadList.add(exThread);
-			exThread.start();
+			ExtendedThread exThread = new ExtendedThread("ExtendThread-"+i,exThreadDelay.get(i-1));
+			exThreadObjList.add(exThread);
+			taskObj.runThreads(threadList, exThread);
 		}
 		
 		for(int i = 1;i<=runThreadCount;i++) {
-			RunnableThread thread = new RunnableThread("RunnableThread-"+i,runThreadDelay.get(i-1),true);
+			RunnableThread thread = new RunnableThread("RunnableThread-"+i,runThreadDelay.get(i-1));
 			Thread runThread = new Thread(thread,"RunnableThread-"+i);
 			runThreadObjList.add(thread);
-			runThreadList.add(runThread);
-			runThread.start();
+			taskObj.runThreads(threadList, runThread);
 		}
 		
-		Thread.sleep(120000);
+		Thread.sleep(1000);
 		
 		for(int i=1;i<=10;i++) {
 			LOG.info("\nTaking Thread Dump #"+i);
-			ThreadRunner.getThreadDump();
-			Thread.sleep(45000);
+			TaskUtility.getThreadDump(LOG);
+			TaskUtility.getAllThreadDump(LOG);
+			Thread.sleep(4000);
 		}
 		
-		for (ExtendedThread thread : exThreadList) {
+		for (ExtendedThread thread : exThreadObjList) {
 	        thread.setRunning(false);
-	        Thread.sleep(60000);
+	        Thread.sleep(6000);
 	    }
 
 	    for (RunnableThread thread : runThreadObjList) {
 	        thread.setRunnable(false);
-	        Thread.sleep(60000);
+	        Thread.sleep(6000);
 	    }
 		
-	    boolean allThreadsExited = false;
-	    
-	    while(!allThreadsExited) {
-	    	allThreadsExited = true;
-	    	
-	    	for(Thread thread : runThreadList) {
-	    		if(thread.isAlive()) {
-	    			allThreadsExited = false;
-	    			break;
-	    		}
-	    	}
-	    	
-	    	for(Thread thread : exThreadList) {
-	    		if(thread.isAlive()) {
-	    			allThreadsExited = false;
-	    			break;
-	    		}
-	    	}
-	    	
-	    	if(!allThreadsExited) {
-	    		Thread.sleep(5000);
-	    	}
-	    }
+	    taskObj.isThreadAlive(threadList);
 	    
 	    LOG.info("Tasks are completed!!!!!!");
 
-	    ThreadRunner.getThreadDump();
+	    TaskUtility.getThreadDump(LOG);
 
 	    LOG.info("Final thread dump taken after all tasks completed.");
 	    
-	    System.out.println("========Work Done========");
+	    System.out.println("======== Task 7 Done========");
 		
 	}
+	
+	public void runCaseEight() throws InterruptedException {
+		ExtendedThread exThread = new ExtendedThread();
+		
+		for(int i =1; i<=5; i++) {
+			Thread thread = new Thread (() -> {
+				try {
+					exThread.checkSyncThreadState();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			},"Thread -"+i);
+			thread.start();
+			Thread.sleep(10000);
 			
-	private static void getThreadDump() {
-		ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
-		ThreadInfo[] threadInfos = threadBean.dumpAllThreads(true, true);
-		LOG.info("\n===== Thread Dump =====\n");
-        for (ThreadInfo info : threadInfos) {
-            LOG.info(info+"");
-        }
+		}
+		TaskUtility.getAllThreadDump(LOG);
+		System.out.println("======= Task 8 Done!!!!=======");
 	}
+
+
 }
