@@ -264,10 +264,6 @@ public class ThreadRunner {
 	}
 
 	
-	/**
-	 * @throws InterruptedException
-	 * @throws TaskException
-	 */
 	public void runCaseSeven() throws InterruptedException, TaskException {
 		
 		ThreadTask taskObj = new ThreadTask();
