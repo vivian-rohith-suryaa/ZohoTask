@@ -111,13 +111,24 @@ public class TaskUtility{
 		String infoFile = TaskUtility.getStringInput();
 		System.out.println("Enter the file name to save the \"SEVERE\" LOG files: ");
 		String severeFile = TaskUtility.getStringInput();
+		
+		File directory = new File(directoryPath);
+	    if (!directory.exists()) { 
+	    	if (directory.mkdirs()) { 
+	            System.out.println("Directory created successfully: " + directoryPath);
+	        }
+	    	else {
+	            throw new TaskException("Failed to create directory: " + directoryPath);
+	        }
+	    }
+	    
 		try {
 			TaskUtility.createInfoFileHandler(LOG,directoryPath+File.separator+infoFile);
 			TaskUtility.createSevereFileHandler(LOG,directoryPath+File.separator+severeFile);
 			logConfig=true;
 		} 
 		catch (SecurityException | TaskException | IOException e) {
-			LOG.severe("Exception in creating info handler");
+			LOG.severe("Exception in creating info/severe handler");
 		}
 
 	}
