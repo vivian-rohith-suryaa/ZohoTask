@@ -28,7 +28,7 @@ public class RegexTask {
 	}
 	
 	public boolean validateMobileNumber(String mobile) throws TaskException{
-		String regex = "^[7,8,9]{1}\\d{9}";
+		String regex = "^[789]\\d{9}$";
 		return getMatcherResult(mobile, regex);
 	}
 	
@@ -90,7 +90,7 @@ public class RegexTask {
 	}
 
 	public boolean validateEmail(String input) throws TaskException{
-		String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+		String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z.]{2,}$";
 		return getMatcherResult(input, regex);
 	}
 	
@@ -129,7 +129,7 @@ public class RegexTask {
 	
 	public List<String> getHTMLTags(String input) throws TaskException{
 		TaskUtility.validateNullValue(input);
-		String regex = "<[^>]+>";
+		String regex = "</?[a-z]+[^>]*>";
 		List<String> result = new ArrayList<String>();
 		
 		Matcher matcher = getPatternMatcher(input, regex);
