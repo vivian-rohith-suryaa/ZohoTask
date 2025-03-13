@@ -28,7 +28,7 @@ public class RegexRunner {
 		boolean loop = true;
 		
 		while(loop) {
-			System.out.println("Enter the sequence number for the exercise (1-7, or 0 to exit):");
+			System.out.println("Enter the sequence number for the exercise (1-8, or 0 to exit):");
 			int sequenceNumber = TaskUtility.getIntInput();
 			if(sequenceNumber==0) {
 				System.out.println("Exiting the program!!!!");
@@ -70,7 +70,7 @@ public class RegexRunner {
 							break;
 							
 						default:
-							LOG.info("Please choose between numbers 1 to 7.");
+							LOG.info("Please choose between numbers 1 to 8.");
 							break;
 					}
 				}

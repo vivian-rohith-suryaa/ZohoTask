@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="/home/vivian-tt0660/Downloads/apache-tomcat-9.0.100/lib/mysql-connector-j-9.2.0.jar"/>
 	<classpathentry kind="output" path="class_files"/>
 </classpath>
