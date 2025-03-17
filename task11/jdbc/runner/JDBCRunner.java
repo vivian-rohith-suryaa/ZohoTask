@@ -1,9 +1,11 @@
 package task11.jdbc.runner;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import exceptions.taskexception.TaskException;
+import task11.jdbc.task. Dependent;
 import task11.jdbc.task.Employee;
-import task11.jdbc.task.Employee_Personal;
 import task11.jdbc.task.JDBCTask;
 import utility.TaskUtility;
 
@@ -111,33 +113,54 @@ public class JDBCRunner {
 	public void runCaseOne() throws TaskException {
 		System.out.println("Enter the table name:");
 		String tableName = TaskUtility.getStringInput();
-		if(taskObj.createTable(tableName)==0) {
+		if(taskObj.createEmployeeTable(tableName)==0) {
 			System.out.println("Table Created Successfully");
 		}
 		runCaseFive();
+		
+//		List<String> columnNames = taskObj.getColumns("Employee");
+//		
+//		for(String column : columnNames) {
+//			System.out.println(column);
+//		}
+		
 	}
 	
 	public void runCaseTwo() throws TaskException {
-		System.out.println("Enter the number of Records to be added in the table:");
-		int recordCount = TaskUtility.getIntInput();
-		
-		for (int i=1;i<=recordCount;i++) {
-			System.out.println("Enter the Name for "+i+" record to insert in table Employee:");
-			String name = TaskUtility.getStringInput();
-			System.out.println("Enter the Mobile for "+i+" record to insert in table Employee:");
-			String mobile = TaskUtility.getStringInput();
-			System.out.println("Enter the E-Mail for "+i+" record to insert in table Employee:");
-			String email = TaskUtility.getStringInput();
-			System.out.println("Enter the Department for "+i+" record to insert in table Employee:");
-			String dept = TaskUtility.getStringInput();
-			
-			Employee employee = new Employee();
-			employee.setEmpName(name);
-			employee.setEmpMobile(mobile);
-			employee.setEmpEmail(email);
-			employee.setEmpDept(dept);
-			taskObj.insertValueIntoTable(employee);
-		}
+		List<Employee> employees = new ArrayList<Employee>();
+	    
+	    while (true) {
+	        System.out.println("Enter the Name for the Employee:");
+	        String name = TaskUtility.getStringInput();
+	        
+	        System.out.println("Enter the Mobile for the Employee:");
+	        String mobile = TaskUtility.getStringInput();
+	        
+	        System.out.println("Enter the E-Mail for the Employee:");
+	        String email = TaskUtility.getStringInput();
+	        
+	        System.out.println("Enter the Department for the Employee:");
+	        String dept = TaskUtility.getStringInput();
+	        
+	        Employee employee = new Employee();
+	        employee.setEmployeeName(name);
+	        employee.setEmployeeMobile(mobile);
+	        employee.setEmployeeEmail(email);
+	        employee.setEmployeeDept(dept);
+	        
+	        employees.add(employee);
+
+	        System.out.println("Do you want to add another employee? (y/n):");
+	        String response = TaskUtility.getStringInput().trim().toLowerCase();
+	        
+	        if (response.equals("n")) {
+	            break; 
+	        }
+	    }
+
+	    if(!employees.isEmpty()) {
+	        taskObj.addEmployee(employees);
+	    }
 		
 		System.out.println("Values are inserted into the table successfully.");
 		runCaseFive();
@@ -147,7 +170,7 @@ public class JDBCRunner {
 		System.out.println("Enter the Employee Name to fetch out the details in the table: ");
 		String param = TaskUtility.getStringInput();
 		
-		List<Employee> empList = taskObj.retrieveRowFromTable(param);
+		List<Employee> empList = taskObj.getEmployeeInfo(param);
 		
 		displayEmployeeTable(empList);
 	}
@@ -162,13 +185,13 @@ public class JDBCRunner {
 		System.out.println("Enter the value to update in the table:");
 		String newValue = TaskUtility.getStringInput();
 		
-		System.out.println(taskObj.updateTable(field, newValue,empId)>0 ? "Updated Successfully" : "Update Failed");
+		System.out.println(taskObj.updateEmployee(field, newValue,empId)>0 ? "Updated Successfully" : "Update Failed");
 		runCaseFive();
 
 	}
 	
 	public void runCaseFive() throws TaskException {
-		List<Employee> empList = taskObj.viewTable();
+		List<Employee> empList = taskObj.viewEmployees();
 		
 		displayEmployeeTable(empList);
 	}
@@ -180,7 +203,7 @@ public class JDBCRunner {
 		System.out.println("Whether to be sorted by Descending order: (True/False)");
 		boolean sortType = TaskUtility.getBoolInput(); 
 		
-		List<Employee> empList = taskObj.sortTable(field,sortType);
+		List<Employee> empList = taskObj.sortEmployees(field,sortType);
 		
 		displayEmployeeTable(empList);
 	}
@@ -189,7 +212,7 @@ public class JDBCRunner {
 		System.out.println("Enter the Employee ID for which you would like to delete the record:");
 		int empId = TaskUtility.getIntInput();
 		
-		System.out.println(taskObj.deleteRecordInTable(empId) > 0 ? "Deleted Successfully" : "Deletion Failed");
+		System.out.println(taskObj.deleteEmployee(empId) > 0 ? "Deleted Successfully" : "Deletion Failed");
 		runCaseFive();
 	}
 
@@ -204,41 +227,59 @@ public class JDBCRunner {
 	}
 	
 	public void runCaseNine() throws TaskException {
-		System.out.println("Enter the number of Records to be added in the table:");
-		int recordCount = TaskUtility.getIntInput();
-		
-		for(int i=1;i<=recordCount;i++) {
-			System.out.println("Enter the number of Info to be entered for "+i+" individual:");
-			int indivCount = TaskUtility.getIntInput();
-			for(int j = 1;j<=indivCount;j++) {
-				System.out.println("Enter the EmployeeID for "+j+" record to insert in table Employee_Personal for "+i+" individual:");
-				int empId = TaskUtility.getIntInput();
-				System.out.println("Enter the Name of the Person for "+j+" record to insert in table Employee_Personal for "+i+" individual:");
-				String personName = TaskUtility.getStringInput();
-				System.out.println("Enter the Age of the Person for "+j+" record to insert in table Employee_Personal for "+i+" individual:");
-				int age = TaskUtility.getIntInput();
-				System.out.println("Enter the Relationship of the Person with Employee for "+j+" record to insert in table Employee_Personal for "+i+" individual:");
-				String relation = TaskUtility.getStringInput();
-				
-				Employee_Personal prsnl = new Employee_Personal();
-				prsnl.setEmpId(empId);
-				prsnl.setPersonName(personName);
-				prsnl.setAge(age);
-				prsnl.setRelation(relation);
-				
-				taskObj.insertValuesToDependentTable(prsnl);
-			}
-		}
+		List<Dependent> prsnList = new ArrayList<>();
+
+	    while (true) {
+	        System.out.println("Enter the Employee ID for which you would like to add Personal Details:");
+	        int empId = TaskUtility.getIntInput();
+
+	        while (true) {
+	            System.out.println("Enter the Name of the Person:");
+	            String personName = TaskUtility.getStringInput();
+	            
+	            System.out.println("Enter the Age of the Person:");
+	            int age = TaskUtility.getIntInput();
+	            
+	            System.out.println("Enter the Relationship of the Person with Employee:");
+	            String relation = TaskUtility.getStringInput();
+	            
+	            Dependent person = new Dependent();
+	            person.setEmployeeId(empId);
+	            person.setPersonName(personName);
+	            person.setAge(age);
+	            person.setRelation(relation);
+	            
+	            prsnList.add(person);
+	            
+	            System.out.println("Do you want to add another person for this employee? (y/n):");
+	            String personResponse = TaskUtility.getStringInput().trim().toLowerCase();
+	            
+	            if (personResponse.equals("n")) {
+	                break;
+	            }
+	        }
+
+	        System.out.println("Do you want to add another employee? (y/n):");
+	        String employeeResponse = TaskUtility.getStringInput().trim().toLowerCase();
+	        
+	        if (employeeResponse.equals("n")) {
+	            break;
+	        }
+	    }
+
+	   if(!prsnList.isEmpty()){
+	        taskObj.addDependents(prsnList);
+	    }
 		System.out.println("Values are inserted into the table successfully.");
 		viewDependentTable();
 	}
 	
 	public void runCaseTen() throws TaskException {
-		System.out.println("Enter the EmployeeID of the Employee to fetch the details from Employee_Personal Table:");
+		System.out.println("Enter the EmployeeID of the Employee to fetch the details from  Dependent Table:");
 		int empId = TaskUtility.getIntInput();
 		
-		List<Employee_Personal> empPerList = taskObj.getDetailsFromEmpPersonal(empId);
-		displayeEmployeePersonalTable(empPerList);
+		List< Dependent> prsnList = taskObj.getDependentInfo(empId);
+		displayeDependentTable(prsnList);
 	}
 	
 	public void runCaseEleven() throws TaskException {
@@ -248,13 +289,13 @@ public class JDBCRunner {
 		System.out.println("Whether to be sorted by Descending order: (True/False)");
 		boolean sortType = TaskUtility.getBoolInput(); 
 		
-		List<Employee_Personal> empPerList = taskObj.sortDependentTable(field, sortType);
-		displayeEmployeePersonalTable(empPerList);
+		List< Dependent> prsnList = taskObj.sortDependents(field, sortType);
+		displayeDependentTable(prsnList);
 	}
 	
 	public void viewDependentTable() throws TaskException {
-		List<Employee_Personal> empPerList=taskObj.viewDependentTable();
-		displayeEmployeePersonalTable(empPerList);
+		List< Dependent> prsnList=taskObj.viewDependents();
+		displayeDependentTable(prsnList);
 	}
 	
 	public void displayEmployeeTable(List<Employee> empList) {
@@ -265,18 +306,18 @@ public class JDBCRunner {
 
 	    for (Employee emp : empList) {
 	        System.out.printf("%-" + idWidth + "d%-" + nameWidth + "s%-" + mobileWidth + "s%-" + emailWidth + "s%-" + deptWidth + "s%n",
-	                          emp.getEmpId(), emp.getEmpName(), emp.getEmpMobile(), emp.getEmpEmail(), emp.getEmpDept());
+	                          emp.getEmployeeId(), emp.getEmployeeName(), emp.getEmployeeMobile(), emp.getEmployeeEmail(), emp.getEmployeeDept());
 	    }
 	}
 	
-	public void displayeEmployeePersonalTable(List<Employee_Personal> empPerList) {
+	public void displayeDependentTable(List< Dependent> prsnList) {
 		
 		int idWidth = 12, empIdWidth = 12,empNameWidth = 15, nameWidth = 15, ageWidth = 15, relationWidth = 25;
 		
 		System.out.printf("%-" + idWidth +"s%-" + empIdWidth +"s%-" + empNameWidth + "s%-" + nameWidth + "s%-" + ageWidth + "s%-" + relationWidth + "s%n","PERSON_ID","EMPLOYEE_ID", "EMPLOYEE_NAME", "NAME", "AGE", "RELATIONSHIP");
 		
-		for(Employee_Personal empPer : empPerList) {
-			System.out.printf("%-" + idWidth +"d%-" + empIdWidth +"s%-" + empNameWidth + "s%-" + nameWidth + "s%-" + ageWidth + "s%-" + relationWidth + "s%n",empPer.getPerId(),empPer.getEmpId(),empPer.getEmpName(),empPer.getPersonName(),empPer.getAge(),empPer.getRelation());
+		for( Dependent prsn : prsnList) {
+			System.out.printf("%-" + idWidth +"d%-" + empIdWidth +"s%-" + empNameWidth + "s%-" + nameWidth + "s%-" + ageWidth + "s%-" + relationWidth + "s%n",prsn.getPersonId(),prsn.getEmployeeId(),prsn.getEmployeeName(),prsn.getPersonName(),prsn.getAge(),prsn.getRelation());
 		}
 	}
 	

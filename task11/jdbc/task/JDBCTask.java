@@ -1,27 +1,28 @@
 package task11.jdbc.task;
 
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import exceptions.taskexception.TaskException;
-import utility.TaskUtility;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;	
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import exceptions.taskexception.TaskException;
+import utility.TaskUtility;	
 
 public class JDBCTask {
 	
+	private String query;
+	private String tableName;
+	public String sort = "ASC";
 	private static final String DBURL = "jdbc:mysql://localhost:3306/incubationDB";
 	private static final String DBUSER = "vvn";
 	private static final String DBPASS = "root";
 	
-	String query;
-	
-	public Connection getConnection() throws SQLException{
+	private Connection getConnection() throws SQLException{
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -30,23 +31,23 @@ public class JDBCTask {
 		return DriverManager.getConnection(DBURL,DBUSER,DBPASS);
 	}
 	
-	public Statement getStatement(Connection conn) throws SQLException, TaskException {
+	private Statement getStatement(Connection conn) throws SQLException, TaskException {
 		TaskUtility.validateNullValue(conn);		
 		return conn.createStatement();
 	}
 	
-	public PreparedStatement getPreparedStatement(Connection conn,String query) throws SQLException, TaskException {
+	private PreparedStatement getPreparedStatement(Connection conn,String query) throws SQLException, TaskException {
 		TaskUtility.validateNullValue(conn);
 		TaskUtility.validateNullValue(query);
 		return conn.prepareStatement(query);
 	}
 	
-	public ResultSet getResultSet(PreparedStatement stmt) throws TaskException, SQLException {
+	private ResultSet getResultSet(PreparedStatement stmt) throws TaskException, SQLException {
 		TaskUtility.validateNullValue(stmt);
 		return stmt.executeQuery();
 	}
 	
-	public int createTable(String tableName) throws TaskException{
+	public int createEmployeeTable(String tableName) throws TaskException{
 		TaskUtility.validateNullValue(tableName);
 		
 		try(Connection conn = getConnection();
@@ -61,29 +62,32 @@ public class JDBCTask {
 			return stmt.executeUpdate(query);
 			}
 		catch(SQLException e) {
-			throw new TaskException("Exception caught in createTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in createEmployeeTable task.\n",e);
 		}
 	}
 	
-	public void insertValueIntoTable(Employee employee) throws TaskException {
-		TaskUtility.validateNullValue(employee);
+	public void addEmployee(List<Employee> employees) throws TaskException {
+		TaskUtility.validateEmptyValue(employees.size());
 		
 		query = "INSERT INTO Employee(NAME,MOBILE,EMAIL,DEPARTMENT) VALUES(?,?,?,?)";
 		
 		try(Connection conn = getConnection();
 			PreparedStatement stmt = getPreparedStatement(conn,query)){
-			stmt.setString(1, employee.getEmpName());
-			stmt.setString(2, employee.getEmpMobile());
-			stmt.setString(3, employee.getEmpEmail());
-			stmt.setString(4, employee.getEmpDept());
-			stmt.executeUpdate();
+			for(Employee employee : employees) {
+				stmt.setString(1, employee.getEmployeeName());
+				stmt.setString(2, employee.getEmployeeMobile());
+				stmt.setString(3, employee.getEmployeeEmail());
+				stmt.setString(4, employee.getEmployeeDept());
+				stmt.addBatch();
+			}
+			stmt.executeBatch();
 		}
 		catch(SQLException e) {
-			throw new TaskException("Exception caught in insertValueIntoTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in addEmployee task.\n",e);
 		}
 	}
 	
-	public List<Employee> retrieveRowFromTable(String param) throws TaskException {
+	public List<Employee> getEmployeeInfo(String param) throws TaskException {
 		
 		TaskUtility.validateNullValue(param);
 		
@@ -99,12 +103,11 @@ public class JDBCTask {
 				
 				while(rst.next()) {
 					Employee emp =new Employee();
-					emp.setEmpId(rst.getInt("EMPLOYEE_ID"));
-					emp.setEmpName(rst.getString("NAME"));
-					emp.setEmpMobile(rst.getString("MOBILE"));
-					emp.setEmpEmail(rst.getString("EMAIL"));
-					emp.setEmpDept(rst.getString("DEPARTMENT"));
-					
+					emp.setEmployeeId(rst.getInt("EMPLOYEE_ID"));
+					emp.setEmployeeName(rst.getString("NAME"));
+					emp.setEmployeeMobile(rst.getString("MOBILE"));
+					emp.setEmployeeEmail(rst.getString("EMAIL"));
+					emp.setEmployeeDept(rst.getString("DEPARTMENT"));
 					employee.add(emp);
 				}
 				return employee;
@@ -112,17 +115,19 @@ public class JDBCTask {
 			
 		}
 		catch(SQLException e) {
-			throw new TaskException("Exception caught in retrieveRowFromTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in getEmployeeInfo task.\n",e);
 		}
 	}
 
-	public int updateTable(String field, String newValue, int empId) throws TaskException {
+	public int updateEmployee(String field, String newValue, int employeeId) throws TaskException {
 		TaskUtility.validateNullValue(field);
 		TaskUtility.validateNullValue(newValue);
-		TaskUtility.validateNullValue(empId);
+		TaskUtility.validateNullValue(employeeId);
 		
 		field=field.toUpperCase();
-		List<String> validFields = Arrays.asList("NAME", "MOBILE", "EMAIL", "DEPARTMENT");
+		tableName = "Employee";
+		
+		List<String> validFields = getColumns(tableName);
 		if (!validFields.contains(field)) {
 			throw new TaskException("Invalid field name: " + field);
 		}
@@ -133,17 +138,17 @@ public class JDBCTask {
 			PreparedStatement stmt = getPreparedStatement(conn, query)){
 			
 			stmt.setString(1, newValue);
-			stmt.setInt(2, empId);
+			stmt.setInt(2, employeeId);
 			
 			return stmt.executeUpdate();
 			
 		}
 		catch (SQLException e) {
-			throw new TaskException("Exception caught in updateTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in updateEmployee task.\n",e);
 		}
 	}
 	
-	public List<Employee> viewTable() throws TaskException{
+	public List<Employee> viewEmployees() throws TaskException{
 		
 		List<Employee> employee = new ArrayList<Employee>();
 		String query ="SELECT * FROM Employee";
@@ -153,76 +158,80 @@ public class JDBCTask {
 			ResultSet rst = getResultSet(stmt)){
 			while(rst.next()) {
 				Employee emp =new Employee();
-				emp.setEmpId(rst.getInt("EMPLOYEE_ID"));
-				emp.setEmpName(rst.getString("NAME"));
-				emp.setEmpMobile(rst.getString("MOBILE"));
-				emp.setEmpEmail(rst.getString("EMAIL"));
-				emp.setEmpDept(rst.getString("DEPARTMENT"));
+				emp.setEmployeeId(rst.getInt("EMPOYEE_ID"));
+				emp.setEmployeeName(rst.getString("NAME"));
+				emp.setEmployeeMobile(rst.getString("MOBILE"));
+				emp.setEmployeeEmail(rst.getString("EMAIL"));
+				emp.setEmployeeDept(rst.getString("DEPARTMENT"));
 				
 				employee.add(emp);
 			}
 			return employee;
 		}
 		catch (SQLException e) {
-			throw new TaskException("Exception caught in viewTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in viewEmployees task.\n",e);
 		}
 
 	}
 	
-	public List<Employee> sortTable(String field, boolean sortType) throws TaskException{
+	public List<Employee> sortEmployees(String field, boolean sortType) throws TaskException{
 		
 		TaskUtility.validateNullValue(field);
 		TaskUtility.validateNullValue(sortType);
 		
 		field=field.toUpperCase();
-		String sort="";
-
-		List<String> validFields = Arrays.asList("NAME", "MOBILE", "EMAIL", "DEPARTMENT");
+		
+		tableName = "Employee";
+		
+		List<String> validFields = getColumns(tableName);
 		if (!validFields.contains(field)) {
 			throw new TaskException("Invalid field name: " + field);
 		}
 		
-		if(sortType) {sort="DESC";}
+		if(sortType) {
+			sort="DESC";
+		}
 		
 		String query ="SELECT * FROM Employee ORDER BY "+field+" "+sort;
 		
 		List<Employee> employee = new ArrayList<Employee>();
+		
 		try(Connection conn = getConnection();
 			PreparedStatement stmt = getPreparedStatement(conn, query);
 			ResultSet rst = getResultSet(stmt)){
 			while(rst.next()) {
 				Employee emp =new Employee();
-				emp.setEmpId(rst.getInt("EMPLOYEE_ID"));
-				emp.setEmpName(rst.getString("NAME"));
-				emp.setEmpMobile(rst.getString("MOBILE"));
-				emp.setEmpEmail(rst.getString("EMAIL"));
-				emp.setEmpDept(rst.getString("DEPARTMENT"));
+				emp.setEmployeeId(rst.getInt("EMPLOYEE_ID"));
+				emp.setEmployeeName(rst.getString("NAME"));
+				emp.setEmployeeMobile(rst.getString("MOBILE"));
+				emp.setEmployeeEmail(rst.getString("EMAIL"));
+				emp.setEmployeeDept(rst.getString("DEPARTMENT"));
 				
 				employee.add(emp);
 			}
 			return employee;
 		}
 		catch (SQLException e) {
-			throw new TaskException("Exception caught in sortTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in sortEmployees task.\n",e);
 		}
 		
 	}
 	
-	public int deleteRecordInTable(int empId) throws TaskException {
-		TaskUtility.validateNullValue(empId);
+	public int deleteEmployee(int employeeId) throws TaskException {
+		TaskUtility.validateNullValue(employeeId);
 		
 		String query = "DELETE FROM Employee WHERE EMPLOYEE_ID = ?";
 		
 		try(Connection conn = getConnection();
 			PreparedStatement stmt = getPreparedStatement(conn, query)){
 				
-			stmt.setInt(1, empId);
+			stmt.setInt(1, employeeId);
 			
 			return stmt.executeUpdate();
 			
 		}
 		catch (SQLException e) {
-			throw new TaskException("Exception caught in deleteRecordInTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in deleteEmployee task.\n",e);
 		}
 	}
 	
@@ -243,130 +252,157 @@ public class JDBCTask {
 			return stmt.executeUpdate(query);
 			}
 		catch(SQLException e) {
-			throw new TaskException("Exception caught in createDependentTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in createDependentTable task.\n",e);
 		}
 	}
 	
-	public void insertValuesToDependentTable(Employee_Personal prsnl) throws TaskException {
-		TaskUtility.validateNullValue(prsnl);
+	public void addDependents(List<Dependent> prsnList) throws TaskException {
+		TaskUtility.validateEmptyValue(prsnList.size());
 		
-		String query = "INSERT INTO Employee_Personal(EMPLOYEE_ID,PERSON_NAME,AGE,RELATIONSHIP) VALUES(?,?,?,?)";
+		String query = "INSERT INTO Dependent(EMPLOYEE_ID,PERSON_NAME,AGE,RELATIONSHIP) VALUES(?,?,?,?)";
 		
 		try(Connection conn = getConnection();
 			PreparedStatement stmt = getPreparedStatement(conn,query)){
-			stmt.setInt(1, prsnl.getEmpId());
-			stmt.setString(2, prsnl.getPersonName());
-			stmt.setInt(3, prsnl.getAge());
-			stmt.setString(4, prsnl.getRelation());
-			stmt.executeUpdate();
+			for(Dependent prsn : prsnList) {
+				stmt.setInt(1, prsn.getEmployeeId());
+				stmt.setString(2, prsn.getPersonName());
+				stmt.setInt(3, prsn.getAge());
+				stmt.setString(4, prsn.getRelation());
+				stmt.addBatch();
+			}
+			stmt.executeBatch();
 		}
 		
 		catch(SQLException e) {
-			throw new TaskException("Exception caught in insertValuesToDependentTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in addDependents task.\n",e);
 		}
 	}
 	
-	public List<Employee_Personal> getDetailsFromEmpPersonal(int empId) throws TaskException{
-		TaskUtility.validateNullValue(empId);
+	public List<Dependent> getDependentInfo(int employeeId) throws TaskException{
+		TaskUtility.validateNullValue(employeeId);
 		
-		List<Employee_Personal> empPerList = new ArrayList<Employee_Personal>();
+		List<Dependent> prsnList = new ArrayList<Dependent>();
 		String query = "SELECT ep.PERSON_ID, e.EMPLOYEE_ID,e.NAME as EMPLOYEE_NAME, ep.PERSON_NAME,ep.AGE, ep.RELATIONSHIP"
-					+ " FROM Employee_Personal ep"
+					+ " FROM Dependent ep"
 					+ " JOIN Employee e ON ep.EMPLOYEE_ID = e.EMPLOYEE_ID WHERE ep.EMPLOYEE_ID = ?";
 		try(Connection conn = getConnection();
 			PreparedStatement stmt = getPreparedStatement(conn,query)){
-			stmt.setInt(1, empId);
+			stmt.setInt(1, employeeId);
 			
 			try(ResultSet rst = getResultSet(stmt)){
 				while(rst.next()) {
-					Employee_Personal empPer = new Employee_Personal();
+					Dependent prsn = new Dependent();
 					
-					empPer.setPerId(rst.getInt("PERSON_ID"));
-					empPer.setEmpId(rst.getInt("EMPLOYEE_ID"));
-					empPer.setEmpName(rst.getString("EMPLOYEE_NAME"));
-					empPer.setPersonName(rst.getString("PERSON_NAME"));
-					empPer.setAge(rst.getInt("AGE"));
-					empPer.setRelation(rst.getString("RELATIONSHIP"));
+					prsn.setPersonId(rst.getInt("PERSON_ID"));
+					prsn.setEmployeeId(rst.getInt("EMPLOYEE_ID"));
+					prsn.setEmployeeName(rst.getString("EMPLOYEE_NAME"));
+					prsn.setPersonName(rst.getString("PERSON_NAME"));
+					prsn.setAge(rst.getInt("AGE"));
+					prsn.setRelation(rst.getString("RELATIONSHIP"));
 					
-					empPerList.add(empPer);
+					prsnList.add(prsn);
 				}
 			}
 			
-			return empPerList;
+			return prsnList;
 				
 		}
 		catch (SQLException e) {
-			throw new TaskException("Exception caught in getDetailsFromEmpPersonal task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in getDependentInfo task.\n",e);
 		}
 		
 	}
 	
-	public List<Employee_Personal> viewDependentTable() throws TaskException{
+	public List<Dependent> viewDependents() throws TaskException{
 		
-		List<Employee_Personal> empPerList = new ArrayList<Employee_Personal>();
-		String query ="SELECT ep.*,e.NAME as EMPLOYEE_NAME FROM Employee_Personal ep "
+		List<Dependent> prsnList = new ArrayList<Dependent>();
+		String query ="SELECT ep.*,e.NAME as EMPLOYEE_NAME FROM Dependent ep "
 					+"JOIN Employee e ON ep.EMPLOYEE_ID = e.EMPLOYEE_ID";
 		
 		try(Connection conn = getConnection();
 			PreparedStatement stmt = getPreparedStatement(conn, query);
 			ResultSet rst = getResultSet(stmt)){
 			while(rst.next()) {
-				Employee_Personal empPer =new Employee_Personal();
-				empPer.setPerId(rst.getInt("PERSON_ID"));
-				empPer.setEmpId(rst.getInt("EMPLOYEE_ID"));
-				empPer.setEmpName(rst.getString("EMPLOYEE_NAME"));
-				empPer.setPersonName(rst.getString("PERSON_NAME"));
-				empPer.setAge(rst.getInt("AGE"));
-				empPer.setRelation(rst.getString("RELATIONSHIP"));
+				Dependent prsn =new Dependent();
+				prsn.setPersonId(rst.getInt("PERSON_ID"));
+				prsn.setEmployeeId(rst.getInt("EMPLOYEE_ID"));
+				prsn.setEmployeeName(rst.getString("EMPLOYEE_NAME"));
+				prsn.setPersonName(rst.getString("PERSON_NAME"));
+				prsn.setAge(rst.getInt("AGE"));
+				prsn.setRelation(rst.getString("RELATIONSHIP"));
 				
-				empPerList.add(empPer);
+				prsnList.add(prsn);
 			}
-			return empPerList;
+			return prsnList;
 		}
 		catch (SQLException e) {
-			throw new TaskException("Exception caught in viewTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in viewDependents task.\n",e);
 		}
 
 	}
 	
-public List<Employee_Personal> sortDependentTable(String field, boolean sortType) throws TaskException{
+	public List<Dependent> sortDependents(String field, boolean sortType) throws TaskException{
 		
 		TaskUtility.validateNullValue(field);
 		TaskUtility.validateNullValue(sortType);
 		
 		field=field.toUpperCase();
-		String sort="";
 
-		List<String> validFields = Arrays.asList("EMPLOYEE_ID", "EMPLOYEE_NAME", "PERSON_NAME", "AGE", "RELATIONSHIP");
+		tableName = "Dependent";
+		
+		List<String> validFields = getColumns(tableName);
 		if (!validFields.contains(field)) {
 			throw new TaskException("Invalid field name: " + field);
 		}
 		
 		if(sortType) {sort="DESC";}
 		
-		String query ="SELECT ep.*,e.NAME as EMPLOYEE_NAME FROM Employee_Personal ep JOIN Employee e ON ep.EMPLOYEE_ID = e.EMPLOYEE_ID ORDER BY "+field+" "+sort;
+		String query ="SELECT ep.*,e.NAME as EMPLOYEE_NAME FROM Dependent ep JOIN Employee e ON ep.EMPLOYEE_ID = e.EMPLOYEE_ID ORDER BY "+field+" "+sort;
 		
-		List<Employee_Personal> empPerList = new ArrayList<Employee_Personal>();
+		List<Dependent> prsnList = new ArrayList<Dependent>();
 		try(Connection conn = getConnection();
 			PreparedStatement stmt = getPreparedStatement(conn, query);
 			ResultSet rst = getResultSet(stmt)){
 			while(rst.next()) {
-				Employee_Personal empPer =new Employee_Personal();
-				empPer.setPerId(rst.getInt("PERSON_ID"));
-				empPer.setEmpId(rst.getInt("EMPLOYEE_ID"));
-				empPer.setEmpName(rst.getString("EMPLOYEE_NAME"));
-				empPer.setPersonName(rst.getString("PERSON_NAME"));
-				empPer.setAge(rst.getInt("AGE"));
-				empPer.setRelation(rst.getString("RELATIONSHIP"));
+				Dependent prsn =new Dependent();
+				prsn.setPersonId(rst.getInt("PERSON_ID"));
+				prsn.setEmployeeId(rst.getInt("EMPLOYEE_ID"));
+				prsn.setEmployeeName(rst.getString("EMPLOYEE_NAME"));
+				prsn.setPersonName(rst.getString("PERSON_NAME"));
+				prsn.setAge(rst.getInt("AGE"));
+				prsn.setRelation(rst.getString("RELATIONSHIP"));
 				
-				empPerList.add(empPer);
+				prsnList.add(prsn);
 			}
-			return empPerList;
+			return prsnList;
 		}
 		catch (SQLException e) {
-			throw new TaskException("Exception caught in sortTable task.\n"+e.getMessage());
+			throw new TaskException("Exception caught in sortDependents task.\n",e);
 		}
 		
+	}
+	
+	public List<String> getColumns(String tableName) throws TaskException{
+		
+		String query = "SELECT * FROM "+tableName;
+		
+		List<String> columnNames = new ArrayList<String>();
+		
+		try(Connection conn = getConnection();
+			PreparedStatement stmt = getPreparedStatement(conn, query);
+			ResultSet rst = getResultSet(stmt)){
+			
+			ResultSetMetaData rsMetaData = rst.getMetaData();
+			
+			for(int i=1;i<rsMetaData.getColumnCount();i++) {
+				columnNames.add(rsMetaData.getColumnName(i));
+			}
+			return columnNames;
+		}
+		
+		catch(SQLException e) {
+			throw new TaskException("Cannot fetch the table's column name.",e);
+		}
 	}
 	
 }

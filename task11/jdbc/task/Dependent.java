@@ -1,33 +1,32 @@
 package task11.jdbc.task;
 
-public class Employee_Personal {
-	
-	private int empId;
-	private int perId;
-	private String empName;
+public class Dependent {
+	private int employeeId;
+	private int personId;
+	private String employeeName;
 	private String personName;
 	private int age;
 	private String relation;
 	
-	public int getEmpId() {
-		return empId;
+	public int getEmployeeId() {
+		return employeeId;
 	}
-	public void setEmpId(int empId) {
-		this.empId = empId;
-	}
-	
-	public int getPerId() {
-		return perId;
-	}
-	public void setPerId(int perId) {
-		this.perId = perId;
+	public void setEmployeeId(int empId) {
+		this.employeeId = empId;
 	}
 	
-	public String getEmpName() {
-		return empName;
+	public int getPersonId() {
+		return personId;
 	}
-	public void setEmpName(String empName) {
-		this.empName = empName;
+	public void setPersonId(int perId) {
+		this.personId = perId;
+	}
+	
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String empName) {
+		this.employeeName = empName;
 	}
 	
 	public String getPersonName() {
@@ -50,8 +49,5 @@ public class Employee_Personal {
 	public void setRelation(String relation) {
 		this.relation = relation;
 	}
-	
-	
-
 
 }
